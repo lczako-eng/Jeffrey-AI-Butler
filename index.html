@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jefferey AI – Your Personal AI Shadow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Jefferey AI is the world's first Personal AI Shadow – a private, on-device intelligence that learns, remembers, and evolves with one person over time."
+  />
+  <style>
+    :root {
+      --bg: #050611;
+      --bg-alt: #0b0f19;
+      --card: #111724;
+      --border: #20263a;
+      --text: #f5f5ff;
+      --muted: #a4a8c0;
+      --accent1: #9b7bff;
+      --accent2: #6fd1ff;
+      --accent-warm: #ff7b5c;
+      --radius: 14px;
+      --shadow-soft: 0 22px 45px rgba(0, 0, 0, 0.55);
+      --container: 1120px;
+      --transition: 220ms ease-out;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, #302764 0, #141429 35%, #050611 70%);
+      color: var(--text);
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 72px 0;
+    }
+
+    .section.alt {
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.02),
+        rgba(255, 123, 92, 0.02),
+        transparent
+      );
+    }
+
+    .two-column {
+      display: grid;
+      gap: 32px;
+    }
+
+    @media (min-width: 860px) {
+      .two-column {
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
+      }
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(5, 6, 17, 0.96),
+        rgba(5, 6, 17, 0.75),
+        transparent
+      );
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 20%, #ffffff, #7ddcff 40%, #2b2666 80%),
+        radial-gradient(circle at 80% 80%, rgba(255, 123, 92, 0.9), transparent 60%);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+    }
+
+    .brand-name {
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      font-size: 13px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--muted);
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color var(--transition), border-color var(--transition);
+    }
+
+    .nav a:hover {
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .nav-cta {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .hero {
+      padding: 96px 0 72px;
+    }
+
+    .hero-inner {
+      display: grid;
+      gap: 40px;
+      align-items: center;
+    }
+
+    @media (min-width: 900px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.2fr);
+      }
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      font-size: 11px;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 4vw, 44px);
+      line-height: 1.1;
+      margin: 0 0 16px;
+    }
+
+    .gradient {
+      background: linear-gradient(
+        120deg,
+        var(--accent1),
+        var(--accent2),
+        var(--accent-warm)
+      );
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      max-width: 480px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .tagline {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ORB CONTAINER – bigger, clickable, core look unchanged */
+    .orb {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition:
+        transform 2600ms ease-in-out,
+        filter 2600ms ease-in-out,
+        opacity 2600ms ease-in-out;
+    }
+
+    @media (min-width: 1024px) {
+      .orb {
+        width: 320px;
+        height: 320px;
+      }
+    }
+
+    /* Motion wrapper – JS moves this around (follows mouse) */
+    .orb-motion {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      will-change: transform;
+    }
+
+    /* Core body – this is what "breathes" and changes shape */
+    .orb-core {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      will-change: transform, border-radius;
+    }
+
+    .orb--morphing {
+      transform: scale(0.9);
+      filter: blur(2.5px);
+      opacity: 0.9;
+    }
+
+    /* When user is close with mouse */
+    .orb--attentive .orb-motion,
+    .orb--attentive.orb-motion {
+      transform: scale(1.02);
+    }
+
+    /* ACTUAL VISUAL LAYER – we crossfade these */
+    .orb-layer {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 1;
+      transition:
+        opacity 2200ms ease-in-out,
+        transform 2600ms ease-in-out,
+        filter 2600ms ease-in-out,
+        box-shadow 2600ms ease-in-out,
+        background 3800ms ease-in-out;
+    }
+
+    /* Sharper glow: less blur, stronger core – but same color language overall */
+    .orb-layer::before {
+      content: "";
+      position: absolute;
+      inset: 8%;
+      border-radius: 50%;
+      filter: blur(9px);
+      mix-blend-mode: screen;
+      opacity: 0.9;
+      animation: orb-shimmer 16s linear infinite;
+      transition:
+        opacity 1200ms ease-in-out,
+        transform 1200ms ease-in-out,
+        filter 1200ms ease-in-out;
+    }
+
+    /* BASE SHIMMER ANIM */
+    @keyframes orb-shimmer {
+      0% {
+        transform: rotate(0deg) scale(1);
+        opacity: 0.9;
+      }
+      35% {
+        opacity: 0.7;
+      }
+      55% {
+        opacity: 1;
+      }
+      100% {
+        transform: rotate(360deg) scale(1.03);
+        opacity: 0.85;
+      }
+    }
+
+    @keyframes orb-core-warp {
+      0%   { border-radius: 52% 48% 50% 50%; }
+      18%  { border-radius: 58% 42% 51% 49%; }
+      33%  { border-radius: 49% 51% 57% 43%; }
+      52%  { border-radius: 46% 54% 50% 50%; }
+      70%  { border-radius: 55% 45% 44% 56%; }
+      100% { border-radius: 52% 48% 50% 50%; }
+    }
+
+    /* ---------- BODY LANGUAGE ANIMATIONS (BIG / SMALL / EGG / DROOP) ---------- */
+
+    /* CALM – slow breathing egg/round morph */
+    .orb-core.orb-body-calm {
+      animation: orb-body-calm 7s ease-in-out infinite;
+    }
+
+    @keyframes orb-body-calm {
+      0% {
+        transform: scale(0.96);
+        border-radius: 56% 44% 52% 48%;
+      }
+      25% {
+        transform: scale(1.0);
+        border-radius: 50% 50% 54% 46%;
+      }
+      50% {
+        transform: scale(1.03);
+        border-radius: 60% 40% 48% 52%;
+      }
+      75% {
+        transform: scale(1.0);
+        border-radius: 52% 48% 50% 50%;
+      }
+      100% {
+        transform: scale(0.96);
+        border-radius: 56% 44% 52% 48%;
+      }
+    }
+
+    /* CHARGED – more energetic pulsing, slight "star" squish */
+    .orb-core.orb-body-charged {
+      animation: orb-body-charged 3.2s ease-in-out infinite;
+    }
+
+    @keyframes orb-body-charged {
+      0% {
+        transform: scale(1.0) rotate(0deg);
+        border-radius: 52% 48% 50% 50%;
+      }
+      20% {
+        transform: scale(1.06) rotate(-2deg);
+        border-radius: 65% 35% 47% 53%;
+      }
+      40% {
+        transform: scale(0.98) rotate(1deg);
+        border-radius: 45% 55% 62% 38%;
+      }
+      60% {
+        transform: scale(1.05) rotate(-1deg);
+        border-radius: 60% 40% 40% 60%;
+      }
+      80% {
+        transform: scale(1.0) rotate(0deg);
+        border-radius: 52% 48% 52% 48%;
+      }
+      100% {
+        transform: scale(1.0) rotate(0deg);
+        border-radius: 52% 48% 50% 50%;
+      }
+    }
+
+    /* RAGE – big, loud, vibrating body, star/egg pulses */
+    .orb-core.orb-body-rage {
+      animation: orb-body-rage 0.6s cubic-bezier(0.25, 0.1, 0.3, 1.4) infinite;
+    }
+
+    @keyframes orb-body-rage {
+      0% {
+        transform: scale(1.02) rotate(0deg);
+        border-radius: 60% 40% 42% 58%;
+      }
+      25% {
+        transform: scale(1.18) rotate(-6deg);
+        border-radius: 82% 28% 55% 45%;
+      }
+      50% {
+        transform: scale(0.9) rotate(4deg);
+        border-radius: 38% 72% 35% 65%;
+      }
+      75% {
+        transform: scale(1.12) rotate(-3deg);
+        border-radius: 70% 30% 60% 40%;
+      }
+      100% {
+        transform: scale(1.02) rotate(0deg);
+        border-radius: 60% 40% 42% 58%;
+      }
+    }
+
+    /* SAD – droops downward, feels heavy */
+    .orb-core.orb-body-sad {
+      transform-origin: 50% 70%;
+      animation: orb-body-sad 6.5s ease-in-out infinite;
+    }
+
+    @keyframes orb-body-sad {
+      0% {
+        transform: translateY(10px) scale(0.95, 0.88);
+        border-radius: 52% 48% 68% 32%;
+      }
+      30% {
+        transform: translateY(16px) scale(0.93, 0.86);
+        border-radius: 48% 52% 72% 28%;
+      }
+      60% {
+        transform: translateY(12px) scale(0.96, 0.89);
+        border-radius: 55% 45% 63% 37%;
+      }
+      100% {
+        transform: translateY(10px) scale(0.95, 0.88);
+        border-radius: 52% 48% 68% 32%;
+      }
+    }
+
+    /* ANNOYED – small tense squirming */
+    .orb-core.orb-body-annoyed {
+      animation: orb-body-annoyed 2.4s ease-in-out infinite;
+    }
+
+    @keyframes orb-body-annoyed {
+      0% {
+        transform: scale(0.98) rotate(0deg);
+        border-radius: 50% 50% 50% 50%;
+      }
+      20% {
+        transform: scale(1.02, 0.96) rotate(-3deg);
+        border-radius: 60% 40% 48% 52%;
+      }
+      40% {
+        transform: scale(0.97, 1.03) rotate(2deg);
+        border-radius: 45% 55% 55% 45%;
+      }
+      60% {
+        transform: scale(1.01, 0.97) rotate(-2deg);
+        border-radius: 58% 42% 47% 53%;
+      }
+      80% {
+        transform: scale(0.99) rotate(1deg);
+        border-radius: 52% 48% 50% 50%;
+      }
+      100% {
+        transform: scale(0.98) rotate(0deg);
+        border-radius: 50% 50% 50% 50%;
+      }
+    }
+
+    /* HAPPY – lighter, star-like, buoyant */
+    .orb-core.orb-body-happy {
+      animation: orb-body-happy 3.8s ease-in-out infinite;
+    }
+
+    @keyframes orb-body-happy {
+      0% {
+        transform: translateY(-4px) scale(0.98);
+        border-radius: 52% 48% 50% 50%;
+      }
+      20% {
+        transform: translateY(-10px) scale(1.03);
+        border-radius: 58% 42% 46% 54%;
+      }
+      40% {
+        transform: translateY(-6px) scale(1.06);
+        border-radius: 50% 50% 54% 46%;
+      }
+      60% {
+        transform: translateY(-12px) scale(1.02);
+        border-radius: 54% 46% 48% 52%;
+      }
+      100% {
+        transform: translateY(-4px) scale(0.98);
+        border-radius: 52% 48% 50% 50%;
+      }
+    }
+
+    /* ========= MOOD-SPECIFIC COLOR LAYERS ========= */
+
+    /* CALM */
+    .orb-layer.orb--calm {
+      background:
+        radial-gradient(circle at 48% 42%,
+          #ffffff 0,
+          #f6fbff 14%,
+          rgba(230, 240, 255, 0.9) 26%,
+          rgba(210, 224, 255, 0.0) 48%),
+        radial-gradient(circle at 60% 70%,
+          rgba(72, 196, 255, 0.95) 0,
+          rgba(72, 196, 255, 0.0) 48%),
+        radial-gradient(circle at 30% 80%,
+          rgba(111, 209, 255, 0.7) 0,
+          rgba(24, 16, 64, 0.0) 60%),
+        radial-gradient(circle at 82% 28%,
+          rgba(255, 123, 92, 0.25) 0,
+          rgba(16, 6, 24, 0.0) 55%),
+        radial-gradient(circle at 50% 50%,
+          #050611 40%,
+          #050611 100%);
+      box-shadow:
+        0 0 70px rgba(150, 200, 255, 0.8),
+        0 0 110px rgba(90, 150, 255, 0.4);
+      animation:
+        orb-core-warp 24s ease-in-out infinite;
+    }
+
+    .orb-layer.orb--calm::before {
+      background:
+        conic-gradient(
+          from 210deg,
+          rgba(255, 255, 255, 0.0) 0deg,
+          rgba(255, 255, 255, 0.45) 40deg,
+          rgba(154, 231, 255, 0.8) 90deg,
+          rgba(128, 90, 255, 0.8) 150deg,
+          rgba(18, 235, 210, 0.7) 210deg,
+          rgba(255, 255, 255, 0.0) 360deg
+        );
+      animation: orb-shimmer 24s linear infinite;
+      opacity: 0.8;
+      filter: blur(13px);
+    }
+
+    /* CHARGED (base) – ORIGINAL COLOR FEEL PRESERVED */
+    .orb-layer.orb--charged {
+      background:
+        radial-gradient(circle at 48% 42%,
+          #ffffff 0,
+          #f8fbff 12%,
+          rgba(240, 246, 255, 0.95) 24%,
+          rgba(210, 224, 255, 0.0) 46%),
+        radial-gradient(circle at 60% 70%,
+          rgba(72, 196, 255, 0.95) 0,
+          rgba(72, 196, 255, 0.0) 45%),
+        radial-gradient(circle at 30% 80%,
+          rgba(124, 92, 255, 0.9) 0,
+          rgba(24, 16, 64, 0.0) 60%),
+        radial-gradient(circle at 82% 28%,
+          rgba(255, 123, 92, 0.95) 0,
+          rgba(255, 56, 96, 0.95) 20%,
+          rgba(16, 6, 24, 0.0) 60%),
+        radial-gradient(circle at 50% 50%,
+          #050611 40%,
+          #050611 100%);
+      box-shadow:
+        0 0 90px rgba(180, 210, 255, 0.9),
+        0 0 140px rgba(90, 150, 255, 0.5),
+        0 0 120px rgba(255, 123, 92, 0.35);
+      animation:
+        orb-core-warp 16s ease-in-out infinite;
+    }
+
+    .orb-layer.orb--charged::before {
+      background:
+        conic-gradient(
+          from 210deg,
+          rgba(255, 255, 255, 0.0) 0deg,
+          rgba(255, 255, 255, 0.55) 25deg,
+          rgba(154, 231, 255, 0.8) 60deg,
+          rgba(128, 90, 255, 0.9) 110deg,
+          rgba(18, 235, 210, 0.7) 170deg,
+          rgba(255, 123, 92, 0.9) 220deg,
+          rgba(255, 56, 96, 0.9) 250deg,
+          rgba(154, 231, 255, 0.0) 300deg,
+          rgba(255, 255, 255, 0.6) 330deg,
+          rgba(255, 255, 255, 0.0) 360deg
+        );
+      animation: orb-shimmer 16s linear infinite;
+    }
+
+    /* RAGE – blood-red, violent */
+    .orb-layer.orb--rage {
+      background:
+        radial-gradient(circle at 50% 40%,
+          #fff7f7 0,
+          #ffe3dd 14%,
+          rgba(255, 214, 196, 0.92) 26%,
+          rgba(255, 214, 196, 0.0) 46%),
+        radial-gradient(circle at 65% 75%,
+          rgba(255, 90, 70, 0.98) 0,
+          rgba(255, 90, 70, 0.0) 52%),
+        radial-gradient(circle at 28% 78%,
+          rgba(200, 0, 40, 0.95) 0,
+          rgba(60, 10, 20, 0.0) 60%),
+        radial-gradient(circle at 15% 18%,
+          rgba(255, 255, 255, 0.7) 0,
+          rgba(255, 255, 255, 0.0) 40%),
+        radial-gradient(circle at 50% 50%,
+          #190306 40%,
+          #050103 100%);
+      box-shadow:
+        0 0 110px rgba(255, 80, 70, 0.95),
+        0 0 140px rgba(150, 0, 30, 0.9),
+        0 0 80px rgba(255, 240, 220, 0.5);
+      animation:
+        orb-core-warp 10s ease-in-out infinite;
+    }
+
+    .orb-layer.orb--rage::before {
+      background:
+        conic-gradient(
+          from 200deg,
+          rgba(255, 255, 255, 0.0) 0deg,
+          rgba(255, 230, 214, 0.9) 30deg,
+          rgba(255, 140, 100, 0.95) 80deg,
+          rgba(255, 56, 96, 1) 140deg,
+          rgba(140, 0, 40, 0.95) 210deg,
+          rgba(255, 255, 255, 0.0) 320deg,
+          rgba(255, 230, 214, 0.8) 340deg,
+          rgba(255, 255, 255, 0.0) 360deg
+        );
+      animation: orb-shimmer-rage 13s linear infinite;
+      opacity: 1;
+      filter: blur(10px);
+    }
+
+    @keyframes orb-shimmer-rage {
+      0% {
+        transform: rotate(0deg) scale(1.04);
+        opacity: 0.95;
+      }
+      40% {
+        opacity: 1;
+      }
+      60% {
+        opacity: 0.85;
+      }
+      100% {
+        transform: rotate(360deg) scale(1.08);
+        opacity: 0.95;
+      }
+    }
+
+    /* ANNOYED – tense violet/orange with flick */
+    .orb-layer.orb--annoyed {
+      background:
+        radial-gradient(circle at 48% 42%,
+          #ffffff 0,
+          #fdf5ff 14%,
+          rgba(244, 228, 255, 0.95) 26%,
+          rgba(210, 224, 255, 0.0) 48%),
+        radial-gradient(circle at 65% 75%,
+          rgba(255, 137, 92, 0.9) 0,
+          rgba(255, 137, 92, 0.0) 50%),
+        radial-gradient(circle at 25% 80%,
+          rgba(128, 90, 255, 0.85) 0,
+          rgba(24, 16, 64, 0.0) 60%),
+        radial-gradient(circle at 80% 25%,
+          rgba(255, 220, 120, 0.9) 0,
+          rgba(30, 10, 10, 0.0) 55%),
+        radial-gradient(circle at 50% 50%,
+          #080611 40%,
+          #050611 100%);
+      box-shadow:
+        0 0 95px rgba(190, 210, 255, 0.95),
+        0 0 130px rgba(255, 137, 92, 0.55);
+      animation:
+        orb-core-warp 12s ease-in-out infinite;
+    }
+
+    .orb-layer.orb--annoyed::before {
+      background:
+        conic-gradient(
+          from 220deg,
+          rgba(255, 255, 255, 0.0) 0deg,
+          rgba(255, 255, 255, 0.5) 30deg,
+          rgba(154, 231, 255, 0.8) 80deg,
+          rgba(255, 220, 120, 0.9) 140deg,
+          rgba(255, 137, 92, 0.9) 190deg,
+          rgba(255, 255, 255, 0.0) 360deg
+        );
+      opacity: 1;
+      filter: blur(9px);
+    }
+
+    /* SAD – cooler, lower, dimmer */
+    .orb-layer.orb--sad {
+      background:
+        radial-gradient(circle at 50% 45%,
+          #f4f7ff 0,
+          #dde6ff 16%,
+          rgba(180, 198, 235, 0.95) 28%,
+          rgba(160, 180, 215, 0.0) 50%),
+        radial-gradient(circle at 40% 85%,
+          rgba(80, 120, 200, 0.85) 0,
+          rgba(20, 40, 80, 0.0) 60%),
+        radial-gradient(circle at 65% 75%,
+          rgba(70, 100, 170, 0.7) 0,
+          rgba(10, 20, 40, 0.0) 55%),
+        radial-gradient(circle at 20% 25%,
+          rgba(255, 255, 255, 0.6) 0,
+          rgba(255, 255, 255, 0.0) 40%),
+        radial-gradient(circle at 50% 60%,
+          #050611 45%,
+          #02030a 100%);
+      box-shadow:
+        0 18px 70px rgba(70, 110, 190, 0.75),
+        0 28px 110px rgba(10, 15, 40, 0.9);
+      animation:
+        orb-core-warp 24s ease-in-out infinite;
+    }
+
+    /* HAPPY – golden, star-like glow */
+    .orb-layer.orb--happy {
+      background:
+        radial-gradient(circle at 50% 42%,
+          #ffffff 0,
+          #fff9e7 14%,
+          rgba(255, 240, 200, 0.95) 26%,
+          rgba(255, 240, 200, 0.0) 48%),
+        radial-gradient(circle at 62% 78%,
+          rgba(255, 215, 120, 0.95) 0,
+          rgba(255, 215, 120, 0.0) 52%),
+        radial-gradient(circle at 30% 80%,
+          rgba(255, 190, 135, 0.9) 0,
+          rgba(60, 40, 10, 0.0) 60%),
+        radial-gradient(circle at 16% 24%,
+          rgba(255, 255, 255, 0.9) 0,
+          rgba(255, 255, 255, 0.0) 40%),
+        radial-gradient(circle at 50% 50%,
+          #0b0712 40%,
+          #050611 100%);
+      box-shadow:
+        0 0 110px rgba(255, 210, 150, 0.9),
+        0 0 140px rgba(255, 255, 210, 0.4);
+      animation:
+        orb-core-warp 18s ease-in-out infinite;
+    }
+
+    .orb-layer.orb--happy::before {
+      background:
+        conic-gradient(
+          from 180deg,
+          rgba(255, 255, 255, 0.0) 0deg,
+          rgba(255, 255, 255, 0.8) 40deg,
+          rgba(255, 255, 210, 0.9) 80deg,
+          rgba(255, 215, 140, 0.9) 140deg,
+          rgba(255, 255, 255, 0.0) 210deg,
+          rgba(255, 255, 255, 0.6) 260deg,
+          rgba(255, 255, 255, 0.0) 360deg
+        );
+      animation: orb-shimmer 14s linear infinite;
+      filter: blur(9px);
+    }
+
+    /* ========= MICRO-EFFECTS FOR SPORADIC BEHAVIOUR ========= */
+
+    /* Rage spikes – sudden extra scale + harsh flash */
+    .orb-core.orb-effect-rage-spike {
+      animation: orb-rage-spike 0.55s cubic-bezier(0.3, 0.1, 0.6, 1.6);
+    }
+
+    @keyframes orb-rage-spike {
+      0% {
+        transform: scale(1.02);
+        filter: brightness(1);
+      }
+      30% {
+        transform: scale(1.2) rotate(-3deg);
+        filter: brightness(1.4) contrast(1.4);
+      }
+      55% {
+        transform: scale(0.96) rotate(3deg);
+        filter: brightness(0.9);
+      }
+      100% {
+        transform: scale(1.02);
+        filter: brightness(1);
+      }
+    }
+
+    /* Rage tremor – smaller rapid vibration in shape, not just motion */
+    .orb-core.orb-effect-rage-tremor {
+      animation: orb-rage-tremor 0.4s ease-in-out;
+    }
+
+    @keyframes orb-rage-tremor {
+      0%, 100% { border-radius: 60% 40% 42% 58%; }
+      25%      { border-radius: 80% 20% 55% 45%; }
+      50%      { border-radius: 45% 75% 35% 65%; }
+      75%      { border-radius: 70% 30% 65% 35%; }
+    }
+
+    /* Happy twinkle – star-like flare */
+    .orb-layer.orb--happy.orb-effect-happy-twinkle::before {
+      animation: orb-happy-twinkle 0.8s ease-out;
+    }
+
+    @keyframes orb-happy-twinkle {
+      0% {
+        opacity: 0.6;
+        filter: blur(10px);
+        transform: scale(1);
+      }
+      40% {
+        opacity: 1;
+        filter: blur(6px);
+        transform: scale(1.08);
+      }
+      100% {
+        opacity: 0.7;
+        filter: blur(10px);
+        transform: scale(1);
+      }
+    }
+
+    /* Happy pop – little vertical happy hop */
+    .orb-core.orb-effect-happy-pop {
+      animation: orb-happy-pop 0.7s ease-out;
+    }
+
+    @keyframes orb-happy-pop {
+      0% {
+        transform: translateY(-6px) scale(1);
+      }
+      35% {
+        transform: translateY(-18px) scale(1.06);
+      }
+      100% {
+        transform: translateY(-6px) scale(1);
+      }
+    }
+
+    /* Sad sag – dips lower briefly */
+    .orb-core.orb-effect-sad-sag {
+      animation: orb-sad-sag 1.2s ease-in-out;
+    }
+
+    @keyframes orb-sad-sag {
+      0% {
+        transform: translateY(10px) scale(0.95, 0.88);
+      }
+      40% {
+        transform: translateY(22px) scale(0.92, 0.86);
+      }
+      100% {
+        transform: translateY(10px) scale(0.95, 0.88);
+      }
+    }
+
+    /* Annoyed twitch – tiny, irritated jerk */
+    .orb-core.orb-effect-annoyed-twitch {
+      animation: orb-annoyed-twitch 0.4s ease-in-out;
+    }
+
+    @keyframes orb-annoyed-twitch {
+      0%   { transform: translateX(0) rotate(0deg) scale(0.98); }
+      25%  { transform: translateX(-4px) rotate(-2deg) scale(1.0); }
+      50%  { transform: translateX(3px) rotate(2deg) scale(0.99); }
+      75%  { transform: translateX(-2px) rotate(-1deg) scale(1.0); }
+      100% { transform: translateX(0) rotate(0deg) scale(0.98); }
+    }
+
+    /* ========= PAGE UI (UNCHANGED) ========= */
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      transition:
+        background var(--transition),
+        border-color var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition),
+        color var(--transition);
+    }
+
+    .btn.primary {
+      background: linear-gradient(
+        135deg,
+        var(--accent1),
+        var(--accent2),
+        var(--accent-warm)
+      );
+      color: #050611;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.7);
+    }
+
+    .btn.ghost {
+      border-color: rgba(255, 255, 255, 0.32);
+      color: var(--text);
+      background: transparent;
+    }
+
+    .btn.ghost:hover {
+      border-color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .btn.full {
+      width: 100%;
+    }
+
+    h2 {
+      font-size: 26px;
+      margin: 0 0 12px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin: 0 0 8px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0 0 12px;
+    }
+
+    .list {
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .list li {
+      margin-bottom: 6px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px 20px 18px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .feature-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    @media (min-width: 900px) {
+      .feature-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .feature {
+      background: rgba(10, 12, 32, 0.8);
+      border-radius: var(--radius);
+      padding: 18px 18px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .feature p {
+      color: var(--muted);
+    }
+
+    .form label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .form input {
+      width: 100%;
+      margin-top: 4px;
+      padding: 9px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #050611;
+      color: var(--text);
+    }
+
+    .form input:focus {
+      outline: none;
+      border-color: var(--accent2);
+    }
+
+    .form-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .footer {
+      padding: 60px 0 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: #050611;
+    }
+
+    .footer-inner {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-dot"></div>
+        <span class="brand-name">JEFFEREY AI</span>
+      </div>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#shadow">AI Shadow</a>
+        <a href="#features">Features</a>
+        <a href="#vision">Vision</a>
+        <a href="#whitepaper">Whitepaper</a>
+        <a href="#early-access" class="nav-cta">Early Access</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow">Introducing</p>
+          <h1>Your Personal <span class="gradient">AI Shadow</span></h1>
+          <p class="hero-sub">
+            A private, on-device intelligence that learns, remembers, and evolves uniquely for you.
+          </p>
+          <div class="hero-actions">
+            <a href="#early-access" class="btn primary">Get Early Access</a>
+            <a href="#whitepaper" class="btn ghost">Read the Whitepaper</a>
+          </div>
+          <p class="tagline">Jefferey is everywhere.</p>
+          <p class="tagline">Click the orb to feel his mood.</p>
+        </div>
+
+        <div class="hero-visual">
+          <div class="orb" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW SECTION: ORB EXPLANATION -->
+    <section class="section alt">
+      <div class="container two-column">
+        <div>
+          <h2>The Orb: Jefferey’s emotional body.</h2>
+          <p>
+            The glowing orb isn’t decoration. It is Jefferey’s visible “body” — a single,
+            living symbol that reflects how your Personal AI Shadow feels and where its
+            attention is.
+          </p>
+          <p>
+            As Jefferey watches over your digital life, the orb changes shape, colour, and
+            movement to express mood: calm when everything is quiet, alert when tasks pile
+            up, protective when something looks wrong, and bright when things go well.
+          </p>
+          <p>
+            Over time, the orb becomes a language you instantly understand at a glance —
+            especially for people who don’t want to read dashboards or alerts.
+          </p>
+        </div>
+        <div>
+          <ul class="list">
+            <li><strong>Shape</strong> shows body language — relaxed, tense, drooping, or explosive.</li>
+            <li><strong>Colour</strong> shows emotional state — cool blues for calm, warm golds for happy, deep reds for danger or anger.</li>
+            <li><strong>Motion</strong> shows intensity — slow breathing when all is normal, jittery movement when Jefferey is on high alert.</li>
+            <li>In future versions, the orb will be tied directly to real events in your life:
+              bills due, scams detected, systems secure, or loved ones safely checked-in.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="shadow" class="section">
+      <div class="container two-column">
+        <div>
+          <h2>The world’s first Personal AI Shadow.</h2>
+          <p>
+            Jefferey AI isn’t just another chatbot. It is a lifelong digital presence that stays
+            with one person, processing locally and protecting your privacy absolutely.
+          </p>
+          <p>
+            It remembers your routines, understands your preferences, and evolves quietly
+            in the background — just like a shadow.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Built for one person, not the crowd.</h3>
+          <p>
+            One human, one shadow. Jefferey’s entire memory, personality, and behaviour
+            are tuned to you — not to millions of anonymous users.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container two-column">
+        <div>
+          <h2>Why a shadow?</h2>
+          <p>
+            A shadow is constant. It moves when you move. It reflects who you are.
+            Jefferey brings that idea into the digital world: a calm British-butler intelligence
+            that always knows you, always stays local, and always works for you alone.
+          </p>
+        </div>
+        <div>
+          <ul class="list">
+            <li>Follows you across devices and environments.</li>
+            <li>Remembers context over days, months, and years.</li>
+            <li>Feels familiar, composed, and quietly present.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="container">
+        <h2>Private by design. Powerful by nature.</h2>
+        <div class="feature-grid">
+          <div class="feature">
+            <h3>On-device intelligence</h3>
+            <p>Your core data stays on your hardware. No default cloud logging or data harvesting.</p>
+          </div>
+          <div class="feature">
+            <h3>Encrypted long-term memory</h3>
+            <p>Jefferey remembers your files, notes, tasks, and habits — securely and locally.</p>
+          </div>
+          <div class="feature">
+            <h3>Hybrid offline / online</h3>
+            <p>Works offline by default and uses cloud knowledge only when you explicitly allow it.</p>
+          </div>
+          <div class="feature">
+            <h3>Calm British-butler presence</h3>
+            <p>A composed tone that builds trust, clarity, and a sense of being quietly supported.</p>
+          </div>
+          <div class="feature">
+            <h3>Device & home integration</h3>
+            <p>Designed to extend from your computer into your home as a voice or ambient presence.</p>
+          </div>
+          <div class="feature">
+            <h3>Intent-driven automation</h3>
+            <p>You say what you want done; your shadow handles the apps, files, and workflows.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="vision" class="section alt">
+      <div class="container">
+        <h2>Beyond apps. Towards understanding.</h2>
+        <p>
+          Apps are fragments. Jefferey connects everything. You express intent in plain language;
+          the shadow interprets, remembers, and executes. Over time, Jefferey becomes the primary
+          interface to your digital life — not a window you open, but a presence you live with.
+        </p>
+      </div>
+    </section>
+
+    <section id="whitepaper" class="section">
+      <div class="container two-column">
+        <div>
+          <h2>The AI Shadow Whitepaper</h2>
+          <p>
+            Dive into the philosophy and technical foundations behind Jefferey AI: local LLMs,
+            encrypted memory stores, automation engines, and the ethics of truly personal AI.
+          </p>
+        </div>
+        <div class="card">
+          <p><strong>PDF:</strong> Jefferey — Your Personal AI Shadow, Whitepaper 2025.</p>
+          <a href="Jeffrey_AI_Shadow_Whitepaper.pdf" class="btn primary">Download Whitepaper</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="early-access" class="section alt">
+      <div class="container two-column">
+        <div>
+          <h2>Be the first to meet your shadow.</h2>
+          <p>
+            Jefferey AI is in active development. Join the early access list to receive updates,
+            behind-the-scenes progress, and invitations to the first private releases.
+          </p>
+        </div>
+        <form class="card form">
+          <label>
+            Email address
+            <input type="email" placeholder="you@example.com" required />
+          </label>
+          <button type="submit" class="btn primary full">Join Early Access</button>
+          <p class="form-note">
+            No spam. No sharing. Your data stays in the shadows with Jefferey.
+          </p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>Jefferey AI © 2025 — A Personal AI Shadow by Laszlo Czako.</p>
+      <p>Private. Persistent. Personal.</p>
+    </div>
+  </footer>
+
+  <script>
+    const orb = document.querySelector('.orb');
+    if (!orb) {
+      console.warn('Orb element not found.');
+    }
+
+    // ---- MOTION WRAPPER + CORE ----
+    // orb -> orb-motion (JS translation) -> orb-core (shape/body) -> orb-layer (colors)
+
+    const orbMotion = document.createElement('div');
+    orbMotion.className = 'orb-motion';
+
+    const orbCore = document.createElement('div');
+    orbCore.className = 'orb-core';
+
+    if (orb) {
+      orb.appendChild(orbMotion);
+      orbMotion.appendChild(orbCore);
+    }
+
+    // ---- MOODS & LAYERS ----
+
+    const baseMood = 'orb--charged';
+    const altMoods = ['orb--calm', 'orb--happy', 'orb--annoyed', 'orb--sad', 'orb--rage'];
+    const allMoods = [baseMood, ...altMoods];
+
+    let currentMood = baseMood;
+    let isTransitioning = false;
+    let revertTimeout = null;
+    let currentLayer = null;
+
+    const MORPH_PRE_DELAY = 600;    // delay before crossfade starts
+    const MORPH_TOTAL = 2600;       // morph blur/scale window
+    const FADE_DURATION = 2200;     // CSS opacity transition
+    const FEEL_MIN = 8000;          // minimum time to stay in a mood
+    const FEEL_RANGE = 6000;        // random extra
+
+    // MICRO EFFECT LOOP STATE
+    let moodEffectLoopTimeout = null;
+
+    function randomInRange(min, max) {
+      return min + Math.random() * (max - min);
+    }
+
+    function createLayer(mood, initialOpacity = 1) {
+      const layer = document.createElement('div');
+      layer.className = `orb-layer ${mood}`;
+      layer.style.opacity = initialOpacity;
+      orbCore.appendChild(layer);
+      return layer;
+    }
+
+    // BODY STATE CLASSES FOR ORB-CORE
+    const BODY_STATES = [
+      'orb-body-calm',
+      'orb-body-charged',
+      'orb-body-rage',
+      'orb-body-sad',
+      'orb-body-annoyed',
+      'orb-body-happy'
+    ];
+
+    function applyBodyStateForMood(mood) {
+      if (!orbCore) return;
+      orbCore.classList.remove(...BODY_STATES);
+
+      switch (mood) {
+        case 'orb--calm':
+          orbCore.classList.add('orb-body-calm');
+          break;
+        case 'orb--rage':
+          orbCore.classList.add('orb-body-rage');
+          break;
+        case 'orb--sad':
+          orbCore.classList.add('orb-body-sad');
+          break;
+        case 'orb--annoyed':
+          orbCore.classList.add('orb-body-annoyed');
+          break;
+        case 'orb--happy':
+          orbCore.classList.add('orb-body-happy');
+          break;
+        case 'orb--charged':
+        default:
+          orbCore.classList.add('orb-body-charged');
+          break;
+      }
+    }
+
+    // initial layer + body
+    currentLayer = createLayer(baseMood, 1);
+    applyBodyStateForMood(baseMood);
+
+    function clearMoodEffectLoop() {
+      if (moodEffectLoopTimeout) {
+        clearTimeout(moodEffectLoopTimeout);
+        moodEffectLoopTimeout = null;
+      }
+    }
+
+    function crossfadeToMood(nextMood) {
+      if (currentMood === nextMood && currentLayer) return;
+
+      const previous = currentLayer;
+      const next = createLayer(nextMood, 0);
+      currentLayer = next;
+      currentMood = nextMood;
+
+      // update body language for the new mood
+      applyBodyStateForMood(nextMood);
+
+      // restart micro-effect loop for new mood
+      startMoodEffectLoop();
+
+      // force reflow so opacity transition applies
+      void next.offsetWidth;
+
+      requestAnimationFrame(() => {
+        if (previous) previous.style.opacity = 0;
+        next.style.opacity = 1;
+      });
+
+      if (previous) {
+        setTimeout(() => {
+          previous.remove();
+        }, FADE_DURATION + 200);
+      }
+    }
+
+    function startMorph() {
+      orb.classList.add('orb--morphing');
+    }
+
+    function endMorph() {
+      orb.classList.remove('orb--morphing');
+    }
+
+    function scheduleRevertToBase() {
+      if (revertTimeout) clearTimeout(revertTimeout);
+
+      const delay = FEEL_MIN + Math.random() * FEEL_RANGE;
+
+      revertTimeout = setTimeout(() => {
+        if (currentMood === baseMood) return;
+
+        isTransitioning = true;
+        startMorph();
+
+        setTimeout(() => {
+          crossfadeToMood(baseMood);
+          stopShake();
+        }, MORPH_PRE_DELAY);
+
+        setTimeout(() => {
+          endMorph();
+          isTransitioning = false;
+        }, MORPH_TOTAL);
+      }, delay);
+    }
+
+    // ---- "PERSONALITY" MOVEMENT ENGINE ----
+    // - orb-motion follows mouse
+    // - orb-core body animations handle big/small/egg/star/etc
+
+    const motionState = {
+      targetX: 0,
+      targetY: 0,
+      currentX: 0,
+      currentY: 0,
+      lastPointerTime: 0,
+      shaking: false,
+    };
+
+    const MAX_OFFSET = 18;          // how far the orb can lean (px)
+    const LERP = 0.08;              // smoothing for motion
+
+    function startShake() {
+      motionState.shaking = true;
+    }
+
+    function stopShake() {
+      motionState.shaking = false;
+    }
+
+    function onPointerMove(event) {
+      if (!orb || !orbMotion) return;
+
+      const rect = orb.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const relX = (event.clientX - centerX) / rect.width;  // -1..1
+      const relY = (event.clientY - centerY) / rect.height; // -1..1
+
+      motionState.targetX = relX * MAX_OFFSET;
+      motionState.targetY = relY * MAX_OFFSET;
+      motionState.lastPointerTime = performance.now();
+
+      const dist = Math.sqrt(relX * relX + relY * relY);
+      if (dist < 0.35) {
+        orb.classList.add('orb--attentive');
+      } else {
+        orb.classList.remove('orb--attentive');
+      }
+    }
+
+    function onPointerLeave() {
+      motionState.targetX = 0;
+      motionState.targetY = 0;
+      motionState.lastPointerTime = 0;
+      orb.classList.remove('orb--attentive');
+    }
+
+    function animate() {
+      if (!orbMotion) {
+        requestAnimationFrame(animate);
+        return;
+      }
+
+      // Smoothly chase the target position
+      motionState.currentX += (motionState.targetX - motionState.currentX) * LERP;
+      motionState.currentY += (motionState.targetY - motionState.currentY) * LERP;
+
+      let offsetX = motionState.currentX;
+      let offsetY = motionState.currentY;
+
+      // Extra jitter when Jeffrey is in rage or intense moods
+      if (motionState.shaking) {
+        offsetX += (Math.random() - 0.5) * 6;
+        offsetY += (Math.random() - 0.5) * 6;
+      }
+
+      // Translation only on the motion wrapper – body animations stay intact
+      orbMotion.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
+
+      requestAnimationFrame(animate);
+    }
+
+    if (orb) {
+      window.addEventListener('mousemove', onPointerMove);
+      window.addEventListener('mouseleave', onPointerLeave);
+      requestAnimationFrame(animate);
+    }
+
+    // ---- MICRO EFFECT CONFIG PER MOOD ----
+
+    const MOOD_EFFECTS = {
+      'orb--rage': [
+        { type: 'rage-spike', target: 'core', minDelay: 1200, maxDelay: 3200 },
+        { type: 'rage-tremor', target: 'core', minDelay: 800, maxDelay: 2600 }
+      ],
+      'orb--happy': [
+        { type: 'happy-twinkle', target: 'layer', minDelay: 1500, maxDelay: 3500 },
+        { type: 'happy-pop', target: 'core', minDelay: 2500, maxDelay: 5200 }
+      ],
+      'orb--sad': [
+        { type: 'sad-sag', target: 'core', minDelay: 3000, maxDelay: 6500 }
+      ],
+      'orb--annoyed': [
+        { type: 'annoyed-twitch', target: 'core', minDelay: 1400, maxDelay: 3200 }
+      ],
+      'orb--calm': [
+        // occasional tiny twinkle-like shimmer later if you want
+      ],
+      'orb--charged': [
+        // let this mostly be stable baseline
+      ]
+    };
+
+    function applyMicroEffect(effect) {
+      if (!effect || !orbCore || !currentLayer) return;
+
+      const { type, target } = effect;
+
+      if (target === 'core') {
+        const className = `orb-effect-${type}`;
+        orbCore.classList.add(className);
+        const duration = type.includes('sag') ? 1200 :
+                         type.includes('pop') ? 700 :
+                         type.includes('twitch') ? 400 :
+                         type.includes('tremor') ? 400 :
+                         550;
+
+        setTimeout(() => {
+          orbCore.classList.remove(className);
+        }, duration + 50);
+      } else if (target === 'layer') {
+        const className = `orb-effect-${type}`;
+        currentLayer.classList.add(className);
+        const duration = 800;
+        setTimeout(() => {
+          currentLayer.classList.remove(className);
+        }, duration + 50);
+      }
+    }
+
+    function startMoodEffectLoop() {
+      clearMoodEffectLoop();
+
+      const configs = MOOD_EFFECTS[currentMood];
+      if (!configs || configs.length === 0) return;
+
+      const scheduleNext = () => {
+        const cfg = configs[Math.floor(Math.random() * configs.length)];
+        const delay = randomInRange(cfg.minDelay, cfg.maxDelay);
+
+        moodEffectLoopTimeout = setTimeout(() => {
+          // Only apply if mood hasn’t changed
+          if (configs !== MOOD_EFFECTS[currentMood]) {
+            // mood changed; stop loop
+            return;
+          }
+
+          // Rage: sometimes also toggle shaking bursts
+          if (currentMood === 'orb--rage') {
+            const chance = Math.random();
+            if (chance < 0.55) {
+              startShake();
+              setTimeout(() => {
+                stopShake();
+              }, randomInRange(280, 900));
+            }
+          }
+
+          applyMicroEffect(cfg);
+
+          // Schedule again
+          scheduleNext();
+        }, delay);
+      };
+
+      scheduleNext();
+    }
+
+    // ---- CLICK: CHANGE MOODS + TRIGGER SPORADIC BEHAVIOUR ----
+
+    if (orb) {
+      orb.addEventListener('click', () => {
+        if (isTransitioning) return;
+
+        isTransitioning = true;
+        startMorph();
+
+        const candidates = altMoods.filter(m => m !== currentMood);
+        const nextMood = candidates[Math.floor(Math.random() * candidates.length)];
+
+        setTimeout(() => {
+          crossfadeToMood(nextMood);
+
+          // Rage: initial strong shake burst on entering
+          if (nextMood === 'orb--rage') {
+            startShake();
+            setTimeout(() => {
+              stopShake();
+            }, randomInRange(500, 1500));
+          } else {
+            stopShake();
+          }
+
+          scheduleRevertToBase();
+        }, MORPH_PRE_DELAY);
+
+        setTimeout(() => {
+          endMorph();
+          isTransitioning = false;
+        }, MORPH_TOTAL);
+      });
+    }
+
+    // Start micro-effects for base mood as well
+    startMoodEffectLoop();
+  </script>
+</body>
+</html>
