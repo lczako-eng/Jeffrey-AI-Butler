@@ -1236,7 +1236,7 @@
       </div>
     </section>
 
-    <section id="early-access" class="section alt">
+    
       <div class="container two-column">
         <div>
           <h2>Be the first to meet your shadow.</h2>
@@ -1245,16 +1245,22 @@
             behind-the-scenes progress, and invitations to the first private releases.
           </p>
         </div>
-        <form class="card form">
-          <label>
-            Email address
-            <input type="email" placeholder="you@example.com" required />
-          </label>
-          <button type="submit" class="btn primary full">Join Early Access</button>
-          <p class="form-note">
-            No spam. No sharing. Your data stays in the shadows with Jefferey.
-          </p>
-        </form>
+        <form class="card form" id="early-access-form">
+            <label>
+              Email address
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+              />
+            </label>
+            <button type="submit" class="btn primary full">Join Early Access</button>
+            <p class="form-note">
+              No spam. No sharing. Your data stays in the shadows with Jefferey.
+            </p>
+          </form>
+      
       </div>
     </section>
   </main>
@@ -1645,8 +1651,38 @@
       });
     }
 
-    // Start micro-effects for base mood as well
-    startMoodEffectLoop();
+        // Start micro-effects for base mood as well
+        startMoodEffectLoop();
+
+// ---- EARLY ACCESS FORM → SEND TO EMAIL ----
+const earlyAccessForm = document.getElementById('early-access-form');
+
+if (earlyAccessForm) {
+  earlyAccessForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const emailInput = earlyAccessForm.querySelector('input[type="email"]');
+    const email = emailInput ? emailInput.value.trim() : '';
+
+    if (!email) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    const subject = encodeURIComponent('Jefferey AI – Early Access Signup');
+    const body = encodeURIComponent(
+      `New early access signup:\n\nEmail: ${email}`
+    );
+
+    // Opens the user’s email client with a pre-filled email to you
+    window.location.href = `mailto:info@jeffereyai.com?subject=${subject}&body=${body}`;
+
+    // Optional: clear the field
+    emailInput.value = '';
+  });
+}
+</script>
+
   </script>
 </body>
 </html>
