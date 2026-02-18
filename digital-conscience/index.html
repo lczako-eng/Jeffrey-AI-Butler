@@ -1,10 +1,487 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Digital Conscience | JEFFEREY AI™</title>
-<meta name="robots" content="index,follow">
-<link rel="canonical" href="https://jeffereyai.com/digital-conscience/">
-</head><body>
-<h1>Digital Conscience</h1>
-<p>Values preserved separately from temporary reasoning.</p>
-<p><a href="/">Home</a></p>
-</body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Digital Conscience | JEFFEREY AI™</title>
+  <meta name="description" content="Digital Conscience is JEFFEREY AI’s persistent hierarchy of values and decision rules—stored separately from reasoning so your priorities persist over time." />
+  <link rel="canonical" href="https://jeffereyai.com/digital-conscience/" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="JEFFEREY AI™" />
+  <meta property="og:title" content="Digital Conscience | JEFFEREY AI™" />
+  <meta property="og:description" content="A persistent hierarchy of your priorities—stored separately from reasoning—so your values persist over time." />
+  <meta property="og:url" content="https://jeffereyai.com/digital-conscience/" />
+  <meta property="og:image" content="https://jeffereyai.com/og.jpg" />
+
+  <meta name="theme-color" content="#050611" />
+
+  <style>
+    :root {
+      --bg: #050611;
+      --bg-alt: #0b0f19;
+      --card: #111724;
+      --border: #20263a;
+      --text: #f5f5ff;
+      --muted: #a4a8c0;
+      --accent1: #9b7bff;
+      --accent2: #6fd1ff;
+      --accent-warm: #ff7b5c;
+      --radius: 14px;
+      --shadow-soft: 0 22px 45px rgba(0, 0, 0, 0.55);
+      --container: 1120px;
+      --transition: 220ms ease-out;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #302764 0, #141429 35%, #050611 70%);
+      color: var(--text);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; }
+    main { display: block; }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 10px;
+      background: #fff;
+      color: #000;
+      padding: 10px 12px;
+      border-radius: 10px;
+      z-index: 9999;
+    }
+    .skip-link:focus { left: 12px; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(5,6,17,0.96), rgba(5,6,17,0.75), transparent);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 180px;
+      text-decoration: none;
+    }
+
+    .brand-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 20%, #ffffff, #7ddcff 40%, #2b2666 80%),
+        radial-gradient(circle at 80% 80%, rgba(255, 123, 92, 0.9), transparent 60%);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+    }
+
+    .brand-name {
+      font-weight: 650;
+      letter-spacing: 0.16em;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 14px;
+      font-size: 14px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--muted);
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .nav a:hover, .nav a:focus-visible {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.4);
+      outline: none;
+    }
+
+    .nav-cta {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.22);
+    }
+
+    .section { padding: 72px 0; }
+    .section.alt {
+      background: linear-gradient(to bottom, rgba(255,255,255,0.02), rgba(255,123,92,0.02), transparent);
+    }
+
+    .two-column { display: grid; gap: 32px; }
+    @media (min-width: 860px) {
+      .two-column { grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr); }
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      font-size: 11px;
+      margin: 0 0 10px;
+    }
+
+    h1 {
+      font-size: clamp(34px, 4vw, 48px);
+      line-height: 1.08;
+      margin: 0 0 14px;
+    }
+
+    .gradient {
+      background: linear-gradient(120deg, var(--accent1), var(--accent2), var(--accent-warm));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    h2 { font-size: 28px; margin: 0 0 12px; line-height: 1.15; }
+    h3 { font-size: 18px; margin: 0 0 8px; line-height: 1.25; }
+
+    p { font-size: 15px; line-height: 1.7; margin: 0 0 12px; }
+    .muted { color: var(--muted); }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px 20px 18px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .list { padding-left: 18px; color: var(--muted); margin: 0; }
+    .list li { margin-bottom: 8px; }
+
+    .kicker {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition),
+                  box-shadow var(--transition), color var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent-warm));
+      color: #050611;
+      box-shadow: var(--shadow-soft);
+      font-weight: 650;
+    }
+
+    .btn.primary:hover { transform: translateY(-1px); box-shadow: 0 18px 35px rgba(0,0,0,0.7); }
+
+    .btn.ghost {
+      border-color: rgba(255,255,255,0.32);
+      color: var(--text);
+      background: transparent;
+    }
+    .btn.ghost:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.04); }
+
+    .hero {
+      padding: 88px 0 34px;
+    }
+
+    .hero-sub {
+      max-width: 70ch;
+      color: var(--muted);
+      margin: 0 0 18px;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(17,23,36,0.55);
+    }
+
+    .icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(155,123,255,0.9), rgba(111,209,255,0.9), rgba(255,123,92,0.75));
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+      flex: 0 0 auto;
+    }
+
+    .footer {
+      padding: 60px 0 28px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: #050611;
+    }
+    .footer-inner { text-align: center; font-size: 13px; color: var(--muted); }
+    .footer a { color: inherit; text-decoration: underline; }
+
+    /* image card */
+    .figure {
+      margin: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(17,23,36,0.55);
+    }
+    .figure img { display: block; width: 100%; height: auto; }
+    .figcap { padding: 12px 14px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+
+    /* small code block */
+    .code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: #dfe3ff;
+      background: rgba(5,6,17,0.55);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 14px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="JEFFEREY AI Home">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span class="brand-name">JEFFEREY AI™</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/personal-ai-shadow/" title="What is a Personal AI Shadow">What it is</a>
+        <a href="/self-cloud/" title="Self-Cloud private custody">Self-Cloud™</a>
+        <a href="/digital-conscience/" title="Digital Conscience values layer">Digital Conscience</a>
+        <a href="/self-cloud/#sovereignty" title="Physical sovereignty and security">Sovereignty</a>
+        <a href="/personal-ai-shadow/#use-cases" title="Use cases for private personal AI">Use cases</a>
+        <a href="/whitepapers/" class="nav-cta" title="Whitepapers and architecture">Whitepapers</a>
+        <a href="/#faq" title="FAQ about JEFFEREY AI">FAQ</a>
+        <a href="/#early-access" class="nav-cta" title="Join early access waitlist">Early Access</a>
+        <a href="https://github.com/lczako-eng/Jeffrey-AI-Butler" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container two-column">
+        <div>
+          <p class="eyebrow">Values layer • Continuity • Decision hierarchy</p>
+          <h1 id="hero-title">Digital <span class="gradient">Conscience</span></h1>
+
+          <p class="hero-sub">
+            Digital Conscience is a persistent hierarchy of your priorities and decision rules—stored separately from
+            temporary reasoning—so your values persist across years, models, and devices.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="/whitepapers/">Read the Whitepapers</a>
+            <a class="btn ghost" href="/self-cloud/">See Self-Cloud™</a>
+            <a class="btn ghost" href="/personal-ai-shadow/">How it works</a>
+          </div>
+        </div>
+
+        <aside class="card" aria-label="At-a-glance definition">
+          <p class="kicker">One-line definition</p>
+          <div class="pill">
+            <span class="icon" aria-hidden="true"></span>
+            <div>
+              <h3 style="margin:0 0 6px;">Values preserved separately from intelligence</h3>
+              <p class="muted" style="margin:0;">
+                Reasoning can change. Your hierarchy shouldn’t.
+              </p>
+            </div>
+          </div>
+
+          <div style="height:14px;"></div>
+
+          <p class="kicker">What it stores</p>
+          <ul class="list">
+            <li>Priority hierarchies (what wins when values collide)</li>
+            <li>Decision rules (“when X conflicts with Y, choose Y”)</li>
+            <li>Corrections that become durable guidance</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- WHY IT MATTERS -->
+    <section class="section alt" aria-labelledby="why-title">
+      <div class="container two-column">
+        <div>
+          <p class="kicker">Why it matters</p>
+          <h2 id="why-title">Memory without values is not continuity</h2>
+          <p class="muted">
+            Most systems preserve information, but they don’t preserve your value hierarchy as a distinct structure.
+            That’s why assistants feel inconsistent: they might “remember facts” but forget what you consider non-negotiable.
+          </p>
+
+          <p class="muted">
+            Digital Conscience turns corrections into durable guidance. Over time, JEFFEREY learns what you reject,
+            what you insist on, and what must never happen—even if it’s “convenient.”
+          </p>
+
+          <div class="code" aria-label="Example value rule">
+privacy > convenience
+safety > speed
+truth > comfort
+when priorities collide: choose the higher rule
+          </div>
+        </div>
+
+        <aside class="card" aria-label="Failure modes">
+          <p class="kicker">What this prevents</p>
+          <ul class="list">
+            <li><strong>Drift:</strong> behavior changing when the underlying model changes</li>
+            <li><strong>Amnesia of priorities:</strong> remembering facts but ignoring boundaries</li>
+            <li><strong>Account custody:</strong> values locked inside vendor policy instead of your hardware</li>
+          </ul>
+          <p class="muted" style="margin-top:12px;">
+            Digital Conscience is designed to persist by custody, not by terms of service.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- STRUCTURE -->
+    <section class="section" aria-labelledby="structure-title">
+      <div class="container two-column">
+        <div>
+          <p class="kicker">Structure</p>
+          <h2 id="structure-title">A persistent layer with a simple interface</h2>
+          <p class="muted">
+            The point is not complexity. The point is separation: keep conscience durable and reasoning disposable.
+            That makes the system stable across time.
+          </p>
+
+          <div class="card" style="margin-top:16px;">
+            <h3>Core separation</h3>
+            <ul class="list">
+              <li><strong>Conscience:</strong> stored rules + hierarchy + boundaries (durable)</li>
+              <li><strong>Reasoning:</strong> temporary inference and planning (replaceable)</li>
+              <li><strong>Audit:</strong> logs that show why the system did what it did (inspectable)</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside aria-label="Concept visual">
+          <figure class="figure">
+            <!-- Use your existing Self-Cloud visual as a placeholder, or swap later -->
+            <img src="/assets/selfcloud.png" alt="Self-Cloud™ custody layer supporting Digital Conscience continuity" loading="lazy" />
+            <figcaption class="figcap">
+              Digital Conscience persists because Self-Cloud™ holds continuity under your control.
+              Swap this image later for a dedicated “Conscience Layer” visual if you want.
+            </figcaption>
+          </figure>
+
+          <div style="height:14px;"></div>
+
+          <div class="card">
+            <p class="kicker">Next step</p>
+            <p class="muted" style="margin:0;">
+              If you want this page to rank, we expand it with:
+              concrete examples, use-cases, and a short “how it’s implemented” section.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section alt" aria-labelledby="cta-title">
+      <div class="container two-column">
+        <div>
+          <p class="kicker">Build path</p>
+          <h2 id="cta-title">Digital Conscience is the core differentiator</h2>
+          <p class="muted">
+            Self-Cloud™ makes custody real. Personal AI Shadow™ makes it useful. Digital Conscience makes it consistent.
+          </p>
+        </div>
+
+        <aside class="card">
+          <p class="kicker">Explore</p>
+          <div class="hero-actions" style="margin-top:10px;">
+            <a class="btn primary" href="/self-cloud/">Self-Cloud™</a>
+            <a class="btn ghost" href="/personal-ai-shadow/">Personal AI Shadow™</a>
+            <a class="btn ghost" href="/whitepapers/">Whitepapers</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p><strong>JEFFEREY AI™</strong> © 2026 — Personal AI Shadow™ powered by Self-Cloud™</p>
+      <p>Owned. Sovereign. Persistent.</p>
+      <p style="margin-top: 10px;">JEFFEREY AI™ · Personal AI Shadow™ · Self-Cloud™ are trademarks.</p>
+      <p>
+        <a href="mailto:info@jeffereyai.com">info@jeffereyai.com</a>
+        &nbsp;·&nbsp;
+        <a href="https://github.com/lczako-eng/Jeffrey-AI-Butler" target="_blank" rel="noopener noreferrer">GitHub: Jeffrey-AI-Butler</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
