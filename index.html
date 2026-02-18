@@ -5,7 +5,6 @@
        CORE TECH SEO
   ========================================================== -->
   <meta charset="UTF-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Canonical: MUST be exact public URL of this page -->
@@ -14,161 +13,161 @@
   <!-- Robots: allow indexing -->
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
-  <!-- Hreflang (single-language site for now; add more if you localize) -->
+  <!-- Hreflang -->
   <link rel="alternate" href="https://jeffereyai.com/" hreflang="en" />
   <link rel="alternate" href="https://jeffereyai.com/" hreflang="x-default" />
 
-  <!-- Title + Description: the two biggest on-page SEO levers -->
-  <title>JEFFEREY AI™ + Self-Cloud™ — Private Personal AI Shadow™ on Owned Infrastructure</title>
-  <meta
-    name="description"
-    content="JEFFEREY AI™ is a private Personal AI Shadow™ powered by Self-Cloud™ — physically owned infrastructure for encrypted continuity, AI memory, and a persistent Digital Conscience shaped by your priorities."
-  />
+  <!-- Title + Description -->
+  <title>JEFFEREY AI™ — Private Personal AI on Self-Cloud™ (Owned Memory + Digital Conscience)</title>
+  <meta name="description" content="JEFFEREY AI™ is a private personal AI that preserves memory and values under your custody. Self-Cloud™ provides owned infrastructure for encrypted continuity and a persistent Digital Conscience." />
 
-  <!-- Optional: keywords are not a ranking factor, but harmless if accurate -->
-  <meta name="keywords" content="personal AI, private AI, self-hosted AI, AI memory system, autonomous AI, digital conscience, encrypted continuity, on-device AI, local AI, personal cloud, self cloud" />
-
-  <!-- Theme / brand -->
+  <!-- Theme -->
   <meta name="theme-color" content="#050611" />
 
-  <!-- Favicons (add files in /assets or root) -->
+  <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- Performance hints -->
   <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin />
   <link rel="dns-prefetch" href="https://raw.githubusercontent.com" />
-  <link rel="preload" as="image" href="assets/selfcloud.png" imagesrcset="assets/selfcloud.png" />
+  <link rel="preload" as="image" href="/assets/selfcloud.png" />
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
   <!-- OpenGraph / Social -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="JEFFEREY AI™" />
+  <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="JEFFEREY AI™ + Self-Cloud™ — Your Private Personal AI Shadow™" />
   <meta property="og:description" content="A physically sovereign Personal AI Shadow™ built on owned infrastructure, encrypted continuity, and a Digital Conscience that persists by custody—not subscription." />
   <meta property="og:url" content="https://jeffereyai.com/" />
   <meta property="og:image" content="https://jeffereyai.com/og.jpg" />
+  <meta property="og:image:secure_url" content="https://jeffereyai.com/og.jpg" />
   <meta property="og:image:alt" content="JEFFEREY AI™ — Personal AI Shadow™ powered by Self-Cloud™" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="JEFFEREY AI™ + Self-Cloud™ — Private Personal AI Shadow™" />
   <meta name="twitter:description" content="A personal AI that lives under your custody: owned infrastructure, encrypted continuity, and values-preserving Digital Conscience." />
   <meta name="twitter:image" content="https://jeffereyai.com/og.jpg" />
+  <meta name="twitter:image:alt" content="JEFFEREY AI™ — Personal AI Shadow™ powered by Self-Cloud™" />
 
   <!-- =========================================================
        STRUCTURED DATA (JSON-LD)
        - Organization
-       - WebSite (with SearchAction)
+       - WebSite
        - WebPage
        - Breadcrumb
        - FAQPage
+       NOTE: SearchAction removed until /search exists.
   ========================================================== -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": "https://jeffereyai.com/#org",
-          "name": "JEFFEREY AI",
-          "url": "https://jeffereyai.com/",
-          "logo": "https://jeffereyai.com/logo.png",
-          "description": "JEFFEREY AI™ is a private Personal AI Shadow™ powered by Self-Cloud™: physically owned infrastructure for encrypted continuity, AI memory, and a values-preserving Digital Conscience.",
-          "sameAs": [
-            "https://github.com/lczako-eng/Jeffrey-AI-Butler"
-          ],
-          "contactPoint": [
-            {
-              "@type": "ContactPoint",
-              "contactType": "customer support",
-              "email": "info@jeffereyai.com",
-              "availableLanguage": ["en"]
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://jeffereyai.com/#org",
+        "name": "JEFFEREY AI",
+        "legalName": "JEFFEREY AI",
+        "url": "https://jeffereyai.com/",
+        "logo": "https://jeffereyai.com/logo.png",
+        "description": "JEFFEREY AI™ is a private personal AI powered by Self-Cloud™: owned infrastructure for encrypted continuity, AI memory, and a values-preserving Digital Conscience.",
+        "founder": {
+          "@type": "Person",
+          "name": "Laszlo Czako"
+        },
+        "sameAs": [
+          "https://github.com/lczako-eng/Jeffrey-AI-Butler"
+        ],
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "contactType": "support",
+            "email": "info@jeffereyai.com",
+            "availableLanguage": ["en"]
+          }
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://jeffereyai.com/#website",
+        "url": "https://jeffereyai.com/",
+        "name": "JEFFEREY AI",
+        "publisher": { "@id": "https://jeffereyai.com/#org" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jeffereyai.com/#webpage",
+        "url": "https://jeffereyai.com/",
+        "name": "JEFFEREY AI™ — Private Personal AI on Self-Cloud™",
+        "isPartOf": { "@id": "https://jeffereyai.com/#website" },
+        "about": { "@id": "https://jeffereyai.com/#org" },
+        "inLanguage": "en",
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://jeffereyai.com/og.jpg",
+          "width": 1200,
+          "height": 630
+        },
+        "description": "JEFFEREY AI™ is a private personal AI that preserves memory and values under your custody using Self-Cloud™ and a persistent Digital Conscience."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://jeffereyai.com/#breadcrumbs",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://jeffereyai.com/"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://jeffereyai.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a Personal AI Shadow™?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A Personal AI Shadow™ is a private, long-lived personal AI designed for one person. It preserves continuity over time and stays under your authority via owned infrastructure rather than vendor custody."
             }
-          ]
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://jeffereyai.com/#website",
-          "url": "https://jeffereyai.com/",
-          "name": "JEFFEREY AI",
-          "publisher": { "@id": "https://jeffereyai.com/#org" },
-          "inLanguage": "en"
-        },
-        {
-          "@type": "WebPage",
-          "@id": "https://jeffereyai.com/#webpage",
-          "url": "https://jeffereyai.com/",
-          "name": "JEFFEREY AI™ + Self-Cloud™ — Private Personal AI Shadow™ on Owned Infrastructure",
-          "isPartOf": { "@id": "https://jeffereyai.com/#website" },
-          "about": { "@id": "https://jeffereyai.com/#org" },
-          "inLanguage": "en",
-          "primaryImageOfPage": {
-            "@type": "ImageObject",
-            "url": "https://jeffereyai.com/og.jpg"
           },
-          "description": "JEFFEREY AI™ is a private Personal AI Shadow™ powered by Self-Cloud™ — physically owned infrastructure for encrypted continuity, AI memory, and a persistent Digital Conscience shaped by your priorities."
-        },
-        {
-          "@type": "BreadcrumbList",
-          "@id": "https://jeffereyai.com/#breadcrumbs",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": "https://jeffereyai.com/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Whitepapers",
-              "item": "https://jeffereyai.com/whitepapers/"
+          {
+            "@type": "Question",
+            "name": "What is Self-Cloud™?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Self-Cloud™ is owned storage and compute that can operate as a private custody layer. When powered down, it can have no network presence—existence becomes deliberate."
             }
-          ]
-        },
-        {
-          "@type": "FAQPage",
-          "@id": "https://jeffereyai.com/#faq",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "What is a Personal AI Shadow™?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "A Personal AI Shadow™ is a private, long-lived AI designed for one person. It learns your priorities, preserves continuity over time, and stays under your authority via owned infrastructure rather than vendor custody."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is Self-Cloud™?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Self-Cloud™ is physically owned storage + compute that can create a private network. When powered down, it can have no network presence, no exposed services, and no passive observation—existence becomes deliberate."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How does Digital Conscience differ from normal AI memory?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Digital Conscience is a structured hierarchy of your priorities and decision rules (what wins when values collide). It’s stored separately from temporary reasoning so your values persist as durable guidance, not just preferences."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Is JEFFEREY AI cloud-based?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "The core idea is custody: memory and continuity are stored under your control. You can integrate remote services, but the custody layer is designed so your long-term context can remain on owned hardware."
-              }
+          },
+          {
+            "@type": "Question",
+            "name": "How does Digital Conscience differ from normal AI memory?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Digital Conscience is a persistent hierarchy of your priorities and decision rules, stored separately from temporary reasoning so your values remain durable guidance over time."
             }
-          ]
-        }
-      ]
-    }
-    </script>
-    
-
+          },
+          {
+            "@type": "Question",
+            "name": "Is JEFFEREY AI cloud-based?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The core design is custody: long-term context is intended to remain under your control on owned hardware, even if optional cloud services are integrated for specific tasks."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <style>
     :root {
@@ -437,6 +436,13 @@
 
     .form-note { font-size: 12px; color: var(--muted); margin-top: 6px; }
 
+    .form-status {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      min-height: 18px;
+    }
+
     .faq details {
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 14px;
@@ -470,7 +476,11 @@
       border-radius: 50%;
       cursor: pointer;
       transition: transform 2600ms ease-in-out, filter 2600ms ease-in-out, opacity 2600ms ease-in-out;
+      outline: none;
+      border: none;
+      background: transparent;
     }
+    .orb:focus-visible { box-shadow: 0 0 0 3px rgba(111, 209, 255, 0.35); }
     @media (min-width: 1024px) {
       .orb { width: 320px; height: 320px; }
     }
@@ -588,7 +598,7 @@
       100% { transform: translateY(-4px) scale(0.98); border-radius: 52% 48% 50% 50%; }
     }
 
-    .orb-layer.orb--calm {
+    .orb-layer.orb--calm { /* unchanged */ 
       background:
         radial-gradient(circle at 48% 42%, #ffffff 0, #f6fbff 14%, rgba(230, 240, 255, 0.9) 26%, rgba(210, 224, 255, 0.0) 48%),
         radial-gradient(circle at 60% 70%, rgba(72, 196, 255, 0.95) 0, rgba(72, 196, 255, 0.0) 48%),
@@ -598,7 +608,7 @@
       box-shadow: 0 0 70px rgba(150, 200, 255, 0.8), 0 0 110px rgba(90, 150, 255, 0.4);
       animation: orb-core-warp 24s ease-in-out infinite;
     }
-    .orb-layer.orb--calm::before {
+    .orb-layer.orb--calm::before { /* unchanged */
       background: conic-gradient(from 210deg,
         rgba(255, 255, 255, 0.0) 0deg,
         rgba(255, 255, 255, 0.45) 40deg,
@@ -612,7 +622,7 @@
       filter: blur(13px);
     }
 
-    .orb-layer.orb--charged {
+    .orb-layer.orb--charged { /* unchanged */
       background:
         radial-gradient(circle at 48% 42%, #ffffff 0, #f8fbff 12%, rgba(240, 246, 255, 0.95) 24%, rgba(210, 224, 255, 0.0) 46%),
         radial-gradient(circle at 60% 70%, rgba(72, 196, 255, 0.95) 0, rgba(72, 196, 255, 0.0) 45%),
@@ -625,7 +635,7 @@
         0 0 120px rgba(255, 123, 92, 0.35);
       animation: orb-core-warp 16s ease-in-out infinite;
     }
-    .orb-layer.orb--charged::before {
+    .orb-layer.orb--charged::before { /* unchanged */
       background: conic-gradient(from 210deg,
         rgba(255, 255, 255, 0.0) 0deg,
         rgba(255, 255, 255, 0.55) 25deg,
@@ -641,7 +651,7 @@
       animation: orb-shimmer 16s linear infinite;
     }
 
-    .orb-layer.orb--rage {
+    .orb-layer.orb--rage { /* unchanged */
       background:
         radial-gradient(circle at 50% 40%, #fff7f7 0, #ffe3dd 14%, rgba(255, 214, 196, 0.92) 26%, rgba(255, 214, 196, 0.0) 46%),
         radial-gradient(circle at 65% 75%, rgba(255, 90, 70, 0.98) 0, rgba(255, 90, 70, 0.0) 52%),
@@ -654,7 +664,7 @@
         0 0 80px rgba(255, 240, 220, 0.5);
       animation: orb-core-warp 10s ease-in-out infinite;
     }
-    .orb-layer.orb--rage::before {
+    .orb-layer.orb--rage::before { /* unchanged */
       background: conic-gradient(from 200deg,
         rgba(255, 255, 255, 0.0) 0deg,
         rgba(255, 230, 214, 0.9) 30deg,
@@ -676,7 +686,7 @@
       100% { transform: rotate(360deg) scale(1.08); opacity: 0.95; }
     }
 
-    .orb-layer.orb--annoyed {
+    .orb-layer.orb--annoyed { /* unchanged */
       background:
         radial-gradient(circle at 48% 42%, #ffffff 0, #fdf5ff 14%, rgba(244, 228, 255, 0.95) 26%, rgba(210, 224, 255, 0.0) 48%),
         radial-gradient(circle at 65% 75%, rgba(255, 137, 92, 0.9) 0, rgba(255, 137, 92, 0.0) 50%),
@@ -686,7 +696,7 @@
       box-shadow: 0 0 95px rgba(190, 210, 255, 0.95), 0 0 130px rgba(255, 137, 92, 0.55);
       animation: orb-core-warp 12s ease-in-out infinite;
     }
-    .orb-layer.orb--annoyed::before {
+    .orb-layer.orb--annoyed::before { /* unchanged */
       background: conic-gradient(from 220deg,
         rgba(255, 255, 255, 0.0) 0deg,
         rgba(255, 255, 255, 0.5) 30deg,
@@ -699,7 +709,7 @@
       filter: blur(9px);
     }
 
-    .orb-layer.orb--sad {
+    .orb-layer.orb--sad { /* unchanged */
       background:
         radial-gradient(circle at 50% 45%, #f4f7ff 0, #dde6ff 16%, rgba(180, 198, 235, 0.95) 28%, rgba(160, 180, 215, 0.0) 50%),
         radial-gradient(circle at 40% 85%, rgba(80, 120, 200, 0.85) 0, rgba(20, 40, 80, 0.0) 60%),
@@ -710,7 +720,7 @@
       animation: orb-core-warp 24s ease-in-out infinite;
     }
 
-    .orb-layer.orb--happy {
+    .orb-layer.orb--happy { /* unchanged */
       background:
         radial-gradient(circle at 50% 42%, #ffffff 0, #fff9e7 14%, rgba(255, 240, 200, 0.95) 26%, rgba(255, 240, 200, 0.0) 48%),
         radial-gradient(circle at 62% 78%, rgba(255, 215, 120, 0.95) 0, rgba(255, 215, 120, 0.0) 52%),
@@ -720,7 +730,7 @@
       box-shadow: 0 0 110px rgba(255, 210, 150, 0.9), 0 0 140px rgba(255, 255, 210, 0.4);
       animation: orb-core-warp 18s ease-in-out infinite;
     }
-    .orb-layer.orb--happy::before {
+    .orb-layer.orb--happy::before { /* unchanged */
       background: conic-gradient(from 180deg,
         rgba(255, 255, 255, 0.0) 0deg,
         rgba(255, 255, 255, 0.8) 40deg,
@@ -796,27 +806,21 @@
       </a>
 
       <nav class="nav" aria-label="Primary navigation">
+        <!-- NOTE: These MUST be real, crawlable pages returning 200 -->
         <a href="/personal-ai-shadow/" title="What is a Personal AI Shadow">What it is</a>
         <a href="/self-cloud/" title="Self-Cloud private custody">Self-Cloud™</a>
         <a href="/digital-conscience/" title="Digital Conscience values layer">Digital Conscience</a>
-      
-        <!-- sovereignty is a section inside self-cloud -->
+
         <a href="/self-cloud/#sovereignty" title="Physical sovereignty and security">Sovereignty</a>
-      
-        <!-- use cases live on personal-ai-shadow -->
         <a href="/personal-ai-shadow/#use-cases" title="Use cases for private personal AI">Use cases</a>
-      
+
         <a href="/whitepapers/" class="nav-cta" title="Whitepapers and architecture">Whitepapers</a>
-      
-        <!-- FAQ stays on homepage -->
         <a href="/#faq" title="FAQ about JEFFEREY AI">FAQ</a>
-      
-        <!-- Early Access stays on homepage -->
         <a href="/#early-access" class="nav-cta" title="Join early access waitlist">Early Access</a>
-      
+
         <a href="https://github.com/lczako-eng/Jeffrey-AI-Butler" target="_blank" rel="noopener noreferrer">GitHub</a>
       </nav>
-          </div>
+    </div>
   </header>
 
   <main id="main">
@@ -842,19 +846,20 @@
             <a href="/whitepapers/" class="btn ghost">Read the Whitepapers</a>
             <a href="/personal-ai-shadow/" class="btn ghost">How it works</a>
           </div>
-          
-          <p class="tagline">Keywords you should rank for: <span class="muted">personal AI • private AI • AI memory system • autonomous AI</span></p>
+
+          <p class="tagline">Private by custody. Persistent by design.</p>
           <p class="tagline">Click the orb to feel the state of your Shadow™.</p>
         </div>
 
         <div class="hero-visual" aria-label="Interactive orb visualization">
-          <div class="orb" role="img" aria-label="Interactive orb showing AI Shadow state"></div>
+          <!-- Accessibility fix: interactive => role="button" -->
+          <div class="orb" role="button" tabindex="0" aria-label="Change AI Shadow state visualization"></div>
         </div>
       </div>
     </section>
 
     <!-- =========================================================
-         WHAT IT IS (semantic, crawlable, keyword-aligned)
+         WHAT IT IS
     ========================================================== -->
     <section id="what-is" class="section alt" aria-labelledby="what-is-title">
       <div class="container two-column">
@@ -892,7 +897,7 @@
     </section>
 
     <!-- =========================================================
-         ORB EXPLANATION (SEO-friendly, not just vibes)
+         ORB EXPLANATION
     ========================================================== -->
     <section class="section" aria-labelledby="orb-title">
       <div class="container two-column">
@@ -921,7 +926,7 @@
     </section>
 
     <!-- =========================================================
-         SELF-CLOUD (primary keyword: private AI, self-hosted, owned)
+         SELF-CLOUD
     ========================================================== -->
     <section id="self-cloud" class="section alt" aria-labelledby="self-cloud-title">
       <div class="container two-column">
@@ -956,7 +961,7 @@
 
           <figure style="margin: 14px 0 0;">
             <img
-              src="assets/selfcloud.png"
+              src="/assets/selfcloud.png"
               alt="Self-Cloud™ device concept — owned infrastructure for private AI memory"
               style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);"
               loading="lazy"
@@ -968,7 +973,7 @@
     </section>
 
     <!-- =========================================================
-         DIGITAL CONSCIENCE (primary keyword: AI memory system / values)
+         DIGITAL CONSCIENCE
     ========================================================== -->
     <section id="digital-conscience" class="section" aria-labelledby="conscience-title">
       <div class="container two-column">
@@ -1000,7 +1005,7 @@
     </section>
 
     <!-- =========================================================
-         PHYSICAL SOVEREIGNTY (security keyword + real explanation)
+         PHYSICAL SOVEREIGNTY
     ========================================================== -->
     <section id="sovereignty" class="section alt" aria-labelledby="sovereignty-title">
       <div class="container two-column">
@@ -1032,7 +1037,7 @@
     </section>
 
     <!-- =========================================================
-         FEATURES (crawlable, specific, query-aligned)
+         FEATURES
     ========================================================== -->
     <section id="features" class="section" aria-labelledby="features-title">
       <div class="container">
@@ -1073,7 +1078,7 @@
     </section>
 
     <!-- =========================================================
-         USE CASES (this is how you rank beyond brand)
+         USE CASES
     ========================================================== -->
     <section id="use-cases" class="section alt" aria-labelledby="use-cases-title">
       <div class="container two-column">
@@ -1108,7 +1113,7 @@
     </section>
 
     <!-- =========================================================
-         WHITEPAPERS (still on homepage, but points to real URL)
+         WHITEPAPERS
     ========================================================== -->
     <section id="whitepapers" class="section" aria-labelledby="whitepapers-title">
       <div class="container two-column">
@@ -1181,7 +1186,7 @@
     </section>
 
     <!-- =========================================================
-         FAQ (helps with featured snippets + schema matches)
+         FAQ
     ========================================================== -->
     <section id="faq" class="section alt" aria-labelledby="faq-title">
       <div class="container">
@@ -1228,7 +1233,7 @@
     </section>
 
     <!-- =========================================================
-         EARLY ACCESS (conversion, but still SEO-safe)
+         EARLY ACCESS (REAL SUBMIT ENDPOINT — NOT mailto)
     ========================================================== -->
     <section id="early-access" class="section" aria-labelledby="early-access-title">
       <div class="container two-column">
@@ -1242,7 +1247,8 @@
           </p>
 
           <p class="form-note">
-            This is a controlled waitlist — not a mailing list. No spam. No sharing. Your email remains separate from your custody system.
+            This is a controlled waitlist — not a mailing list. No spam. No sharing.
+            See <a href="/privacy/">privacy policy</a>.
           </p>
         </div>
 
@@ -1251,14 +1257,15 @@
             Email address
             <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required />
           </label>
-          <button type="submit" class="btn primary full">Join Waitlist</button>
+          <button type="submit" class="btn primary full" id="early-access-submit">Join Waitlist</button>
+          <div class="form-status" id="early-access-status" aria-live="polite"></div>
           <p class="form-note">No spam. No sharing. Your custody stays yours.</p>
         </form>
       </div>
     </section>
 
     <!-- =========================================================
-         INTERNAL LINKS (small but useful crawl boosters)
+         INTERNAL LINKS
     ========================================================== -->
     <section class="section alt" aria-label="Quick links">
       <div class="container">
@@ -1271,6 +1278,7 @@
             <li><a href="#use-cases">Use cases: private AI assistant + AI memory system</a></li>
             <li><a href="/whitepapers/">Whitepapers: full architecture docs (dedicated page)</a></li>
             <li><a href="#faq">FAQ: quick answers</a></li>
+            <li><a href="/privacy/">Privacy policy</a></li>
           </ul>
         </div>
       </div>
@@ -1284,6 +1292,8 @@
       <p style="margin-top: 10px;">JEFFEREY AI™ · Personal AI Shadow™ · Self-Cloud™ are trademarks.</p>
       <p>
         <a href="mailto:info@jeffereyai.com">info@jeffereyai.com</a>
+        &nbsp;·&nbsp;
+        <a href="/privacy/">Privacy</a>
         &nbsp;·&nbsp;
         <a href="https://github.com/lczako-eng/Jeffrey-AI-Butler" target="_blank" rel="noopener noreferrer">GitHub: Jeffrey-AI-Butler</a>
       </p>
@@ -1312,8 +1322,6 @@
 
     const baseMood = 'orb--charged';
     const altMoods = ['orb--calm', 'orb--happy', 'orb--annoyed', 'orb--sad', 'orb--rage'];
-    const allMoods = [baseMood, ...altMoods];
-
     let currentMood = baseMood;
     let isTransitioning = false;
     let revertTimeout = null;
@@ -1625,36 +1633,79 @@
           isTransitioning = false;
         }, MORPH_TOTAL);
       });
+
+      // Accessibility: Enter/Space triggers click
+      orb.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          orb.click();
+        }
+      });
     }
 
     startMoodEffectLoop();
 
-    // ---- EARLY ACCESS FORM → SEND TO EMAIL ----
+    // =======================================================================
+    // EARLY ACCESS FORM → POST TO /api/early-access (Vercel function)
+    // =======================================================================
     const earlyAccessForm = document.getElementById('early-access-form');
+    const earlyAccessStatus = document.getElementById('early-access-status');
+    const earlyAccessSubmit = document.getElementById('early-access-submit');
+
+    function setStatus(msg) {
+      if (earlyAccessStatus) earlyAccessStatus.textContent = msg || '';
+    }
+
+    function setSubmitting(isSubmitting) {
+      if (!earlyAccessSubmit) return;
+      earlyAccessSubmit.disabled = !!isSubmitting;
+      earlyAccessSubmit.textContent = isSubmitting ? 'Submitting…' : 'Join Waitlist';
+    }
 
     if (earlyAccessForm) {
-      earlyAccessForm.addEventListener('submit', (event) => {
+      earlyAccessForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const emailInput = earlyAccessForm.querySelector('input[type="email"]');
         const email = emailInput ? emailInput.value.trim() : '';
 
         if (!email) {
-          alert('Please enter a valid email address.');
+          setStatus('Please enter a valid email address.');
           return;
         }
 
-        const subject = encodeURIComponent('JEFFEREY AI™ – Early Access Signup');
-        const body = encodeURIComponent(`New early access signup:\n\nEmail: ${email}`);
+        setSubmitting(true);
+        setStatus('');
 
-        window.location.href = `mailto:info@jeffereyai.com?subject=${subject}&body=${body}`;
+        try {
+          const res = await fetch('/api/early-access', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email,
+              source: 'homepage',
+              ts: new Date().toISOString()
+            })
+          });
 
-        emailInput.value = '';
+          const data = await res.json().catch(() => ({}));
+
+          if (!res.ok) {
+            const msg = data && data.error ? data.error : 'Signup failed. Please try again.';
+            setStatus(msg);
+            setSubmitting(false);
+            return;
+          }
+
+          setStatus('You’re on the list. Watch your inbox for pilot invites.');
+          if (emailInput) emailInput.value = '';
+          setSubmitting(false);
+        } catch (err) {
+          setStatus('Network error. Please try again.');
+          setSubmitting(false);
+        }
       });
     }
-    // =======================================================================
-    // END ORB JS (UNCHANGED)
-    // =======================================================================
   </script>
 </body>
 </html>
