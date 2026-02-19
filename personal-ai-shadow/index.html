@@ -1,13 +1,1219 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Personal AI Shadow™ | JEFFEREY AI™</title>
-<meta name="robots" content="index,follow">
-<link rel="canonical" href="https://jeffereyai.com/personal-ai-shadow/">
-</head><body>
-<h1>Personal AI Shadow™</h1>
-<section id="use-cases">
-  <h2 id="use-cases-title">Use cases</h2>
-  <p>Long-term memory, private knowledge, values alignment, operational support.</p>
-</section>
-<p><a href="/">Home</a></p>
-</body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- =========================================================
+       CORE TECH SEO
+  ========================================================== -->
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://jeffereyai.com/personal-ai-shadow/" />
+
+  <!-- Robots -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+  <!-- Title + Description -->
+  <title>Personal AI Shadow™ — Your Private Operational Twin | JEFFEREY AI™</title>
+  <meta
+    name="description"
+    content="Personal AI Shadow™ is a private, persistent operational twin: identity-aware, long-memory, and designed to act with permission—financial, physical, and institutional—while staying under your custody via Self-Cloud™."
+  />
+
+  <!-- Theme -->
+  <meta name="theme-color" content="#050611" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Personal AI Shadow™ — Your Private Operational Twin | JEFFEREY AI™" />
+  <meta
+    property="og:description"
+    content="A private, persistent operational twin that runs under your custody: long-term memory, identity alignment, permissioned execution, and continuity across life."
+  />
+  <meta property="og:url" content="https://jeffereyai.com/personal-ai-shadow/" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Personal AI Shadow™ | JEFFEREY AI™" />
+  <meta
+    name="twitter:description"
+    content="Not a chatbot: a private operational twin with identity memory, permissioned action, and long-term continuity under Self-Cloud™ custody."
+  />
+
+  <!-- =========================================================
+       STYLES (match jeffereyai.com look: dark, clean, fast)
+  ========================================================== -->
+  <style>
+    :root{
+      --bg:#050611;
+      --panel:#0b0f22;
+      --panel2:#0a0d1a;
+      --text:#e9ecff;
+      --muted:#aab2d6;
+      --faint:#7b84b0;
+      --line:rgba(255,255,255,.10);
+      --line2:rgba(255,255,255,.07);
+      --glow:rgba(80,140,255,.30);
+      --glow2:rgba(120,190,255,.22);
+      --accent:#7fb2ff;
+      --accent2:#9dd7ff;
+      --danger:#ff647c;
+      --ok:#89ffa8;
+
+      --max: 980px;
+      --radius: 18px;
+      --shadow: 0 22px 70px rgba(0,0,0,.45);
+      --shadow2: 0 12px 40px rgba(0,0,0,.35);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(900px 520px at 20% 8%, rgba(120,190,255,.14), transparent 60%),
+        radial-gradient(700px 520px at 80% 18%, rgba(90,140,255,.10), transparent 62%),
+        radial-gradient(900px 650px at 50% 105%, rgba(120,190,255,.10), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      line-height:1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a{color:inherit}
+    .skip{
+      position:absolute; left:-999px; top:auto;
+      width:1px; height:1px; overflow:hidden;
+    }
+    .skip:focus{
+      position:fixed; left:14px; top:12px;
+      width:auto; height:auto; padding:10px 12px;
+      background:rgba(0,0,0,.75); border:1px solid var(--line);
+      border-radius:12px; z-index:9999;
+    }
+
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(5,6,17,.88), rgba(5,6,17,.55));
+      border-bottom:1px solid var(--line2);
+    }
+
+    .navwrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+      font-weight:700;
+      letter-spacing:.2px;
+      white-space:nowrap;
+    }
+
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, #ffffff 0%, rgba(255,255,255,.6) 25%, rgba(130,190,255,.35) 50%, rgba(20,40,90,.0) 75%);
+      box-shadow: 0 0 24px rgba(120,190,255,.40);
+    }
+
+    nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+      justify-content:flex-end;
+      font-size:14px;
+      color:var(--muted);
+    }
+    nav a{
+      text-decoration:none;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+    }
+    nav a:hover{
+      color:var(--text);
+      border-color:var(--line2);
+      background:rgba(255,255,255,.03);
+    }
+    nav a.active{
+      color:var(--text);
+      border-color:rgba(120,190,255,.22);
+      background: linear-gradient(180deg, rgba(120,190,255,.10), rgba(255,255,255,.02));
+    }
+
+    main{max-width:var(--max); margin:0 auto; padding: 38px 16px 54px;}
+    .kicker{color:var(--muted); font-size:14px; letter-spacing:.2px}
+    h1{margin:8px 0 8px; font-size:44px; line-height:1.08;}
+    h2{margin:0 0 10px; font-size:26px; line-height:1.2}
+    h3{margin:0 0 8px; font-size:18px; line-height:1.25; color:var(--text)}
+    p{margin:10px 0; color:var(--muted)}
+    .lead{font-size:18px; color:rgba(233,236,255,.86)}
+    .row{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+      margin-top:18px;
+    }
+    @media (max-width: 860px){
+      h1{font-size:38px}
+      .row{grid-template-columns:1fr}
+      nav{display:none}
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line2);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      padding:18px;
+    }
+    .card.dark{
+      background: linear-gradient(180deg, rgba(10,13,26,.75), rgba(10,13,26,.45));
+      border-color:rgba(255,255,255,.09);
+    }
+
+    .ctaRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:11px 14px;
+      border-radius:14px;
+      border:1px solid rgba(120,190,255,.22);
+      background: linear-gradient(180deg, rgba(120,190,255,.12), rgba(255,255,255,.02));
+      text-decoration:none;
+      color:var(--text);
+      font-weight:600;
+      font-size:14px;
+    }
+    .btn:hover{border-color:rgba(120,190,255,.35)}
+    .btn.ghost{
+      border-color:var(--line2);
+      background: rgba(255,255,255,.02);
+      color:var(--muted);
+    }
+    .btn.ghost:hover{color:var(--text)}
+    .fine{color:var(--faint); font-size:13px}
+    .hr{height:1px; background:var(--line2); margin:18px 0}
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+      margin-top:12px;
+    }
+    @media (max-width: 860px){
+      .grid3{grid-template-columns:1fr}
+    }
+
+    ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
+    li{margin:8px 0}
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:13px;
+      margin:6px 8px 0 0;
+      white-space:nowrap;
+    }
+
+    .orbPanel{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height: 260px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* =========================================================
+       ORB CSS (REPLACES OLD .orb) — DO NOT EDIT
+    ========================================================== */
+    .orb {
+      position: relative;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 2600ms ease-in-out, filter 2600ms ease-in-out, opacity 2600ms ease-in-out;
+      outline: none;
+      border: none;
+      background: transparent;
+      display: inline-block;
+    }
+    .orb:focus-visible { box-shadow: 0 0 0 3px rgba(120,190,255, 0.28); }
+
+    @media (min-width: 860px) {
+      .orb { width: 260px; height: 260px; }
+    }
+
+    .orb-motion {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      will-change: transform;
+    }
+    .orb-core {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      will-change: transform, border-radius;
+    }
+
+    .orb--morphing { transform: scale(0.9); filter: blur(2.5px); opacity: 0.9; }
+    .orb--attentive .orb-motion,
+    .orb--attentive.orb-motion { transform: scale(1.02); }
+
+    .orb-layer {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 1;
+      transition:
+        opacity 2200ms ease-in-out,
+        transform 2600ms ease-in-out,
+        filter 2600ms ease-in-out,
+        box-shadow 2600ms ease-in-out,
+        background 3800ms ease-in-out;
+    }
+    .orb-layer::before {
+      content: "";
+      position: absolute;
+      inset: 8%;
+      border-radius: 50%;
+      filter: blur(9px);
+      mix-blend-mode: screen;
+      opacity: 0.9;
+      animation: orb-shimmer 16s linear infinite;
+      transition: opacity 1200ms ease-in-out, transform 1200ms ease-in-out, filter 1200ms ease-in-out;
+    }
+
+    @keyframes orb-shimmer {
+      0% { transform: rotate(0deg) scale(1); opacity: 0.9; }
+      35% { opacity: 0.7; }
+      55% { opacity: 1; }
+      100% { transform: rotate(360deg) scale(1.03); opacity: 0.85; }
+    }
+    @keyframes orb-core-warp {
+      0%   { border-radius: 52% 48% 50% 50%; }
+      18%  { border-radius: 58% 42% 51% 49%; }
+      33%  { border-radius: 49% 51% 57% 43%; }
+      52%  { border-radius: 46% 54% 50% 50%; }
+      70%  { border-radius: 55% 45% 44% 56%; }
+      100% { border-radius: 52% 48% 50% 50%; }
+    }
+
+    .orb-core.orb-body-calm { animation: orb-body-calm 7s ease-in-out infinite; }
+    @keyframes orb-body-calm {
+      0% { transform: scale(0.96); border-radius: 56% 44% 52% 48%; }
+      25% { transform: scale(1.0); border-radius: 50% 50% 54% 46%; }
+      50% { transform: scale(1.03); border-radius: 60% 40% 48% 52%; }
+      75% { transform: scale(1.0); border-radius: 52% 48% 50% 50%; }
+      100% { transform: scale(0.96); border-radius: 56% 44% 52% 48%; }
+    }
+
+    .orb-core.orb-body-charged { animation: orb-body-charged 3.2s ease-in-out infinite; }
+    @keyframes orb-body-charged {
+      0% { transform: scale(1.0) rotate(0deg); border-radius: 52% 48% 50% 50%; }
+      20% { transform: scale(1.06) rotate(-2deg); border-radius: 65% 35% 47% 53%; }
+      40% { transform: scale(0.98) rotate(1deg); border-radius: 45% 55% 62% 38%; }
+      60% { transform: scale(1.05) rotate(-1deg); border-radius: 60% 40% 40% 60%; }
+      80% { transform: scale(1.0) rotate(0deg); border-radius: 52% 48% 52% 48%; }
+      100% { transform: scale(1.0) rotate(0deg); border-radius: 52% 48% 50% 50%; }
+    }
+
+    .orb-core.orb-body-rage { animation: orb-body-rage 0.6s cubic-bezier(0.25, 0.1, 0.3, 1.4) infinite; }
+    @keyframes orb-body-rage {
+      0% { transform: scale(1.02) rotate(0deg); border-radius: 60% 40% 42% 58%; }
+      25% { transform: scale(1.18) rotate(-6deg); border-radius: 82% 28% 55% 45%; }
+      50% { transform: scale(0.9) rotate(4deg); border-radius: 38% 72% 35% 65%; }
+      75% { transform: scale(1.12) rotate(-3deg); border-radius: 70% 30% 60% 40%; }
+      100% { transform: scale(1.02) rotate(0deg); border-radius: 60% 40% 42% 58%; }
+    }
+
+    .orb-core.orb-body-sad { transform-origin: 50% 70%; animation: orb-body-sad 6.5s ease-in-out infinite; }
+    @keyframes orb-body-sad {
+      0% { transform: translateY(10px) scale(0.95, 0.88); border-radius: 52% 48% 68% 32%; }
+      30% { transform: translateY(16px) scale(0.93, 0.86); border-radius: 48% 52% 72% 28%; }
+      60% { transform: translateY(12px) scale(0.96, 0.89); border-radius: 55% 45% 63% 37%; }
+      100% { transform: translateY(10px) scale(0.95, 0.88); border-radius: 52% 48% 68% 32%; }
+    }
+
+    .orb-core.orb-body-annoyed { animation: orb-body-annoyed 2.4s ease-in-out infinite; }
+    @keyframes orb-body-annoyed {
+      0% { transform: scale(0.98) rotate(0deg); border-radius: 50% 50% 50% 50%; }
+      20% { transform: scale(1.02, 0.96) rotate(-3deg); border-radius: 60% 40% 48% 52%; }
+      40% { transform: scale(0.97, 1.03) rotate(2deg); border-radius: 45% 55% 55% 45%; }
+      60% { transform: scale(1.01, 0.97) rotate(-2deg); border-radius: 58% 42% 47% 53%; }
+      80% { transform: scale(0.99) rotate(1deg); border-radius: 52% 48% 50% 50%; }
+      100% { transform: scale(0.98) rotate(0deg); border-radius: 50% 50% 50% 50%; }
+    }
+
+    .orb-core.orb-body-happy { animation: orb-body-happy 3.8s ease-in-out infinite; }
+    @keyframes orb-body-happy {
+      0% { transform: translateY(-4px) scale(0.98); border-radius: 52% 48% 50% 50%; }
+      20% { transform: translateY(-10px) scale(1.03); border-radius: 58% 42% 46% 54%; }
+      40% { transform: translateY(-6px) scale(1.06); border-radius: 50% 50% 54% 46%; }
+      60% { transform: translateY(-12px) scale(1.02); border-radius: 54% 46% 48% 52%; }
+      100% { transform: translateY(-4px) scale(0.98); border-radius: 52% 48% 50% 50%; }
+    }
+
+    .orb-layer.orb--calm {
+      background:
+        radial-gradient(circle at 48% 42%, #ffffff 0, #f6fbff 14%, rgba(230, 240, 255, 0.9) 26%, rgba(210, 224, 255, 0.0) 48%),
+        radial-gradient(circle at 60% 70%, rgba(72, 196, 255, 0.95) 0, rgba(72, 196, 255, 0.0) 48%),
+        radial-gradient(circle at 30% 80%, rgba(111, 209, 255, 0.7) 0, rgba(24, 16, 64, 0.0) 60%),
+        radial-gradient(circle at 82% 28%, rgba(255, 123, 92, 0.25) 0, rgba(16, 6, 24, 0.0) 55%),
+        radial-gradient(circle at 50% 50%, #050611 40%, #050611 100%);
+      box-shadow: 0 0 70px rgba(150, 200, 255, 0.8), 0 0 110px rgba(90, 150, 255, 0.4);
+      animation: orb-core-warp 24s ease-in-out infinite;
+    }
+    .orb-layer.orb--calm::before {
+      background: conic-gradient(from 210deg,
+        rgba(255, 255, 255, 0.0) 0deg,
+        rgba(255, 255, 255, 0.45) 40deg,
+        rgba(154, 231, 255, 0.8) 90deg,
+        rgba(128, 90, 255, 0.8) 150deg,
+        rgba(18, 235, 210, 0.7) 210deg,
+        rgba(255, 255, 255, 0.0) 360deg
+      );
+      animation: orb-shimmer 24s linear infinite;
+      opacity: 0.8;
+      filter: blur(13px);
+    }
+
+    .orb-layer.orb--charged {
+      background:
+        radial-gradient(circle at 48% 42%, #ffffff 0, #f8fbff 12%, rgba(240, 246, 255, 0.95) 24%, rgba(210, 224, 255, 0.0) 46%),
+        radial-gradient(circle at 60% 70%, rgba(72, 196, 255, 0.95) 0, rgba(72, 196, 255, 0.0) 45%),
+        radial-gradient(circle at 30% 80%, rgba(124, 92, 255, 0.9) 0, rgba(24, 16, 64, 0.0) 60%),
+        radial-gradient(circle at 82% 28%, rgba(255, 123, 92, 0.95) 0, rgba(255, 56, 96, 0.95) 20%, rgba(16, 6, 24, 0.0) 60%),
+        radial-gradient(circle at 50% 50%, #050611 40%, #050611 100%);
+      box-shadow:
+        0 0 90px rgba(180, 210, 255, 0.9),
+        0 0 140px rgba(90, 150, 255, 0.5),
+        0 0 120px rgba(255, 123, 92, 0.35);
+      animation: orb-core-warp 16s ease-in-out infinite;
+    }
+    .orb-layer.orb--charged::before {
+      background: conic-gradient(from 210deg,
+        rgba(255, 255, 255, 0.0) 0deg,
+        rgba(255, 255, 255, 0.55) 25deg,
+        rgba(154, 231, 255, 0.8) 60deg,
+        rgba(128, 90, 255, 0.9) 110deg,
+        rgba(18, 235, 210, 0.7) 170deg,
+        rgba(255, 123, 92, 0.9) 220deg,
+        rgba(255, 56, 96, 0.9) 250deg,
+        rgba(154, 231, 255, 0.0) 300deg,
+        rgba(255, 255, 255, 0.6) 330deg,
+        rgba(255, 255, 255, 0.0) 360deg
+      );
+      animation: orb-shimmer 16s linear infinite;
+    }
+
+    .orb-layer.orb--rage {
+      background:
+        radial-gradient(circle at 50% 40%, #fff7f7 0, #ffe3dd 14%, rgba(255, 214, 196, 0.92) 26%, rgba(255, 214, 196, 0.0) 46%),
+        radial-gradient(circle at 65% 75%, rgba(255, 90, 70, 0.98) 0, rgba(255, 90, 70, 0.0) 52%),
+        radial-gradient(circle at 28% 78%, rgba(200, 0, 40, 0.95) 0, rgba(60, 10, 20, 0.0) 60%),
+        radial-gradient(circle at 15% 18%, rgba(255, 255, 255, 0.7) 0, rgba(255, 255, 255, 0.0) 40%),
+        radial-gradient(circle at 50% 50%, #190306 40%, #050103 100%);
+      box-shadow:
+        0 0 110px rgba(255, 80, 70, 0.95),
+        0 0 140px rgba(150, 0, 30, 0.9),
+        0 0 80px rgba(255, 240, 220, 0.5);
+      animation: orb-core-warp 10s ease-in-out infinite;
+    }
+    .orb-layer.orb--rage::before {
+      background: conic-gradient(from 200deg,
+        rgba(255, 255, 255, 0.0) 0deg,
+        rgba(255, 230, 214, 0.9) 30deg,
+        rgba(255, 140, 100, 0.95) 80deg,
+        rgba(255, 56, 96, 1) 140deg,
+        rgba(140, 0, 40, 0.95) 210deg,
+        rgba(255, 255, 255, 0.0) 320deg,
+        rgba(255, 230, 214, 0.8) 340deg,
+        rgba(255, 255, 255, 0.0) 360deg
+      );
+      animation: orb-shimmer-rage 13s linear infinite;
+      opacity: 1;
+      filter: blur(10px);
+    }
+    @keyframes orb-shimmer-rage {
+      0% { transform: rotate(0deg) scale(1.04); opacity: 0.95; }
+      40% { opacity: 1; }
+      60% { opacity: 0.85; }
+      100% { transform: rotate(360deg) scale(1.08); opacity: 0.95; }
+    }
+
+    .orb-layer.orb--annoyed {
+      background:
+        radial-gradient(circle at 48% 42%, #ffffff 0, #fdf5ff 14%, rgba(244, 228, 255, 0.95) 26%, rgba(210, 224, 255, 0.0) 48%),
+        radial-gradient(circle at 65% 75%, rgba(255, 137, 92, 0.9) 0, rgba(255, 137, 92, 0.0) 50%),
+        radial-gradient(circle at 25% 80%, rgba(128, 90, 255, 0.85) 0, rgba(24, 16, 64, 0.0) 60%),
+        radial-gradient(circle at 80% 25%, rgba(255, 220, 120, 0.9) 0, rgba(30, 10, 10, 0.0) 55%),
+        radial-gradient(circle at 50% 50%, #080611 40%, #050611 100%);
+      box-shadow: 0 0 95px rgba(190, 210, 255, 0.95), 0 0 130px rgba(255, 137, 92, 0.55);
+      animation: orb-core-warp 12s ease-in-out infinite;
+    }
+    .orb-layer.orb--annoyed::before {
+      background: conic-gradient(from 220deg,
+        rgba(255, 255, 255, 0.0) 0deg,
+        rgba(255, 255, 255, 0.5) 30deg,
+        rgba(154, 231, 255, 0.8) 80deg,
+        rgba(255, 220, 120, 0.9) 140deg,
+        rgba(255, 137, 92, 0.9) 190deg,
+        rgba(255, 255, 255, 0.0) 360deg
+      );
+      opacity: 1;
+      filter: blur(9px);
+    }
+
+    .orb-layer.orb--sad {
+      background:
+        radial-gradient(circle at 50% 45%, #f4f7ff 0, #dde6ff 16%, rgba(180, 198, 235, 0.95) 28%, rgba(160, 180, 215, 0.0) 50%),
+        radial-gradient(circle at 40% 85%, rgba(80, 120, 200, 0.85) 0, rgba(20, 40, 80, 0.0) 60%),
+        radial-gradient(circle at 65% 75%, rgba(70, 100, 170, 0.7) 0, rgba(10, 20, 40, 0.0) 55%),
+        radial-gradient(circle at 20% 25%, rgba(255, 255, 255, 0.6) 0, rgba(255, 255, 255, 0.0) 40%),
+        radial-gradient(circle at 50% 60%, #050611 45%, #02030a 100%);
+      box-shadow: 0 18px 70px rgba(70, 110, 190, 0.75), 0 28px 110px rgba(10, 15, 40, 0.9);
+      animation: orb-core-warp 24s ease-in-out infinite;
+    }
+
+    .orb-layer.orb--happy {
+      background:
+        radial-gradient(circle at 50% 42%, #ffffff 0, #fff9e7 14%, rgba(255, 240, 200, 0.95) 26%, rgba(255, 240, 200, 0.0) 48%),
+        radial-gradient(circle at 62% 78%, rgba(255, 215, 120, 0.95) 0, rgba(255, 215, 120, 0.0) 52%),
+        radial-gradient(circle at 30% 80%, rgba(255, 190, 135, 0.9) 0, rgba(60, 40, 10, 0.0) 60%),
+        radial-gradient(circle at 16% 24%, rgba(255, 255, 255, 0.9) 0, rgba(255, 255, 255, 0.0) 40%),
+        radial-gradient(circle at 50% 50%, #0b0712 40%, #050611 100%);
+      box-shadow: 0 0 110px rgba(255, 210, 150, 0.9), 0 0 140px rgba(255, 255, 210, 0.4);
+      animation: orb-core-warp 18s ease-in-out infinite;
+    }
+    .orb-layer.orb--happy::before {
+      background: conic-gradient(from 180deg,
+        rgba(255, 255, 255, 0.0) 0deg,
+        rgba(255, 255, 255, 0.8) 40deg,
+        rgba(255, 255, 210, 0.9) 80deg,
+        rgba(255, 215, 140, 0.9) 140deg,
+        rgba(255, 255, 255, 0.0) 210deg,
+        rgba(255, 255, 255, 0.6) 260deg,
+        rgba(255, 255, 255, 0.0) 360deg
+      );
+      animation: orb-shimmer 14s linear infinite;
+      filter: blur(9px);
+    }
+
+    .orb-core.orb-effect-rage-spike { animation: orb-rage-spike 0.55s cubic-bezier(0.3, 0.1, 0.6, 1.6); }
+    @keyframes orb-rage-spike {
+      0% { transform: scale(1.02); filter: brightness(1); }
+      30% { transform: scale(1.2) rotate(-3deg); filter: brightness(1.4) contrast(1.4); }
+      55% { transform: scale(0.96) rotate(3deg); filter: brightness(0.9); }
+      100% { transform: scale(1.02); filter: brightness(1); }
+    }
+
+    .orb-core.orb-effect-rage-tremor { animation: orb-rage-tremor 0.4s ease-in-out; }
+    @keyframes orb-rage-tremor {
+      0%, 100% { border-radius: 60% 40% 42% 58%; }
+      25% { border-radius: 80% 20% 55% 45%; }
+      50% { border-radius: 45% 75% 35% 65%; }
+      75% { border-radius: 70% 30% 65% 35%; }
+    }
+
+    .orb-layer.orb--happy.orb-effect-happy-twinkle::before { animation: orb-happy-twinkle 0.8s ease-out; }
+    @keyframes orb-happy-twinkle {
+      0% { opacity: 0.6; filter: blur(10px); transform: scale(1); }
+      40% { opacity: 1; filter: blur(6px); transform: scale(1.08); }
+      100% { opacity: 0.7; filter: blur(10px); transform: scale(1); }
+    }
+
+    .orb-core.orb-effect-happy-pop { animation: orb-happy-pop 0.7s ease-out; }
+    @keyframes orb-happy-pop {
+      0% { transform: translateY(-6px) scale(1); }
+      35% { transform: translateY(-18px) scale(1.06); }
+      100% { transform: translateY(-6px) scale(1); }
+    }
+
+    .orb-core.orb-effect-sad-sag { animation: orb-sad-sag 1.2s ease-in-out; }
+    @keyframes orb-sad-sag {
+      0% { transform: translateY(10px) scale(0.95, 0.88); }
+      40% { transform: translateY(22px) scale(0.92, 0.86); }
+      100% { transform: translateY(10px) scale(0.95, 0.88); }
+    }
+
+    .orb-core.orb-effect-annoyed-twitch { animation: orb-annoyed-twitch 0.4s ease-in-out; }
+    @keyframes orb-annoyed-twitch {
+      0% { transform: translateX(0) rotate(0deg) scale(0.98); }
+      25% { transform: translateX(-4px) rotate(-2deg) scale(1.0); }
+      50% { transform: translateX(3px) rotate(2deg) scale(0.99); }
+      75% { transform: translateX(-2px) rotate(-1deg) scale(1.0); }
+      100% { transform: translateX(0) rotate(0deg) scale(0.98); }
+    }
+    /* =========================================================
+       END ORB CSS
+    ========================================================== */
+
+    footer{
+      border-top:1px solid var(--line2);
+      margin-top:38px;
+      padding-top:18px;
+      color:var(--faint);
+      font-size:13px;
+    }
+    footer a{color:var(--muted); text-decoration:none}
+    footer a:hover{color:var(--text)}
+    .footRow{
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center; justify-content:space-between;
+      margin-top:10px;
+    }
+
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      color: rgba(233,236,255,.80);
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line2);
+      padding: 10px 12px;
+      border-radius: 14px;
+      overflow:auto;
+    }
+  </style>
+
+  <!-- Structured Data: basic WebPage -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Personal AI Shadow™",
+    "url":"https://jeffereyai.com/personal-ai-shadow/",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"JEFFEREY AI™",
+      "url":"https://jeffereyai.com/"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header>
+    <div class="navwrap">
+      <a class="brand" href="/" aria-label="JEFFEREY AI home">
+        <span class="dot" aria-hidden="true"></span>
+        <span>JEFFEREY AI™</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <a href="/#what-it-is">What it is</a>
+        <a href="/self-cloud/">Self-Cloud™</a>
+        <a href="/digital-conscience/">Digital Conscience</a>
+        <a href="/#sovereignty">Sovereignty</a>
+        <a href="/#use-cases">Use cases</a>
+        <a href="/whitepapers/">Whitepapers</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/#early-access">Early Access</a>
+        <a href="https://github.com/Laszlo-Czako/Jeffrey-AI-Butler" rel="noopener" target="_blank">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <div class="kicker">Private by custody • Persistent by design • Identity-aware execution</div>
+    <h1>Personal AI Shadow™</h1>
+    <p class="lead">
+      A Personal AI Shadow™ is not a chatbot. It’s a private, long-lived operational twin: the version of you that
+      remembers, aligns to your priorities, and (with explicit permission) can act on your behalf — while staying under your custody.
+    </p>
+
+    <div class="ctaRow">
+      <a class="btn" href="/#early-access">Get Early Access</a>
+      <a class="btn ghost" href="/whitepapers/">Read the Whitepapers</a>
+      <a class="btn ghost" href="/digital-conscience/">How values persist</a>
+    </div>
+
+    <div class="row">
+      <section class="card dark">
+        <h2>What “privacy” actually means here</h2>
+        <p>
+          Privacy is not “no tracking.” It means your Shadow™ becomes trusted enough to run your life without placing
+          your identity inside a vendor account.
+        </p>
+        <div>
+          <span class="pill">Local memory</span>
+          <span class="pill">Identity-aware</span>
+          <span class="pill">Permissioned action</span>
+          <span class="pill">Auditability</span>
+          <span class="pill">Custody via Self-Cloud™</span>
+        </div>
+
+        <div class="hr"></div>
+
+        <h3>Unified idea</h3>
+        <p>
+          Your Shadow™ is the operational version of you that moves with you: handling tasks, decisions, and interfaces —
+          while preserving continuity across years.
+        </p>
+        <ul>
+          <li><b>Persistent identity model:</b> preferences, habits, routines, communication style.</li>
+          <li><b>Private continuity:</b> long-term context stored locally, not harvested.</li>
+          <li><b>Execution-ready:</b> can move beyond talk into actions when authorized.</li>
+        </ul>
+      </section>
+
+      <!-- ORB PANEL (OLD ORB REMOVED) -->
+        <div>
+          <div class="orb" role="button" tabindex="0" aria-label="Change shadow state visualization"></div>
+          <p class="fine" style="margin-top:62px;">
+            The orb is state — readable AI body language (calm / alert / risk).
+          </p>
+                  </div>
+      </aside>
+    </div>
+
+    <section class="card" style="margin-top:18px;">
+      <h2>Core definition</h2>
+      <p class="lead" style="margin-top:6px;">
+        Personal AI Shadow™ = <b>Private</b> • <b>Persistent</b> • <b>Identity-bound</b> • <b>Device-aware</b> • <b>Action-capable</b>.
+      </p>
+      <p>
+        It exists to eliminate friction, replace app sprawl, preserve your priorities, and become a stable interface to life —
+        without surrendering custody.
+      </p>
+
+      <div class="grid3">
+        <div class="card dark">
+          <h3>Identity Layer</h3>
+          <p>
+            Learns your decision style and non-negotiables so it resolves conflicts the way <i>you</i> would.
+          </p>
+          <ul>
+            <li>Preference + routine learning</li>
+            <li>Communication style alignment</li>
+            <li>Context continuity across time</li>
+          </ul>
+        </div>
+
+        <div class="card dark">
+          <h3>Operational Layer</h3>
+          <p>
+            Handles tasks you normally do — from workflows to negotiations — with explicit authorization.
+          </p>
+          <ul>
+            <li>Automation and scripting</li>
+            <li>Institution interactions</li>
+            <li>Structured planning + execution</li>
+          </ul>
+        </div>
+
+        <div class="card dark">
+          <h3>Custody Layer</h3>
+          <p>
+            Memory persists by possession. When Self-Cloud™ is off, the system can have no network presence.
+          </p>
+          <ul>
+            <li>Local storage + encrypted continuity</li>
+            <li>Optional online intelligence</li>
+            <li>Existence is deliberate</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:18px;" id="capabilities">
+      <h2>Capabilities that define “Shadow”</h2>
+      <p>
+        The Shadow concept becomes real when it can execute across the domains that actually run your life:
+        physical systems, money, institutions, and long-term continuity.
+      </p>
+
+      <div class="grid3">
+        <div class="card dark">
+          <h3>Physical control & automation</h3>
+          <p>Integration with your environment as a personal operator.</p>
+          <ul>
+            <li>Home control (locks, routines, devices)</li>
+            <li>Context-based execution (time/location)</li>
+            <li>Future: vehicle start / access control</li>
+          </ul>
+        </div>
+
+        <div class="card dark">
+          <h3>Financial executor</h3>
+          <p>Execution layer for bills, optimization, detection, and waste removal.</p>
+          <ul>
+            <li>Pay bills and track spending</li>
+            <li>Detect fraud patterns</li>
+            <li>Optimize subscriptions and plans</li>
+          </ul>
+        </div>
+
+        <div class="card dark">
+          <h3>Digital negotiator</h3>
+          <p>Represents you with your tone, authority, and boundaries.</p>
+          <ul>
+            <li>Negotiate rates (utilities, phone, insurance)</li>
+            <li>Handle disputes and cancellations</li>
+            <li>Authorized messaging / call workflows</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <h3>Legal & personal continuity</h3>
+      <p>
+        Over time, the Shadow evolves into a continuity system — a “digital next of kin” with preserved instructions,
+        emergency logic, and estate continuity (under your custody, not a platform’s).
+      </p>
+    </section>
+
+    <section class="card" style="margin-top:18px;" id="use-cases">
+      <h2>Use cases (crawlable)</h2>
+      <p>
+        This page targets real intent queries: <i>private AI assistant</i>, <i>AI memory system</i>, <i>self-hosted personal AI</i>,
+        <i>digital twin assistant</i>, <i>AI bill payer</i>, <i>AI negotiator</i>.
+      </p>
+      <ul>
+        <li><b>Long-term memory:</b> decisions, plans, preferences, corrections that persist for years.</li>
+        <li><b>Private knowledge:</b> sensitive docs, projects, and personal context under custody.</li>
+        <li><b>Operational support:</b> reminders, drafting, research, structured thinking, automations.</li>
+        <li><b>Institution handling:</b> rate negotiations, disputes, cancellations, paperwork workflows.</li>
+        <li><b>Financial hygiene:</b> spending tracking, fraud detection, subscription cleanup.</li>
+        <li><b>Continuity:</b> preserved instructions and protocols for emergencies and legacy.</li>
+      </ul>
+    </section>
+
+    <section class="card" style="margin-top:18px;" id="how-it-works">
+      <h2>How it works (concept architecture)</h2>
+      <p class="fine">High-level sketch (kept simple on purpose):</p>
+      <div class="mono" role="img" aria-label="Architecture sketch">
+Self-Cloud™ (custody)  →  Encrypted Memory Vault  →  Identity Model (you)
+                                   ↓
+                         Digital Conscience (priorities)
+                                   ↓
+                    Reasoning (disposable / session-bound)
+                                   ↓
+            Permissioned Execution (audit logs + revocation)
+                                   ↓
+      Devices • Home • Money • Institutions • Continuity protocols
+      </div>
+      <p>
+        Cloud intelligence can exist as an optional tool — but custody, memory, and rules remain local and physically controlled.
+      </p>
+    </section>
+
+    <section class="card" style="margin-top:18px;" id="ip">
+      <h2>Why this is a new category (IP surface)</h2>
+      <p>
+        “Personal Shadow AI” is defensible because it’s not a UI feature — it’s a systems category:
+        identity-bound local AI + custody hardware + execution layers (physical, financial, institutional) + continuity logic.
+      </p>
+      <ul>
+        <li>Local, identity-based AI (not generic assistant behavior)</li>
+        <li>Hardware/custody posture (Self-Cloud™)</li>
+        <li>Execution layer (permissioned actions with auditability)</li>
+        <li>Continuity + inheritance structure (multi-decade)</li>
+      </ul>
+    </section>
+
+    <section class="card" style="margin-top:18px;" id="docs">
+      <h2>Documentation</h2>
+      <p>
+        If you want deeper context, keep these as dedicated crawlable links and a single download cluster:
+      </p>
+      <div class="ctaRow">
+        <a class="btn" href="/whitepapers/">Whitepapers hub</a>
+        <a class="btn ghost" href="/self-cloud/">Self-Cloud™</a>
+        <a class="btn ghost" href="/digital-conscience/">Digital Conscience</a>
+      </div>
+      <p class="fine" style="margin-top:10px;">
+        Tip: keep the page fast — no heavy JS needed; this is designed to rank and convert.
+      </p>
+    </section>
+
+    <footer>
+      <div class="footRow">
+        <div>JEFFEREY AI™ © 2026 — Personal AI Shadow™ powered by Self-Cloud™</div>
+        <div>
+          <a href="/privacy/">Privacy</a>
+          <span aria-hidden="true"> · </span>
+          <a href="https://github.com/Laszlo-Czako/Jeffrey-AI-Butler" target="_blank" rel="noopener">GitHub</a>
+          <span aria-hidden="true"> · </span>
+          <a href="mailto:info@jeffereyai.com">info@jeffereyai.com</a>
+        </div>
+      </div>
+      <p class="fine" style="margin-top:10px;">
+        Owned. Sovereign. Persistent. JEFFEREY AI™ · Personal AI Shadow™ · Self-Cloud™ are trademarks.
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    // =======================================================================
+    // ORB JS (SAME ENGINE AS SELF-CLOUD) — DO NOT EDIT
+    // =======================================================================
+    const orb = document.querySelector('.orb');
+    if (!orb) {
+      console.warn('Orb element not found.');
+    }
+
+    const orbMotion = document.createElement('div');
+    orbMotion.className = 'orb-motion';
+
+    const orbCore = document.createElement('div');
+    orbCore.className = 'orb-core';
+
+    if (orb) {
+      orb.appendChild(orbMotion);
+      orbMotion.appendChild(orbCore);
+    }
+
+    const baseMood = 'orb--charged';
+    const altMoods = ['orb--calm', 'orb--happy', 'orb--annoyed', 'orb--sad', 'orb--rage'];
+    let currentMood = baseMood;
+    let isTransitioning = false;
+    let revertTimeout = null;
+    let currentLayer = null;
+
+    const MORPH_PRE_DELAY = 600;
+    const MORPH_TOTAL = 2600;
+    const FADE_DURATION = 2200;
+    const FEEL_MIN = 8000;
+    const FEEL_RANGE = 6000;
+
+    let moodEffectLoopTimeout = null;
+
+    function randomInRange(min, max) {
+      return min + Math.random() * (max - min);
+    }
+
+    function createLayer(mood, initialOpacity = 1) {
+      const layer = document.createElement('div');
+      layer.className = `orb-layer ${mood}`;
+      layer.style.opacity = initialOpacity;
+      orbCore.appendChild(layer);
+      return layer;
+    }
+
+    const BODY_STATES = [
+      'orb-body-calm',
+      'orb-body-charged',
+      'orb-body-rage',
+      'orb-body-sad',
+      'orb-body-annoyed',
+      'orb-body-happy'
+    ];
+
+    function applyBodyStateForMood(mood) {
+      if (!orbCore) return;
+      orbCore.classList.remove(...BODY_STATES);
+
+      switch (mood) {
+        case 'orb--calm':
+          orbCore.classList.add('orb-body-calm');
+          break;
+        case 'orb--rage':
+          orbCore.classList.add('orb-body-rage');
+          break;
+        case 'orb--sad':
+          orbCore.classList.add('orb-body-sad');
+          break;
+        case 'orb--annoyed':
+          orbCore.classList.add('orb-body-annoyed');
+          break;
+        case 'orb--happy':
+          orbCore.classList.add('orb-body-happy');
+          break;
+        case 'orb--charged':
+        default:
+          orbCore.classList.add('orb-body-charged');
+          break;
+      }
+    }
+
+    function clearMoodEffectLoop() {
+      if (moodEffectLoopTimeout) {
+        clearTimeout(moodEffectLoopTimeout);
+        moodEffectLoopTimeout = null;
+      }
+    }
+
+    function crossfadeToMood(nextMood) {
+      if (currentMood === nextMood && currentLayer) return;
+
+      const previous = currentLayer;
+      const next = createLayer(nextMood, 0);
+      currentLayer = next;
+      currentMood = nextMood;
+
+      applyBodyStateForMood(nextMood);
+      startMoodEffectLoop();
+
+      void next.offsetWidth;
+
+      requestAnimationFrame(() => {
+        if (previous) previous.style.opacity = 0;
+        next.style.opacity = 1;
+      });
+
+      if (previous) {
+        setTimeout(() => {
+          previous.remove();
+        }, FADE_DURATION + 200);
+      }
+    }
+
+    function startMorph() {
+      orb.classList.add('orb--morphing');
+    }
+
+    function endMorph() {
+      orb.classList.remove('orb--morphing');
+    }
+
+    function scheduleRevertToBase() {
+      if (revertTimeout) clearTimeout(revertTimeout);
+
+      const delay = FEEL_MIN + Math.random() * FEEL_RANGE;
+
+      revertTimeout = setTimeout(() => {
+        if (currentMood === baseMood) return;
+
+        isTransitioning = true;
+        startMorph();
+
+        setTimeout(() => {
+          crossfadeToMood(baseMood);
+          stopShake();
+        }, MORPH_PRE_DELAY);
+
+        setTimeout(() => {
+          endMorph();
+          isTransitioning = false;
+        }, MORPH_TOTAL);
+      }, delay);
+    }
+
+    const motionState = {
+      targetX: 0,
+      targetY: 0,
+      currentX: 0,
+      currentY: 0,
+      lastPointerTime: 0,
+      shaking: false,
+    };
+
+    const MAX_OFFSET = 18;
+    const LERP = 0.08;
+
+    function startShake() {
+      motionState.shaking = true;
+    }
+
+    function stopShake() {
+      motionState.shaking = false;
+    }
+
+    function onPointerMove(event) {
+      if (!orb || !orbMotion) return;
+
+      const rect = orb.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const relX = (event.clientX - centerX) / rect.width;
+      const relY = (event.clientY - centerY) / rect.height;
+
+      motionState.targetX = relX * MAX_OFFSET;
+      motionState.targetY = relY * MAX_OFFSET;
+      motionState.lastPointerTime = performance.now();
+
+      const dist = Math.sqrt(relX * relX + relY * relY);
+      if (dist < 0.35) {
+        orb.classList.add('orb--attentive');
+      } else {
+        orb.classList.remove('orb--attentive');
+      }
+    }
+
+    function onPointerLeave() {
+      motionState.targetX = 0;
+      motionState.targetY = 0;
+      motionState.lastPointerTime = 0;
+      orb.classList.remove('orb--attentive');
+    }
+
+    function animate() {
+      if (!orbMotion) {
+        requestAnimationFrame(animate);
+        return;
+      }
+
+      motionState.currentX += (motionState.targetX - motionState.currentX) * LERP;
+      motionState.currentY += (motionState.targetY - motionState.currentY) * LERP;
+
+      let offsetX = motionState.currentX;
+      let offsetY = motionState.currentY;
+
+      if (motionState.shaking) {
+        offsetX += (Math.random() - 0.5) * 6;
+        offsetY += (Math.random() - 0.5) * 6;
+      }
+
+      orbMotion.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
+
+      requestAnimationFrame(animate);
+    }
+
+    if (orb) {
+      window.addEventListener('mousemove', onPointerMove);
+      window.addEventListener('mouseleave', onPointerLeave);
+      requestAnimationFrame(animate);
+    }
+
+    const MOOD_EFFECTS = {
+      'orb--rage': [
+        { type: 'rage-spike', target: 'core', minDelay: 1200, maxDelay: 3200 },
+        { type: 'rage-tremor', target: 'core', minDelay: 800, maxDelay: 2600 }
+      ],
+      'orb--happy': [
+        { type: 'happy-twinkle', target: 'layer', minDelay: 1500, maxDelay: 3500 },
+        { type: 'happy-pop', target: 'core', minDelay: 2500, maxDelay: 5200 }
+      ],
+      'orb--sad': [
+        { type: 'sad-sag', target: 'core', minDelay: 3000, maxDelay: 6500 }
+      ],
+      'orb--annoyed': [
+        { type: 'annoyed-twitch', target: 'core', minDelay: 1400, maxDelay: 3200 }
+      ],
+      'orb--calm': [],
+      'orb--charged': []
+    };
+
+    function applyMicroEffect(effect) {
+      if (!effect || !orbCore || !currentLayer) return;
+
+      const { type, target } = effect;
+
+      if (target === 'core') {
+        const className = `orb-effect-${type}`;
+        orbCore.classList.add(className);
+        const duration = type.includes('sag') ? 1200 :
+                         type.includes('pop') ? 700 :
+                         type.includes('twitch') ? 400 :
+                         type.includes('tremor') ? 400 :
+                         550;
+
+        setTimeout(() => {
+          orbCore.classList.remove(className);
+        }, duration + 50);
+      } else if (target === 'layer') {
+        const className = `orb-effect-${type}`;
+        currentLayer.classList.add(className);
+        const duration = 800;
+        setTimeout(() => {
+          currentLayer.classList.remove(className);
+        }, duration + 50);
+      }
+    }
+
+    function startMoodEffectLoop() {
+      clearMoodEffectLoop();
+
+      const configs = MOOD_EFFECTS[currentMood];
+      if (!configs || configs.length === 0) return;
+
+      const scheduleNext = () => {
+        const cfg = configs[Math.floor(Math.random() * configs.length)];
+        const delay = randomInRange(cfg.minDelay, cfg.maxDelay);
+
+        moodEffectLoopTimeout = setTimeout(() => {
+          if (configs !== MOOD_EFFECTS[currentMood]) return;
+
+          if (currentMood === 'orb--rage') {
+            const chance = Math.random();
+            if (chance < 0.55) {
+              startShake();
+              setTimeout(() => {
+                stopShake();
+              }, randomInRange(280, 900));
+            }
+          }
+
+          applyMicroEffect(cfg);
+          scheduleNext();
+        }, delay);
+      };
+
+      scheduleNext();
+    }
+
+    currentLayer = createLayer(baseMood, 1);
+    applyBodyStateForMood(baseMood);
+    startMoodEffectLoop();
+
+    if (orb) {
+      orb.addEventListener('click', () => {
+        if (isTransitioning) return;
+
+        isTransitioning = true;
+        startMorph();
+
+        const candidates = altMoods.filter(m => m !== currentMood);
+        const nextMood = candidates[Math.floor(Math.random() * candidates.length)];
+
+        setTimeout(() => {
+          crossfadeToMood(nextMood);
+
+          if (nextMood === 'orb--rage') {
+            startShake();
+            setTimeout(() => {
+              stopShake();
+            }, randomInRange(500, 1500));
+          } else {
+            stopShake();
+          }
+
+          scheduleRevertToBase();
+        }, MORPH_PRE_DELAY);
+
+        setTimeout(() => {
+          endMorph();
+          isTransitioning = false;
+        }, MORPH_TOTAL);
+      });
+
+      orb.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          orb.click();
+        }
+      });
+    }
+  </script>
+</body>
+</html>
