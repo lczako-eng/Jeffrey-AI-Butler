@@ -709,7 +709,7 @@
             <button class="mood-chip" data-mood="sad" style="--chip:#5078c8">Sad</button>
             <button class="mood-chip" data-mood="thinking" style="--chip:#64a0ff">Thinking</button>
           </div>
-          <p class="orb-caption">Live neural state · <strong id="moodLabel">Charged</strong> · When the cloud flashes from within, Jefferey is thinking<br />Poke Jefferey — he giggles, jumps, snaps, or sulks. Sporadically. · Scroll or pinch to zoom in</p>
+          <p class="orb-caption">Live neural state · <strong id="moodLabel">Charged</strong> · When the cloud flashes from within, Jefferey is thinking<br />Poke Jefferey — he squiggles, giggles, jumps, or sulks. Keep poking and he WILL get mad. · Scroll or pinch to zoom</p>
         </div>
       </div>
     </section>
@@ -1297,6 +1297,8 @@
       attribute vec4 aA;   // phase, orbit, tone, size
       attribute vec3 aB;   // kind (0 nebula, 1 neural, 2 axon, 3 star), id, tAlong
       uniform float uTime, uRot, uBreath, uScale, uSag, uJitter, uDPR, uPulseCount, uBurstCount, uMorphA, uMorphS, uKick, uFlashCount;
+      uniform vec4 uPoke;
+      uniform vec2 uSquirm;
       uniform vec4 uFlash[10];
       uniform vec2 uViewport, uLook;
       uniform vec2 uPulses[24];
@@ -1356,6 +1358,14 @@
           float az = uTime * 0.085 * (1.35 - rl) + uKick * 0.12;
           float caz = cos(az), saz = sin(az);
           p = vec3(p.x * caz - p.y * saz, p.x * saz + p.y * caz, p.z);
+        }
+
+        // ------- jelly squirm: squiggles like a kid being tickled
+        if (uSquirm.x > 0.001) {
+          float sq = uSquirm.x, st = uSquirm.y;
+          p.x += sq * 0.14 * sin(p.y * 5.2 + st * 24.0);
+          p.y += sq * 0.10 * sin(p.x * 4.3 - st * 21.0 + 1.3);
+          p.z += sq * 0.12 * sin(p.y * 3.7 + st * 18.0 + 2.1);
         }
 
         // ------- morphogenic shape language: the whole body changes form
@@ -1419,6 +1429,14 @@
         vec2 screen = vec2(x1, -y1) * uScale * f;
         gl_Position = vec4(screen.x / (uViewport.x * 0.5), screen.y / (uViewport.y * 0.5), 0.0, 1.0);
 
+        // ------- poke ripple: the flesh dents where touched, boings back
+        if (abs(uPoke.z) > 0.002) {
+          vec2 dpk = gl_Position.xy - uPoke.xy;
+          float dd = length(dpk) + 1e-4;
+          float push = uPoke.z * exp(-dd * dd * 8.0);
+          gl_Position.xy += (dpk / dd) * push * 0.16;
+        }
+
         float near = (z2 + 1.0) * 0.5;
         float tw = 0.55 + 0.45 * sin(uTime * (0.6 + orbit * 6.0) + phase);
 
@@ -1429,8 +1447,8 @@
           // colour ZONES: the field polarizes to the four palette tones so
           // every mood shows at least three dominant colours at once —
           // large coherent patches, blending only at their borders.
-          float tz = smoothstep(0.30, 0.70, tone);
-          float t2 = smoothstep(0.34, 0.66, id);
+          float tz = smoothstep(0.36, 0.64, tone);
+          float t2 = smoothstep(0.38, 0.62, id);
           vec3 colA = mix(uP0, uP1, tz);
           vec3 colB = mix(uP2, uP3, tz);
           col = mix(colA, colB, t2);
@@ -1446,7 +1464,7 @@
           col = mix(uC1, uP2, tone * 0.5);
         }
         // saturation pop: keep the mixture vivid, never grey
-        col = mix(vec3(dot(col, vec3(0.299, 0.587, 0.114))), col, 1.3);
+        col = mix(vec3(dot(col, vec3(0.299, 0.587, 0.114))), col, 1.45);
         lit = min(lit, 1.2);
         col = mix(col, uC2, min(1.0, lit * 0.6));
         vColor = col * (baseA + lit * 0.22);
@@ -1660,7 +1678,7 @@
     const U = {};
     ['uTime', 'uRot', 'uBreath', 'uScale', 'uSag', 'uJitter', 'uDPR', 'uPulseCount', 'uBurstCount',
      'uViewport', 'uLook', 'uPulses', 'uBursts', 'uC1', 'uC2', 'uC3',
-     'uP0', 'uP1', 'uP2', 'uP3', 'uMorphA', 'uMorphS', 'uKick', 'uFlash', 'uFlashCount'].forEach(n => U[n] = gl.getUniformLocation(prog, n));
+     'uP0', 'uP1', 'uP2', 'uP3', 'uMorphA', 'uMorphS', 'uKick', 'uFlash', 'uFlashCount', 'uPoke', 'uSquirm'].forEach(n => U[n] = gl.getUniformLocation(prog, n));
 
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE);          // additive — the light accumulates
@@ -1783,6 +1801,50 @@
       const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
       look.tx = Math.max(-1, Math.min(1, (e.clientX - cx) / (r.width * 0.9)));
       look.ty = Math.max(-1, Math.min(1, (e.clientY - cy) / (r.height * 0.9)));
+
+      const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+      const rad = Math.min(r.width, r.height) * 0.4;
+
+      // anticipatory flinch: rush at him and he ducks BEFORE you touch him
+      if (dist > rad * 0.9 && dist < rad * 1.8 && prevDistC - dist > 13) {
+        flinchTarget = 1; relievePending = true;
+      }
+      if (dist < rad * 0.85 || dist > rad * 2.0) flinchTarget = 0;
+      if (relievePending && dist > rad * 2.1) {
+        relievePending = false;
+        jv -= 0.5;                     // relieved exhale — expands past rest
+      }
+      prevDistC = dist;
+
+      // tickle: scrub the cursor back and forth over him and he squirms
+      if (dist < rad) {
+        const dxm = e.clientX - lastMoveX;
+        if (Math.abs(dxm) > 3) {
+          const sgn = dxm > 0 ? 1 : -1;
+          const now = performance.now() / 1000;
+          if (tickTimes.length && tickTimes[tickTimes.length - 1].s !== sgn) {
+            tickTimes.push({ t: now, s: sgn });
+          } else if (!tickTimes.length) {
+            tickTimes.push({ t: now, s: sgn });
+          } else {
+            tickTimes[tickTimes.length - 1].t = now;
+          }
+          tickTimes = tickTimes.filter(x => now - x.t < Math.max(1.2, fdt * 14));
+          if (tickTimes.length >= 4) {
+            tickleLevel = Math.min(1.4, tickleLevel + 0.16);
+            tickTimes.length = 0;
+            if (tickleLevel >= 1.3) {
+              // he can't take it any more
+              setMood('happy');
+              startReaction('happy');
+              for (let i = 0; i < 3; i++) spawnFlash();
+              jv -= 0.7;
+              tickleLevel = 0.45;
+            }
+          }
+        }
+      }
+      lastMoveX = e.clientX;
     });
 
     // ------------------------------------------------ firing system (CPU orchestrates, GPU renders)
@@ -1874,10 +1936,16 @@
 
     let rotY = 0, last = performance.now(), tGlobal = 0, fireAcc = 0;
     let zoom = 1, kick = 0, nextKick = 2.5, reaction = null;
+    let pokeFX = null, pokeTimes = [], forcedAngry = false, lastPokeT = -99, nextFidget = 7, nextDrift = 40;
+    let jx = 0, jv = 0;                       // jello follow-through spring
+    let flinch = 0, flinchTarget = 0, relievePending = false, prevDistC = 1e9;
+    let tickleLevel = 0, tickTimes = [], lastMoveX = 0, sessionPokes = 0, fdt = 0.016;
 
     function frame(now) {
-      const dt = Math.min(0.05, (now - last) / 1000);
+      const rawDt = (now - last) / 1000;
+      const dt = Math.min(0.05, rawDt);
       last = now; tGlobal += dt;
+      fdt = fdt * 0.9 + Math.min(1.5, rawDt) * 0.1;   // true frame pace, unclamped
       stepLive(dt);
 
       look.x += (look.tx - look.x) * 0.04;
@@ -1910,6 +1978,50 @@
       if (tGlobal > nextKick) {
         kick = Math.min(1, kick + 0.55 + R2() * 0.45);
         nextKick = tGlobal + 2.2 + R2() * 5.5;
+      }
+
+      // poke ripple spring: dent, boing back, overshoot, settle
+      let pokeStrength = 0;
+      if (pokeFX) {
+        pokeFX.age += dt;
+        if (pokeFX.age > 1.4) pokeFX = null;
+        else pokeStrength = 1.25 * Math.exp(-pokeFX.age * 4.5) * Math.cos(pokeFX.age * 13);
+      }
+
+      // jelly squirm while squiggling/giggling
+      let squirmAmp = 0;
+      if (reaction && (reaction.type === 'squiggle' || reaction.type === 'giggle')) {
+        squirmAmp = reaction.amp * (1 - reaction.t / reaction.dur) * 0.9;
+      }
+      squirmAmp = Math.max(squirmAmp, Math.min(1, tickleLevel) * 0.85);
+      if (tickleLevel > 0.02) tickleLevel *= Math.pow(0.5, dt);
+
+      // idle fidgets: he never sits perfectly still
+      if (!reaction && tGlobal > nextFidget) {
+        nextFidget = tGlobal + 6 + R2() * 10;
+        const soft = { ...{} };
+        startReaction(moodKey);
+        if (reaction) reaction.amp *= 0.35;
+      }
+
+      // temper cools: left alone after being poked angry, he settles to calm
+      if (forcedAngry && tGlobal - lastPokeT > 12) {
+        forcedAngry = false;
+        setMood('calm');
+        startReaction('calm');
+        if (reaction) reaction.amp *= 0.5;
+      }
+
+      // sporadic mood drift: sometimes he just... changes his mind
+      if (tGlobal > nextDrift) {
+        nextDrift = tGlobal + 30 + R2() * 45;
+        if (!forcedAngry && tGlobal - lastPokeT > 10 && R2() < 0.45) {
+          let d = moodKey;
+          while (d === moodKey) d = MOOD_ORDER[(R2() * MOOD_ORDER.length) | 0];
+          setMood(d);
+          startReaction(d);
+          if (reaction) reaction.amp *= 0.4;
+        }
       }
 
       // sporadic thinking storms: quiet spells, then a flurry of lightning
@@ -1970,6 +2082,8 @@
       gl.uniform1f(U.uMorphS, live.morphS);
       gl.uniform1f(U.uKick, kick);
       gl.uniform4fv(U.uFlash, flashFlat);
+      gl.uniform4f(U.uPoke, pokeFX ? pokeFX.x : 0, pokeFX ? pokeFX.y : 0, pokeStrength, 0);
+      gl.uniform2f(U.uSquirm, squirmAmp, tGlobal);
       gl.uniform1f(U.uFlashCount, Math.min(10, flashes.length));
       gl.uniform1f(U.uSag, live.sag);
       gl.uniform1f(U.uJitter, live.jitter);
@@ -1992,20 +2106,19 @@
 
       lastBreath = breath; lastT = tGlobal;
       frameEl.style.setProperty('--orbGlow',
-        `rgba(${live.c1[0] | 0},${live.c1[1] | 0},${live.c1[2] | 0},${(0.10 + Math.max(0, breath) * 0.16).toFixed(3)})`);
+        `rgba(${live.c1[0] | 0},${live.c1[1] | 0},${live.c1[2] | 0},${(0.13 + Math.max(0, breath) * 0.20).toFixed(3)})`);
       drawWires(dt);
 
-      // living reactions: the whole orb body jiggles, bounces, shakes, sulks
+      // ---- unified body language: reaction + jello follow-through + flinch ----
+      let tx = 0, ty = 0, rot = 0, sc = 1, sx = 1, sy = 1;
       if (reaction) {
         reaction.t += dt;
         const rt = reaction.t, rd = reaction.dur;
         if (rt >= rd) {
           reaction = null;
-          frameEl.style.transform = '';
         } else {
           const k = 1 - rt / rd, a = reaction.amp;
           const arc = Math.sin(Math.PI * Math.min(1, rt / rd)); // rise & settle
-          let tx = 0, ty = 0, rot = 0, sc = 1;
           switch (reaction.type) {
             case 'giggle': rot = 5 * a * k * Math.sin(rt * 38); sc = 1 + 0.05 * a * k * Math.sin(rt * 52); break;
             case 'bounce': ty = -16 * a * k * Math.abs(Math.sin(rt * 10)); sc = 1 + 0.04 * a * k * Math.sin(rt * 20); break;
@@ -2018,10 +2131,27 @@
             case 'sway': rot = 6 * a * k * Math.sin(rt * 7); break;
             case 'tilt': rot = 8 * a * arc; tx = 4 * a * k * Math.sin(rt * 13); break;
             case 'jolt': ty = -10 * a * Math.exp(-rt * 9); sc = 1 + 0.08 * a * Math.exp(-rt * 8) * Math.cos(rt * 30); break;
+            case 'squiggle': tx = 6 * a * k * Math.sin(rt * 40); rot = 2.5 * a * k * Math.sin(rt * 35); break;
+            case 'stretch': sy = 1 + 0.07 * a * arc; sx = 1 - 0.04 * a * arc; break;
           }
-          frameEl.style.transform =
-            'translate(' + tx.toFixed(2) + 'px,' + ty.toFixed(2) + 'px) rotate(' + rot.toFixed(2) + 'deg) scale(' + sc.toFixed(4) + ')';
         }
+      }
+      // jello: every impulse wobbles to rest like flesh — never stops dead
+      jv += (-85 * jx - 8.5 * jv) * dt;
+      jx += jv * dt;
+      sx *= sc * (1 + jx);
+      sy *= sc * (1 - jx);
+      // flinch: contracts in anticipation, releases with relief
+      flinch += (flinchTarget - flinch) * Math.min(1, dt * 9);
+      if (flinch > 0.004) { sx *= 1 - 0.05 * flinch; sy *= 1 - 0.05 * flinch; }
+      // tickle wobble on top
+      if (tickleLevel > 0.02) rot += 3.2 * Math.min(1, tickleLevel) * Math.sin(tGlobal * 45);
+
+      if (reaction || Math.abs(jx) > 0.0008 || flinch > 0.01 || tickleLevel > 0.02) {
+        frameEl.style.transform =
+          'translate(' + tx.toFixed(2) + 'px,' + ty.toFixed(2) + 'px) rotate(' + rot.toFixed(2) + 'deg) scale(' + sx.toFixed(4) + ',' + sy.toFixed(4) + ')';
+      } else if (frameEl.style.transform) {
+        frameEl.style.transform = '';
       }
 
       if (!reduceMotion) requestAnimationFrame(frame);
@@ -2053,19 +2183,41 @@
     chips.forEach((chip) => chip.addEventListener('click', () => setMood(chip.dataset.mood)));
     frameEl.style.setProperty('--shimmer', MOODS[moodKey].sh);
 
+    // ------------------------------------------------ he remembers you
+    // Visit memory lives in YOUR browser (nowhere else — of course).
+    try {
+      const visits = (parseInt(localStorage.getItem('jefVisits') || '0', 10) || 0) + 1;
+      const lastPokes = parseInt(localStorage.getItem('jefLastPokes') || '0', 10) || 0;
+      const lastSeen = parseInt(localStorage.getItem('jefLastSeen') || '0', 10) || 0;
+      const away = lastSeen ? (Date.now() - lastSeen) / 86400000 : 0;
+      localStorage.setItem('jefVisits', String(visits));
+      localStorage.setItem('jefLastSeen', String(Date.now()));
+      localStorage.setItem('jefLastPokes', '0');
+      setTimeout(() => {
+        if (lastPokes >= 6) {
+          setMood('annoyed'); startReaction('annoyed');       // he remembers the torment
+          if (reaction) reaction.amp *= 0.5;
+        } else if (visits === 1) {
+          setMood('calm');                                     // shy on first meeting
+        } else if (away > 3) {
+          setMood('happy'); startReaction('happy');            // he missed you
+        }
+      }, 1200);
+    } catch (err) {}
+
     // ------------------------------------------------ poking Jefferey: he LIVES
     // A poke picks a sporadic mood (never the same one) and triggers a
     // physical reaction — giggle, bounce, angry shake, sulk, shiver —
     // with randomized intensity and duration, so no two pokes feel alike.
     const REACTIONS = {
-      happy:      ['giggle', 'bounce', 'wiggle'],
-      curious:    ['wiggle', 'tilt', 'bounce'],
+      happy:      ['squiggle', 'giggle', 'bounce', 'wiggle'],
+      curious:    ['squiggle', 'wiggle', 'tilt', 'bounce'],
       protective: ['rage', 'shake', 'recoil'],
       annoyed:    ['shake', 'recoil', 'rage'],
       sad:        ['droop', 'shiver'],
-      calm:       ['sway', 'shiver', 'tilt'],
-      charged:    ['jolt', 'giggle', 'shake'],
-      thinking:   ['tilt', 'sway', 'jolt']
+      calm:       ['sway', 'shiver', 'stretch'],
+      charged:    ['squiggle', 'jolt', 'giggle', 'shake'],
+      thinking:   ['tilt', 'sway', 'stretch']
     };
     function startReaction(mood) {
       const types = REACTIONS[mood] || ['wiggle'];
@@ -2075,6 +2227,7 @@
         dur: 0.7 + R2() * 0.9,
         amp: 0.8 + R2() * 0.6
       };
+      jv += 0.45 * reaction.amp * (R2() < 0.5 ? -1 : 1);
     }
     canvas.style.cursor = 'pointer';
     canvas.setAttribute('title', 'Poke Jefferey');
@@ -2084,9 +2237,28 @@
       const dy = e.clientY - (r.top + r.height / 2);
       const rad = Math.min(r.width, r.height) * 0.42 * zoom;
       if (dx * dx + dy * dy < rad * rad) {
-        // sporadic: any mood but the current one
-        let next = moodKey;
-        while (next === moodKey) next = MOOD_ORDER[(R2() * MOOD_ORDER.length) | 0];
+        // the flesh dents right where you touched him
+        pokeFX = { x: (e.clientX - r.left) / r.width * 2 - 1,
+                   y: -((e.clientY - r.top) / r.height * 2 - 1), age: 0 };
+        lastPokeT = tGlobal;
+        jv -= 0.6;                            // the poke compresses him
+        relievePending = false;
+        sessionPokes++;
+        try { localStorage.setItem('jefLastPokes', String(sessionPokes)); } catch (err) {}
+        // temper: poke him too much and he genuinely gets pissed
+        pokeTimes.push(tGlobal);
+        pokeTimes = pokeTimes.filter(t => tGlobal - t < 6);
+        let next;
+        if (pokeTimes.length >= 5) {
+          next = 'protective'; forcedAngry = true;
+          stormUntil = tGlobal + 2.2;           // full fury
+        } else if (pokeTimes.length >= 3) {
+          next = 'annoyed'; forcedAngry = true;
+        } else {
+          // sporadic: any mood but the current one
+          next = moodKey;
+          while (next === moodKey) next = MOOD_ORDER[(R2() * MOOD_ORDER.length) | 0];
+        }
         setMood(next);
         startReaction(next);
         for (let i = 0; i < 5; i++) spawnFlash();
