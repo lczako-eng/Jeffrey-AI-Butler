@@ -691,7 +691,7 @@
             <button class="mood-chip" data-mood="protective" style="--chip:#ff6a4d">Protective</button>
             <button class="mood-chip" data-mood="sad" style="--chip:#5a7cff">Sad</button>
           </div>
-          <p class="orb-caption">Live neural state · <strong id="moodLabel">Charged</strong> · When the lightning storms, Jeff is thinking</p>
+          <p class="orb-caption">Live neural state · <strong id="moodLabel">Charged</strong> · When the lightning storms, Jeff is thinking<br />Poke the orb to change his mood · Scroll or pinch to zoom into the synapses</p>
         </div>
       </div>
     </section>
@@ -1243,26 +1243,26 @@
     // regions — many colours live in the body at once, the mood just
     // re-tunes the whole field.
     const MOODS = {
-      calm:       { c1: [79, 216, 232],  c2: [190, 245, 255], c3: [30, 110, 185],
-                    p: [[215, 248, 255], [79, 216, 232], [90, 140, 255], [25, 70, 160]],
-                    fire: 0.35, spin: 0.4,  breathe: 1.7,  jitter: 0,    sag: 0,    label: 'Calm' },
-      charged:    { c1: [139, 123, 255], c2: [215, 200, 255], c3: [55, 140, 235],
-                    p: [[205, 225, 255], [139, 123, 255], [255, 70, 190], [45, 60, 185]],
-                    fire: 1.0,  spin: 1.0,  breathe: 1.0,  jitter: 0,    sag: 0,    label: 'Charged' },
-      curious:    { c1: [244, 193, 105], c2: [255, 240, 195], c3: [225, 105, 155],
-                    p: [[255, 240, 205], [244, 193, 105], [255, 110, 150], [190, 70, 45]],
-                    fire: 1.5,  spin: 1.6,  breathe: 0.85, jitter: 0.12, sag: 0,    label: 'Curious' },
-      protective: { c1: [255, 106, 77],  c2: [255, 225, 165], c3: [190, 30, 85],
-                    p: [[255, 230, 175], [255, 106, 77], [225, 25, 95], [115, 10, 55]],
-                    fire: 2.6,  spin: 1.9,  breathe: 0.5,  jitter: 1.0,  sag: 0,    label: 'Protective' },
-      sad:        { c1: [90, 124, 255],  c2: [165, 180, 255], c3: [35, 50, 135],
-                    p: [[195, 208, 255], [120, 140, 255], [75, 80, 205], [22, 32, 110]],
-                    fire: 0.15, spin: 0.25, breathe: 2.3,  jitter: 0,    sag: 0.26, label: 'Sad' }
+      calm:       { c1: [79, 216, 232],  c2: [120, 235, 255], c3: [30, 110, 185],
+                    p: [[135, 232, 248], [79, 216, 232], [90, 140, 255], [25, 70, 160]],
+                    fire: 0.35, spin: 0.4,  breathe: 1.7,  jitter: 0,    sag: 0,    morphA: 0.035, morphS: 0.35, label: 'Calm' },
+      charged:    { c1: [139, 123, 255], c2: [175, 155, 255], c3: [55, 140, 235],
+                    p: [[145, 185, 255], [139, 123, 255], [255, 70, 190], [45, 60, 185]],
+                    fire: 1.0,  spin: 1.0,  breathe: 1.0,  jitter: 0,    sag: 0,    morphA: 0.055, morphS: 0.6,  label: 'Charged' },
+      curious:    { c1: [244, 193, 105], c2: [255, 200, 120], c3: [225, 105, 155],
+                    p: [[255, 205, 130], [244, 193, 105], [255, 110, 150], [190, 70, 45]],
+                    fire: 1.5,  spin: 1.6,  breathe: 0.85, jitter: 0.12, sag: 0,    morphA: 0.075, morphS: 1.05, label: 'Curious' },
+      protective: { c1: [255, 106, 77],  c2: [255, 165, 105], c3: [190, 30, 85],
+                    p: [[255, 175, 115], [255, 106, 77], [225, 25, 95], [115, 10, 55]],
+                    fire: 2.6,  spin: 1.9,  breathe: 0.5,  jitter: 1.0,  sag: 0,    morphA: 0.09,  morphS: 1.7,  label: 'Protective' },
+      sad:        { c1: [90, 124, 255],  c2: [135, 155, 255], c3: [35, 50, 135],
+                    p: [[150, 168, 255], [120, 140, 255], [75, 80, 205], [22, 32, 110]],
+                    fire: 0.15, spin: 0.25, breathe: 2.3,  jitter: 0,    sag: 0.26, morphA: 0.04,  morphS: 0.22, label: 'Sad' }
     };
     let moodKey = 'charged';
     const live = { c1: [...MOODS.charged.c1], c2: [...MOODS.charged.c2], c3: [...MOODS.charged.c3],
                    p: MOODS.charged.p.map(c => [...c]),
-                   fire: 1, spin: 1, breathe: 1, jitter: 0, sag: 0 };
+                   fire: 1, spin: 1, breathe: 1, jitter: 0, sag: 0, morphA: 0.055, morphS: 0.6 };
     const lerp = (a, b, t) => a + (b - a) * t;
     function stepLive(dt) {
       const m = MOODS[moodKey], k = Math.min(1, dt * 1.5);
@@ -1277,6 +1277,8 @@
       live.breathe = lerp(live.breathe, m.breathe, k);
       live.jitter = lerp(live.jitter, m.jitter, k);
       live.sag = lerp(live.sag, m.sag, k);
+      live.morphA = lerp(live.morphA, m.morphA, k);
+      live.morphS = lerp(live.morphS, m.morphS, k);
       // css halo follows the mood
       frameEl.style.setProperty('--orbGlow',
         `rgba(${live.c1[0] | 0},${live.c1[1] | 0},${live.c1[2] | 0},0.16)`);
@@ -1288,7 +1290,7 @@
       attribute vec3 aPos;
       attribute vec4 aA;   // phase, orbit, tone, size
       attribute vec3 aB;   // kind (0 nebula, 1 neural, 2 axon, 3 star), id, tAlong
-      uniform float uTime, uRot, uBreath, uScale, uSag, uJitter, uDPR, uPulseCount, uBurstCount;
+      uniform float uTime, uRot, uBreath, uScale, uSag, uJitter, uDPR, uPulseCount, uBurstCount, uMorphA, uMorphS;
       uniform vec2 uViewport, uLook;
       uniform vec2 uPulses[24];
       uniform vec2 uBursts[16];
@@ -1336,6 +1338,12 @@
           float ca = cos(a), sa = sin(a);
           p = vec3(p.x * ca + p.z * sa, p.y, -p.x * sa + p.z * ca);
         }
+
+        // ------- morphogenic shape language: the whole body changes form
+        float morph = 1.0
+          + uMorphA * sin(p.y * 2.0 + uTime * uMorphS)
+          + uMorphA * 0.7 * sin(p.x * 1.6 - uTime * uMorphS * 0.8 + 1.7);
+        p *= morph;
 
         if (kind > 1.5) {
           // ------- axon particle: light up when a pulse wave passes
@@ -1394,7 +1402,7 @@
           vec3 colB = mix(uP2, uP3, tone);
           col = mix(colA, colB, t2);
           float heat = tA;
-          col = mix(col, vec3(1.02, 1.0, 0.98), heat * heat * 0.36);
+          col = mix(col, uP0, heat * heat * 0.42);
           baseA = (0.024 + heat * 0.17 + near * near * 0.075) * (0.55 + tw * 0.45);
           col *= (0.78 + near * 0.45);
         } else if (kind < 1.5) {
@@ -1406,7 +1414,6 @@
         }
         lit = min(lit, 2.0);
         col = mix(col, uC2, min(1.0, lit * 0.75));
-        col += vec3(0.8, 0.85, 1.0) * max(0.0, lit - 1.4) * 0.2;  // restrained hot centres
         vColor = col * (baseA + lit * 0.5);
         vAlpha = 1.0;
         gl_PointSize = clamp((size * (0.55 + near * 1.05)) * uDPR * (1.0 + lit * (kind > 1.5 ? 0.45 : 1.1)), 1.0, 9.0 * uDPR);
@@ -1618,7 +1625,7 @@
     const U = {};
     ['uTime', 'uRot', 'uBreath', 'uScale', 'uSag', 'uJitter', 'uDPR', 'uPulseCount', 'uBurstCount',
      'uViewport', 'uLook', 'uPulses', 'uBursts', 'uC1', 'uC2', 'uC3',
-     'uP0', 'uP1', 'uP2', 'uP3'].forEach(n => U[n] = gl.getUniformLocation(prog, n));
+     'uP0', 'uP1', 'uP2', 'uP3', 'uMorphA', 'uMorphS'].forEach(n => U[n] = gl.getUniformLocation(prog, n));
 
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE);          // additive — the light accumulates
@@ -1651,14 +1658,16 @@
       wMembers.push(members);
     }
     const wrgba = (c, a) => 'rgba(' + (c[0] | 0) + ',' + (c[1] | 0) + ',' + (c[2] | 0) + ',' + a + ')';
-    let lastBreath = 0;
+    let lastBreath = 0, lastT = 0;
     function wproj(v) {
       let x = v[0], y = v[1], z = v[2];
       if (live.sag > 0.005) {
         y -= live.sag * 0.35 * (1 - y * y);
         x *= (1 - live.sag * 0.12); z *= (1 - live.sag * 0.12);
       }
-      const sc = 1 + lastBreath * 0.045;
+      const mo = 1 + live.morphA * Math.sin(y * 2.0 + lastT * live.morphS)
+                  + live.morphA * 0.7 * Math.sin(x * 1.6 - lastT * live.morphS * 0.8 + 1.7);
+      const sc = (1 + lastBreath * 0.045) * mo;
       x *= sc; y *= sc; z *= sc;
       const ry = rotY + look.x * 0.45, rx = -0.26 + look.y * 0.32;
       const cy1 = Math.cos(ry), sy1 = Math.sin(ry);
@@ -1666,7 +1675,7 @@
       const cx1 = Math.cos(rx), sx1 = Math.sin(rx);
       const y1 = y * cx1 - z1 * sx1, z2 = y * sx1 + z1 * cx1;
       const f = 3.1 / (3.1 - z2);
-      const scalePx = Math.min(W, H) * 0.335;
+      const scalePx = Math.min(W, H) * 0.335 * zoom;
       return [W / 2 + x1 * scalePx * f, H / 2 + y1 * scalePx * f, z2];
     }
     function wbez(ax, t) {
@@ -1712,13 +1721,13 @@
         wctx.lineWidth = 1.8;
         wctx.beginPath(); wctx.moveTo(tail[0], tail[1]); wctx.lineTo(head[0], head[1]); wctx.stroke();
         wctx.lineWidth = 1.0;
-        const sz = 2.0 + near * 3.0;
-        const g = wctx.createRadialGradient(head[0], head[1], 0, head[0], head[1], sz * 5);
-        g.addColorStop(0, wrgba(live.c2, 0.9 * (0.35 + near * 0.65)));
+        const sz = 1.6 + near * 2.2;
+        const g = wctx.createRadialGradient(head[0], head[1], 0, head[0], head[1], sz * 3.5);
+        g.addColorStop(0, wrgba(live.c2, 0.45 * (0.35 + near * 0.65)));
         g.addColorStop(1, 'rgba(0,0,0,0)');
         wctx.fillStyle = g;
-        wctx.beginPath(); wctx.arc(head[0], head[1], sz * 5, 0, 6.283); wctx.fill();
-        wctx.fillStyle = wrgba(live.c2, 0.30 + near * 0.45);
+        wctx.beginPath(); wctx.arc(head[0], head[1], sz * 3.5, 0, 6.283); wctx.fill();
+        wctx.fillStyle = wrgba(live.c2, 0.22 + near * 0.30);
         wctx.beginPath(); wctx.arc(head[0], head[1], sz * 0.55, 0, 6.283); wctx.fill();
       }
       // synaptic lightning — jagged branching bolts, flickering hard
@@ -1741,7 +1750,7 @@
           wctx.strokeStyle = wrgba(live.c2, 0.34 * inten * scale);
           wctx.lineWidth = 1.9 * scale;
           wctx.stroke();
-          wctx.strokeStyle = 'rgba(255,255,255,' + (0.8 * inten * scale) + ')';
+          wctx.strokeStyle = wrgba(live.c2, 0.9 * inten * scale);
           wctx.lineWidth = 0.9 * scale;
           wctx.stroke();
         };
@@ -1774,7 +1783,7 @@
         const n = wNodes[i];
         const near = (P[i][2] + 1) / 2;
         if (n.core || n.charge > 0.04) {
-          const a = Math.min(1, (n.core ? 0.12 + near * near * 0.24 : 0.04) + n.charge * 0.55);
+          const a = Math.min(0.75, (n.core ? 0.10 + near * near * 0.20 : 0.035) + n.charge * 0.34);
           const size = (n.core ? 1.1 + near * 1.4 : 0.7 + near * 1.0) * (1 + n.charge * 1.1);
           wctx.fillStyle = n.charge > 0.25 ? wrgba(live.c2, a) : wrgba(live.c1, a);
           wctx.beginPath(); wctx.arc(P[i][0], P[i][1], size, 0, 6.283); wctx.fill();
@@ -1894,6 +1903,7 @@
     const burstFlat = new Float32Array(32);
 
     let rotY = 0, last = performance.now(), tGlobal = 0, fireAcc = 0;
+    let zoom = 1;
 
     function frame(now) {
       const dt = Math.min(0.05, (now - last) / 1000);
@@ -1956,7 +1966,9 @@
       gl.uniform1f(U.uTime, tGlobal);
       gl.uniform1f(U.uRot, rotY);
       gl.uniform1f(U.uBreath, breath);
-      gl.uniform1f(U.uScale, Math.min(W, H) * 0.335);
+      gl.uniform1f(U.uScale, Math.min(W, H) * 0.335 * zoom);
+      gl.uniform1f(U.uMorphA, live.morphA);
+      gl.uniform1f(U.uMorphS, live.morphS);
       gl.uniform1f(U.uSag, live.sag);
       gl.uniform1f(U.uJitter, live.jitter);
       gl.uniform1f(U.uDPR, DPR);
@@ -1976,7 +1988,7 @@
 
       gl.drawArrays(gl.POINTS, 0, N);
 
-      lastBreath = breath;
+      lastBreath = breath; lastT = tGlobal;
       drawWires(dt);
 
       if (!reduceMotion) requestAnimationFrame(frame);
@@ -1992,19 +2004,57 @@
       requestAnimationFrame(frame);
     }
 
-    // ------------------------------------------------ mood chips
+    // ------------------------------------------------ moods: chips + poking Jeff
     const chips = document.querySelectorAll('.mood-chip');
     const label = document.getElementById('moodLabel');
-    chips.forEach((chip) => {
-      chip.addEventListener('click', () => {
-        chips.forEach((c) => c.classList.remove('active'));
-        chip.classList.add('active');
-        moodKey = chip.dataset.mood;
-        if (label) label.textContent = MOODS[moodKey].label;
-        for (let i = 0; i < 8; i++) fireAxonFrom((Math.random() * CLUSTERS) | 0);
-        for (let i = 0; i < 4; i++) burstCluster((Math.random() * CLUSTERS) | 0);
-      });
+    const MOOD_ORDER = ['calm', 'charged', 'curious', 'protective', 'sad'];
+    function setMood(k) {
+      moodKey = k;
+      chips.forEach((c) => c.classList.toggle('active', c.dataset.mood === k));
+      if (label) label.textContent = MOODS[k].label;
+      for (let i = 0; i < 8; i++) fireAxonFrom((Math.random() * CLUSTERS) | 0);
+      for (let i = 0; i < 4; i++) burstCluster((Math.random() * CLUSTERS) | 0);
+    }
+    chips.forEach((chip) => chip.addEventListener('click', () => setMood(chip.dataset.mood)));
+
+    // poke the orb → his mood changes, and he reacts
+    canvas.style.cursor = 'pointer';
+    canvas.setAttribute('title', 'Poke Jeff');
+    canvas.addEventListener('click', (e) => {
+      const r = canvas.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width / 2);
+      const dy = e.clientY - (r.top + r.height / 2);
+      const rad = Math.min(r.width, r.height) * 0.4 * zoom;
+      if (dx * dx + dy * dy < rad * rad) {
+        setMood(MOOD_ORDER[(MOOD_ORDER.indexOf(moodKey) + 1) % MOOD_ORDER.length]);
+        for (let i = 0; i < 4; i++) spawnBolt();
+      }
     });
+
+    // ------------------------------------------------ zoom into the synapses
+    // scroll wheel / trackpad on desktop, pinch on touch
+    function clampZoom(z) { return Math.max(0.55, Math.min(2.6, z)); }
+    frameEl.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      zoom = clampZoom(zoom * (1 - e.deltaY * 0.0012));
+    }, { passive: false });
+    let pinchDist = 0;
+    frameEl.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 2) {
+        pinchDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX,
+                               e.touches[0].clientY - e.touches[1].clientY);
+      }
+    }, { passive: true });
+    frameEl.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 2 && pinchDist > 0) {
+        e.preventDefault();
+        const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX,
+                             e.touches[0].clientY - e.touches[1].clientY);
+        zoom = clampZoom(zoom * d / pinchDist);
+        pinchDist = d;
+      }
+    }, { passive: false });
+    frameEl.addEventListener('touchend', () => { pinchDist = 0; }, { passive: true });
   })();
 
   // ===========================================================
