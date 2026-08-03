@@ -1,10 +1,339 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Whitepapers | JEFFEREY AI™</title>
-<meta name="robots" content="index,follow">
-<link rel="canonical" href="https://jeffereyai.com/whitepapers/">
-</head><body>
-<h1>Whitepapers</h1>
-<p>Architecture and custody docs.</p>
-<p><a href="/">Home</a></p>
-</body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://jeffereyai.com/whitepapers/" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <title>Whitepapers & Public Record | JEFFEREY AI™</title>
+  <meta name="description" content="The public, timestamped record behind JEFFEREY: the To Be Built specification, architecture documents, and the founding concept declarations." />
+  <meta name="theme-color" content="#030409" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="JEFFEREY AI™" />
+  <meta property="og:title" content="Whitepapers & Public Record | JEFFEREY AI™" />
+  <meta property="og:description" content="The public, timestamped record behind JEFFEREY: the To Be Built specification, architecture documents, and the founding concept declarations." />
+  <meta property="og:url" content="https://jeffereyai.com/whitepapers/" />
+  <meta property="og:image" content="https://jeffereyai.com/og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Whitepapers & Public Record | JEFFEREY AI™" />
+  <meta name="twitter:description" content="The public, timestamped record behind JEFFEREY: the To Be Built specification, architecture documents, and the founding concept declarations." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://jeffereyai.com/whitepapers/#webpage",
+        "url": "https://jeffereyai.com/whitepapers/",
+        "name": "Whitepapers & Public Record | JEFFEREY AI™",
+        "inLanguage": "en",
+        "isPartOf": { "@id": "https://jeffereyai.com/#website" },
+        "description": "The public, timestamped record behind JEFFEREY: the To Be Built specification, architecture documents, and the founding concept declarations."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jeffereyai.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Whitepapers", "item": "https://jeffereyai.com/whitepapers/" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #030409; --bg2: #060a14;
+      --panel: rgba(14, 19, 34, 0.55); --panel-solid: #0c1120;
+      --line: rgba(140, 160, 255, 0.14); --line-bright: rgba(150, 170, 255, 0.32);
+      --text: #eef0ff; --muted: #9aa1c2; --dim: #6b7194;
+      --violet: #8b7bff; --teal: #4fd8e8; --gold: #f4c169; --ember: #ff6a4d;
+      --radius: 18px; --radius-sm: 12px; --container: 1180px;
+      --font-display: "Space Grotesk", system-ui, sans-serif;
+      --font-body: "Inter", system-ui, -apple-system, sans-serif;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: var(--font-body); font-size: 16px; line-height: 1.65;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    .ambient {
+      position: fixed; inset: 0; z-index: -2; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 45% at 50% -8%, rgba(97, 78, 210, 0.20), transparent 60%),
+        radial-gradient(ellipse 45% 35% at 88% 68%, rgba(38, 120, 150, 0.09), transparent 60%),
+        var(--bg);
+    }
+    .grid-veil {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.5;
+      background-image:
+        linear-gradient(rgba(130, 150, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(130, 150, 255, 0.028) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, black 0%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, black 0%, transparent 75%);
+    }
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3);
+      background: rgba(4, 6, 14, 0.62); border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 24px; max-width: var(--container); margin: 0 auto;
+    }
+    .brand {
+      font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;
+      letter-spacing: 0.14em; color: var(--text); display: flex; align-items: center; gap: 10px;
+    }
+    .brand:hover { text-decoration: none; }
+    .brand-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #cdc4ff, var(--violet));
+      box-shadow: 0 0 12px 2px rgba(139, 123, 255, 0.65);
+      animation: dot-breathe 4s ease-in-out infinite;
+    }
+    @keyframes dot-breathe {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 10px 2px rgba(139,123,255,0.5); }
+      50% { transform: scale(1.18); box-shadow: 0 0 18px 4px rgba(139,123,255,0.85); }
+    }
+    .nav { display: flex; gap: 26px; align-items: center; }
+    .nav a { color: var(--muted); font-size: 0.86rem; font-weight: 500; }
+    .nav a:hover { color: var(--text); text-decoration: none; }
+    .nav a.active { color: var(--text); }
+    @media (max-width: 880px) { .nav a:not(.btn) { display: none; } }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 26px; border-radius: 999px; border: 1px solid transparent;
+      font-family: var(--font-display); font-weight: 600; font-size: 0.92rem;
+      letter-spacing: 0.03em; cursor: pointer; text-decoration: none;
+      transition: transform 240ms var(--ease), box-shadow 240ms var(--ease);
+    }
+    .btn:hover { text-decoration: none; transform: translateY(-2px); }
+    .btn.primary {
+      background: linear-gradient(94deg, #a795ff, #6fe3f2); color: #05060f;
+      box-shadow: 0 8px 28px -6px rgba(120, 140, 255, 0.45);
+    }
+    .btn.ghost { color: var(--text); border-color: var(--line-bright); background: rgba(130, 150, 255, 0.05); }
+    .btn.ghost:hover { background: rgba(130, 150, 255, 0.12); }
+    .page-hero { padding: 84px 0 30px; position: relative; }
+    .page-hero .orb-mini {
+      position: absolute; right: 4%; top: 40px; width: 190px; height: 190px;
+      border-radius: 50%; pointer-events: none; opacity: 0.85;
+      background:
+        radial-gradient(circle at 38% 34%, rgba(205,190,255,0.55), transparent 40%),
+        radial-gradient(circle at 62% 66%, rgba(255,70,190,0.25), transparent 52%),
+        radial-gradient(circle, rgba(139,123,255,0.45), rgba(10,12,30,0) 70%);
+      filter: blur(2px);
+      animation: orb-mini-breathe 4.4s ease-in-out infinite;
+    }
+    @keyframes orb-mini-breathe {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.07); opacity: 0.95; }
+    }
+    @media (max-width: 880px) { .page-hero .orb-mini { display: none; } }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-display); font-size: 0.74rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal);
+      border: 1px solid rgba(79, 216, 232, 0.28); border-radius: 999px;
+      padding: 7px 16px; background: rgba(79, 216, 232, 0.06); margin: 0 0 22px;
+    }
+    .kicker::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+    h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 4.8vw, 3.6rem);
+      line-height: 1.06; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 20px; max-width: 820px;
+    }
+    .grad-text {
+      background: linear-gradient(94deg, #f2f0ff 5%, #b3a4ff 48%, #5fd9ea 95%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .lead { color: var(--muted); font-size: 1.08rem; max-width: 44rem; margin: 0 0 26px; }
+    .section { padding: 72px 0; }
+    .section.tight { padding: 44px 0; }
+    .section-head { max-width: 720px; margin-bottom: 44px; }
+    h2 {
+      font-family: var(--font-display); font-weight: 700; letter-spacing: -0.015em;
+      font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.14; margin: 0 0 14px;
+    }
+    .grid { display: grid; gap: 18px; }
+    .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 980px) { .grid.cols-3, .grid.cols-4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: 1fr; } }
+    .card {
+      position: relative; border-radius: var(--radius); background: var(--panel);
+      border: 1px solid var(--line); padding: 28px 26px;
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      transition: transform 320ms var(--ease), border-color 320ms, box-shadow 320ms;
+    }
+    .card:hover { transform: translateY(-4px); border-color: var(--line-bright); box-shadow: 0 24px 50px -18px rgba(80, 90, 220, 0.28); }
+    .card h3 { font-family: var(--font-display); font-size: 1.06rem; font-weight: 600; margin: 0 0 10px; }
+    .card p { color: var(--muted); font-size: 0.92rem; margin: 0; }
+    .card .num {
+      font-family: var(--font-display); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; color: var(--teal); display: block; margin-bottom: 14px;
+    }
+    .statement {
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(96, 80, 210, 0.07), rgba(30, 120, 150, 0.05));
+      padding: 52px 0; text-align: center;
+    }
+    .statement p {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(1.25rem, 2.6vw, 1.8rem); line-height: 1.3;
+      max-width: 860px; margin: 0 auto;
+    }
+    .statement .own { background: linear-gradient(94deg, #b3a4ff, #5fd9ea); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .statement .sub { font-family: var(--font-body); font-weight: 400; font-size: 0.9rem; color: var(--dim); margin: 12px auto 0; }
+    .hier { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 10px; }
+    .hier-chip {
+      font-family: var(--font-display); font-weight: 600; font-size: 0.82rem;
+      letter-spacing: 0.05em; padding: 9px 18px; border-radius: 999px;
+      color: var(--text); border: 1px solid var(--line-bright);
+      background: linear-gradient(120deg, rgba(139,123,255,0.10), rgba(79,216,232,0.06));
+    }
+    .quote-card {
+      border-radius: var(--radius); border: 1px solid var(--line-bright);
+      background: var(--panel-solid); padding: 34px 32px; margin: 26px 0;
+    }
+    .quote-card p { font-family: var(--font-display); font-size: 1.12rem; color: var(--text); margin: 0; line-height: 1.55; }
+    .quote-card .attr { font-family: var(--font-body); font-size: 0.82rem; color: var(--dim); margin-top: 12px; }
+    .cta-panel {
+      border-radius: 26px; border: 1px solid var(--line-bright);
+      background: radial-gradient(ellipse 70% 90% at 50% -20%, rgba(139,123,255,0.16), transparent 60%), var(--panel-solid);
+      padding: 52px 34px; text-align: center;
+    }
+    .cta-panel .lead { margin: 0 auto 28px; }
+    .footer { border-top: 1px solid var(--line); padding: 48px 0 60px; margin-top: 40px; }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 26px; }
+    .footer p { margin: 0 0 6px; font-size: 0.82rem; color: var(--dim); }
+    .footer strong { color: var(--muted); font-family: var(--font-display); letter-spacing: 0.08em; }
+    .footer a { color: var(--muted); }
+    .footer-links { display: flex; flex-direction: column; gap: 6px; font-size: 0.82rem; }
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 700ms var(--ease), transform 700ms var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } * { animation-duration: 0.001s !important; } }
+    img.doc-img { max-width: 100%; border-radius: var(--radius); border: 1px solid var(--line); }
+  </style>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="grid-veil" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="nav-inner">
+      <a class="brand" href="/"><span class="brand-dot" aria-hidden="true"></span>JEFFEREY&nbsp;AI™</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/#human">The Human Side</a>
+        <a href="/#conscience">Conscience</a>
+        <a href="/#opportunity">Opportunity Engine</a>
+        <a href="/personal-ai-shadow/">The Shadow</a>
+        <a href="/self-cloud/">Self-Cloud™</a>
+        <a href="/whitepapers/" class="active">Whitepapers</a>
+        <a class="btn primary" href="/#coming-soon">Coming Soon</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="page-hero">
+      <div class="container" style="position: relative;">
+        <div class="orb-mini" aria-hidden="true"></div>
+        <p class="kicker">The public record</p>
+        <h1>Built in the open.<br /><span class="grad-text">Documented from day one.</span></h1>
+        <p class="lead">
+          JEFFEREY is being built against a public, timestamped record: concept declarations,
+          architecture documents, and the build specification that drives the roadmap.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="papers-title">
+      <div class="container">
+        <h2 id="papers-title" class="reveal" style="margin-bottom: 34px;">The documents</h2>
+        <div class="grid cols-2">
+          <div class="card reveal" style="border-color: var(--line-bright);">
+            <span class="num">SPEC · V1.1</span>
+            <h3>JEFFEREY — “To Be Built” Specification</h3>
+            <p>The master build document: the core design principle, six building blocks, the Opportunity
+            Engine, permission levels, the plug-in agent strategy, and the build order 01–07.</p>
+            <p style="margin-top: 14px;"><a href="/JEFFEREY_To_Be_Built_Spec_v1.pdf">Read the PDF →</a></p>
+          </div>
+          <div class="card reveal">
+            <span class="num">ARCHITECTURE</span>
+            <h3>System Architecture &amp; Privacy Model</h3>
+            <p>The dual-brain design: a private local core that owns all personal memory, and a stateless,
+            identity-blind web layer. Personal data never crosses the boundary.</p>
+            <p style="margin-top: 14px;"><a href="https://github.com/lczako-eng/Jeffrey-AI-Butler/blob/main/docs/architecture.md" target="_blank" rel="noopener noreferrer">Read on GitHub →</a></p>
+          </div>
+          <div class="card reveal">
+            <span class="num">CONCEPT</span>
+            <h3>The AI Shadow Whitepaper</h3>
+            <p>The original Personal AI Shadow™ concept: private, persistent, identity-aware,
+            device-integrated, autonomous.</p>
+            <p style="margin-top: 14px;"><a href="/Jeffrey_AI_Shadow_Whitepaper.pdf">Read the PDF →</a></p>
+          </div>
+          <div class="card reveal">
+            <span class="num">THE ORB</span>
+            <h3>Emotional AI &amp; the Orb System</h3>
+            <p>The living interface: morphogenic shape language, a chromatic emotional spectrum, and a
+            behavioural motion engine — readable AI state without words.</p>
+            <p style="margin-top: 14px;"><a href="/Emotionalai%20Jefferey.pdf">Read the PDF →</a></p>
+          </div>
+          <div class="card reveal">
+            <span class="num">DECLARATION</span>
+            <h3>Unified Concept Declaration</h3>
+            <p>The founding declaration of Project JBX — the identity system, continuity architecture, and
+            the category it defines.</p>
+            <p style="margin-top: 14px;"><a href="https://github.com/lczako-eng/Jeffrey-AI-Butler#readme" target="_blank" rel="noopener noreferrer">Read on GitHub →</a></p>
+          </div>
+          <div class="card reveal">
+            <span class="num">LIVE</span>
+            <h3>The repository</h3>
+            <p>Every commit, every revision of the site and the spec, timestamped in public.</p>
+            <p style="margin-top: 14px;"><a href="https://github.com/lczako-eng/Jeffrey-AI-Butler" target="_blank" rel="noopener noreferrer">View the repository →</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div>
+        <p><strong>JEFFEREY AI™</strong> © 2026 — Personal AI Shadow™ powered by Self-Cloud™</p>
+        <p>Owned. Sovereign. Persistent. Loyal to one person: you.</p>
+        <p style="margin-top: 10px;">JEFFEREY AI™ · Personal AI Shadow™ · Self-Cloud™ are trademarks.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/personal-ai-shadow/">Personal AI Shadow™</a>
+        <a href="/digital-conscience/">Digital Conscience</a>
+        <a href="/self-cloud/">Self-Cloud™</a>
+        <a href="/whitepapers/">Whitepapers</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="mailto:info@jeffereyai.com">info@jeffereyai.com</a>
+        <a href="https://github.com/lczako-eng/Jeffrey-AI-Butler" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+      }, { threshold: 0.12 });
+      els.forEach((e) => io.observe(e));
+    })();
+  </script>
+</body>
+</html>

@@ -1,631 +1,354 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- =========================================================
-       CORE TECH SEO
-  ========================================================== -->
   <meta charset="UTF-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Canonical -->
   <link rel="canonical" href="https://jeffereyai.com/self-cloud/" />
-
-  <!-- Robots -->
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-
-  <!-- Title + Description -->
-  <title>Self-Cloud™ — Your Own Digital Network You Can Turn On and Off</title>
-  <meta
-    name="description"
-    content="Self-Cloud™ is physically owned personal digital infrastructure — your own network, not a rented cloud. Turn it on when needed. Turn it off to eliminate exposure. Digital Conscience™ is stored on Self-Cloud™ for custody-based continuity."
-  />
-
-  <meta name="theme-color" content="#050611" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <title>Self-Cloud™ — Custody, Not Subscription | JEFFEREY AI™</title>
+  <meta name="description" content="Self-Cloud™ is owned infrastructure for your digital life: the private custody layer for your Digital Conscience. Governed by physics, not policy." />
+  <meta name="theme-color" content="#030409" />
   <link rel="icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-  <!-- Performance hints -->
-  <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin />
-  <link rel="dns-prefetch" href="https://raw.githubusercontent.com" />
-
-  <!-- OpenGraph -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="JEFFEREY AI™" />
-  <meta property="og:title" content="Self-Cloud™ — Your Own Digital Network (Not a Rented Cloud)" />
-  <meta property="og:description" content="Physically owned infrastructure you can turn on and off. Digital Conscience™ is stored on Self-Cloud™ for custody-based continuity and private AI memory." />
+  <meta property="og:title" content="Self-Cloud™ — Custody, Not Subscription | JEFFEREY AI™" />
+  <meta property="og:description" content="Self-Cloud™ is owned infrastructure for your digital life: the private custody layer for your Digital Conscience. Governed by physics, not policy." />
   <meta property="og:url" content="https://jeffereyai.com/self-cloud/" />
   <meta property="og:image" content="https://jeffereyai.com/og.jpg" />
-
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Self-Cloud™ — Turn Your Digital Presence On or Off" />
-  <meta name="twitter:description" content="Your own network, not a rented cloud. Store Digital Conscience™ and private AI memory under physical custody." />
-  <meta name="twitter:image" content="https://jeffereyai.com/og.jpg" />
-
-  <!-- =========================================================
-       STRUCTURED DATA (JSON-LD)
-  ========================================================== -->
+  <meta name="twitter:title" content="Self-Cloud™ — Custody, Not Subscription | JEFFEREY AI™" />
+  <meta name="twitter:description" content="Self-Cloud™ is owned infrastructure for your digital life: the private custody layer for your Digital Conscience. Governed by physics, not policy." />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": "https://jeffereyai.com/self-cloud/#webpage",
-    "url": "https://jeffereyai.com/self-cloud/",
-    "name": "Self-Cloud™ — Your Own Digital Network You Can Turn On and Off",
-    "isPartOf": { "@id": "https://jeffereyai.com/#website" },
-    "inLanguage": "en",
-    "description": "Self-Cloud™ is physically owned personal digital infrastructure — your own network, not a rented cloud. Turn it on when needed. Turn it off to eliminate exposure. Digital Conscience™ is stored on Self-Cloud™ for custody-based continuity.",
-    "primaryImageOfPage": {
-      "@type": "ImageObject",
-      "url": "https://jeffereyai.com/assets/selfcloud.png"
-    }
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://jeffereyai.com/self-cloud/#webpage",
+        "url": "https://jeffereyai.com/self-cloud/",
+        "name": "Self-Cloud™ — Custody, Not Subscription | JEFFEREY AI™",
+        "inLanguage": "en",
+        "isPartOf": { "@id": "https://jeffereyai.com/#website" },
+        "description": "Self-Cloud™ is owned infrastructure for your digital life: the private custody layer for your Digital Conscience. Governed by physics, not policy."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jeffereyai.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Self-Cloud™", "item": "https://jeffereyai.com/self-cloud/" }
+        ]
+      }
+    ]
   }
   </script>
-
   <style>
     :root {
-      --bg: #050611;
-      --bg-alt: #0b0f19;
-      --card: #111724;
-      --border: #20263a;
-      --text: #f5f5ff;
-      --muted: #a4a8c0;
-      --accent1: #9b7bff;
-      --accent2: #6fd1ff;
-      --accent-warm: #ff7b5c;
-      --radius: 14px;
-      --shadow-soft: 0 22px 45px rgba(0, 0, 0, 0.55);
-      --container: 1120px;
-      --transition: 220ms ease-out;
+      --bg: #030409; --bg2: #060a14;
+      --panel: rgba(14, 19, 34, 0.55); --panel-solid: #0c1120;
+      --line: rgba(140, 160, 255, 0.14); --line-bright: rgba(150, 170, 255, 0.32);
+      --text: #eef0ff; --muted: #9aa1c2; --dim: #6b7194;
+      --violet: #8b7bff; --teal: #4fd8e8; --gold: #f4c169; --ember: #ff6a4d;
+      --radius: 18px; --radius-sm: 12px; --container: 1180px;
+      --font-display: "Space Grotesk", system-ui, sans-serif;
+      --font-body: "Inter", system-ui, -apple-system, sans-serif;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
-
     *, *::before, *::after { box-sizing: border-box; }
-
+    html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #302764 0, #141429 35%, #050611 70%);
-      color: var(--text);
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: var(--font-body); font-size: 16px; line-height: 1.65;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
     }
-
-    a { color: inherit; }
-    main { display: block; }
-
-    .container {
-      width: 100%;
-      max-width: var(--container);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .skip-link {
-      position: absolute;
-      left: -999px;
-      top: 10px;
-      background: #fff;
-      color: #000;
-      padding: 10px 12px;
-      border-radius: 10px;
-      z-index: 9999;
-    }
-    .skip-link:focus { left: 12px; }
-
-    .section { padding: 72px 0; }
-    .section.alt {
-      background: linear-gradient(to bottom, rgba(255,255,255,0.02), rgba(111,209,255,0.02), transparent);
-    }
-
-    .two-column { display: grid; gap: 32px; }
-    @media (min-width: 860px) {
-      .two-column { grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr); }
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(to bottom, rgba(5,6,17,0.96), rgba(5,6,17,0.75), transparent);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 24px;
-      gap: 16px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 180px;
-      text-decoration: none;
-    }
-
-    .brand-dot {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
+    .ambient {
+      position: fixed; inset: 0; z-index: -2; pointer-events: none;
       background:
-        radial-gradient(circle at 30% 20%, #ffffff, #7ddcff 40%, #2b2666 80%),
-        radial-gradient(circle at 80% 80%, rgba(255, 123, 92, 0.9), transparent 60%);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+        radial-gradient(ellipse 70% 45% at 50% -8%, rgba(97, 78, 210, 0.20), transparent 60%),
+        radial-gradient(ellipse 45% 35% at 88% 68%, rgba(38, 120, 150, 0.09), transparent 60%),
+        var(--bg);
     }
-
-    .brand-name {
-      font-weight: 650;
-      letter-spacing: 0.16em;
-      font-size: 13px;
-      white-space: nowrap;
+    .grid-veil {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.5;
+      background-image:
+        linear-gradient(rgba(130, 150, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(130, 150, 255, 0.028) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, black 0%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, black 0%, transparent 75%);
     }
-
-    .nav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 14px;
-      font-size: 14px;
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3);
+      background: rgba(4, 6, 14, 0.62); border-bottom: 1px solid var(--line);
     }
-
-    .nav a {
-      text-decoration: none;
-      color: var(--muted);
-      padding-bottom: 2px;
-      border-bottom: 1px solid transparent;
-      transition: color var(--transition), border-color var(--transition), background var(--transition);
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 24px; max-width: var(--container); margin: 0 auto;
     }
-    .nav a:hover, .nav a:focus-visible {
-      color: var(--text);
-      border-color: rgba(255,255,255,0.4);
-      outline: none;
+    .brand {
+      font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;
+      letter-spacing: 0.14em; color: var(--text); display: flex; align-items: center; gap: 10px;
     }
-
-    .nav-cta {
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.22);
-      background: rgba(255,255,255,0.02);
+    .brand:hover { text-decoration: none; }
+    .brand-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #cdc4ff, var(--violet));
+      box-shadow: 0 0 12px 2px rgba(139, 123, 255, 0.65);
+      animation: dot-breathe 4s ease-in-out infinite;
     }
-
-    .nav .active {
-      color: var(--text);
-      border-color: rgba(255,255,255,0.35);
+    @keyframes dot-breathe {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 10px 2px rgba(139,123,255,0.5); }
+      50% { transform: scale(1.18); box-shadow: 0 0 18px 4px rgba(139,123,255,0.85); }
     }
-
-    .hero { padding: 88px 0 56px; }
-    .hero-inner { display: grid; gap: 40px; align-items: center; }
-    @media (min-width: 900px) {
-      .hero-inner { grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.2fr); }
-    }
-
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      color: var(--muted);
-      font-size: 11px;
-      margin: 0 0 10px;
-    }
-
-    h1 {
-      font-size: clamp(34px, 4vw, 48px);
-      line-height: 1.08;
-      margin: 0 0 14px;
-    }
-
-    .gradient {
-      background: linear-gradient(120deg, var(--accent1), var(--accent2), var(--accent-warm));
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-sub {
-      max-width: 64ch;
-      color: var(--muted);
-      margin: 0 0 20px;
-      font-size: 16px;
-      line-height: 1.65;
-    }
-
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
-    .tagline { font-size: 13px; color: var(--muted); margin: 6px 0 0; }
-
-    .hero-visual { display: flex; justify-content: center; align-items: center; }
-
-    .hero-figure { margin: 0; width: min(520px, 100%); }
-    .hero-image {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,0.10);
-      box-shadow: var(--shadow-soft);
-      background: rgba(0,0,0,0.18);
-    }
-    .hero-caption {
-      margin-top: 10px;
-      font-size: 13px;
-      line-height: 1.5;
-      color: var(--muted);
-    }
-
+    .nav { display: flex; gap: 26px; align-items: center; }
+    .nav a { color: var(--muted); font-size: 0.86rem; font-weight: 500; }
+    .nav a:hover { color: var(--text); text-decoration: none; }
+    .nav a.active { color: var(--text); }
+    @media (max-width: 880px) { .nav a:not(.btn) { display: none; } }
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 18px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      font-size: 14px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background var(--transition), border-color var(--transition), transform var(--transition),
-                  box-shadow var(--transition), color var(--transition);
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 26px; border-radius: 999px; border: 1px solid transparent;
+      font-family: var(--font-display); font-weight: 600; font-size: 0.92rem;
+      letter-spacing: 0.03em; cursor: pointer; text-decoration: none;
+      transition: transform 240ms var(--ease), box-shadow 240ms var(--ease);
     }
-
+    .btn:hover { text-decoration: none; transform: translateY(-2px); }
     .btn.primary {
-      background: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent-warm));
-      color: #050611;
-      box-shadow: var(--shadow-soft);
-      font-weight: 650;
+      background: linear-gradient(94deg, #a795ff, #6fe3f2); color: #05060f;
+      box-shadow: 0 8px 28px -6px rgba(120, 140, 255, 0.45);
     }
-    .btn.primary:hover { transform: translateY(-1px); box-shadow: 0 18px 35px rgba(0,0,0,0.7); }
-
-    .btn.ghost {
-      border-color: rgba(255,255,255,0.32);
-      color: var(--text);
-      background: transparent;
+    .btn.ghost { color: var(--text); border-color: var(--line-bright); background: rgba(130, 150, 255, 0.05); }
+    .btn.ghost:hover { background: rgba(130, 150, 255, 0.12); }
+    .page-hero { padding: 84px 0 30px; position: relative; }
+    .page-hero .orb-mini {
+      position: absolute; right: 4%; top: 40px; width: 190px; height: 190px;
+      border-radius: 50%; pointer-events: none; opacity: 0.85;
+      background:
+        radial-gradient(circle at 38% 34%, rgba(205,190,255,0.55), transparent 40%),
+        radial-gradient(circle at 62% 66%, rgba(255,70,190,0.25), transparent 52%),
+        radial-gradient(circle, rgba(139,123,255,0.45), rgba(10,12,30,0) 70%);
+      filter: blur(2px);
+      animation: orb-mini-breathe 4.4s ease-in-out infinite;
     }
-    .btn.ghost:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.04); }
-
-    h2 { font-size: 28px; margin: 0 0 12px; line-height: 1.15; }
-    h3 { font-size: 18px; margin: 0 0 8px; line-height: 1.25; }
-
-    p { font-size: 15px; line-height: 1.7; margin: 0 0 12px; color: var(--text); }
-    .muted { color: var(--muted); }
-
-    .list { padding-left: 18px; color: var(--muted); margin: 0; }
-    .list li { margin-bottom: 8px; }
-
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 20px 20px 18px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
+    @keyframes orb-mini-breathe {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.07); opacity: 0.95; }
     }
-
-    .callout {
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(5,6,17,0.55);
-      border-radius: var(--radius);
-      padding: 16px 16px 14px;
-    }
-
+    @media (max-width: 880px) { .page-hero .orb-mini { display: none; } }
     .kicker {
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 8px;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-display); font-size: 0.74rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal);
+      border: 1px solid rgba(79, 216, 232, 0.28); border-radius: 999px;
+      padding: 7px 16px; background: rgba(79, 216, 232, 0.06); margin: 0 0 22px;
     }
-
-    .pill-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.03);
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1;
-      white-space: nowrap;
+    .kicker::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+    h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 4.8vw, 3.6rem);
+      line-height: 1.06; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 20px; max-width: 820px;
     }
-    .pill strong { color: var(--text); font-weight: 650; }
-
-    .footer {
-      padding: 60px 0 28px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      background: #050611;
+    .grad-text {
+      background: linear-gradient(94deg, #f2f0ff 5%, #b3a4ff 48%, #5fd9ea 95%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
-    .footer-inner { text-align: center; font-size: 13px; color: var(--muted); }
-    .footer a { color: inherit; text-decoration: underline; }
+    .lead { color: var(--muted); font-size: 1.08rem; max-width: 44rem; margin: 0 0 26px; }
+    .section { padding: 72px 0; }
+    .section.tight { padding: 44px 0; }
+    .section-head { max-width: 720px; margin-bottom: 44px; }
+    h2 {
+      font-family: var(--font-display); font-weight: 700; letter-spacing: -0.015em;
+      font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.14; margin: 0 0 14px;
+    }
+    .grid { display: grid; gap: 18px; }
+    .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 980px) { .grid.cols-3, .grid.cols-4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: 1fr; } }
+    .card {
+      position: relative; border-radius: var(--radius); background: var(--panel);
+      border: 1px solid var(--line); padding: 28px 26px;
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      transition: transform 320ms var(--ease), border-color 320ms, box-shadow 320ms;
+    }
+    .card:hover { transform: translateY(-4px); border-color: var(--line-bright); box-shadow: 0 24px 50px -18px rgba(80, 90, 220, 0.28); }
+    .card h3 { font-family: var(--font-display); font-size: 1.06rem; font-weight: 600; margin: 0 0 10px; }
+    .card p { color: var(--muted); font-size: 0.92rem; margin: 0; }
+    .card .num {
+      font-family: var(--font-display); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; color: var(--teal); display: block; margin-bottom: 14px;
+    }
+    .statement {
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(96, 80, 210, 0.07), rgba(30, 120, 150, 0.05));
+      padding: 52px 0; text-align: center;
+    }
+    .statement p {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(1.25rem, 2.6vw, 1.8rem); line-height: 1.3;
+      max-width: 860px; margin: 0 auto;
+    }
+    .statement .own { background: linear-gradient(94deg, #b3a4ff, #5fd9ea); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .statement .sub { font-family: var(--font-body); font-weight: 400; font-size: 0.9rem; color: var(--dim); margin: 12px auto 0; }
+    .hier { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 10px; }
+    .hier-chip {
+      font-family: var(--font-display); font-weight: 600; font-size: 0.82rem;
+      letter-spacing: 0.05em; padding: 9px 18px; border-radius: 999px;
+      color: var(--text); border: 1px solid var(--line-bright);
+      background: linear-gradient(120deg, rgba(139,123,255,0.10), rgba(79,216,232,0.06));
+    }
+    .quote-card {
+      border-radius: var(--radius); border: 1px solid var(--line-bright);
+      background: var(--panel-solid); padding: 34px 32px; margin: 26px 0;
+    }
+    .quote-card p { font-family: var(--font-display); font-size: 1.12rem; color: var(--text); margin: 0; line-height: 1.55; }
+    .quote-card .attr { font-family: var(--font-body); font-size: 0.82rem; color: var(--dim); margin-top: 12px; }
+    .cta-panel {
+      border-radius: 26px; border: 1px solid var(--line-bright);
+      background: radial-gradient(ellipse 70% 90% at 50% -20%, rgba(139,123,255,0.16), transparent 60%), var(--panel-solid);
+      padding: 52px 34px; text-align: center;
+    }
+    .cta-panel .lead { margin: 0 auto 28px; }
+    .footer { border-top: 1px solid var(--line); padding: 48px 0 60px; margin-top: 40px; }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 26px; }
+    .footer p { margin: 0 0 6px; font-size: 0.82rem; color: var(--dim); }
+    .footer strong { color: var(--muted); font-family: var(--font-display); letter-spacing: 0.08em; }
+    .footer a { color: var(--muted); }
+    .footer-links { display: flex; flex-direction: column; gap: 6px; font-size: 0.82rem; }
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 700ms var(--ease), transform 700ms var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } * { animation-duration: 0.001s !important; } }
+    img.doc-img { max-width: 100%; border-radius: var(--radius); border: 1px solid var(--line); }
   </style>
 </head>
-
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="grid-veil" aria-hidden="true"></div>
   <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="https://jeffereyai.com/" aria-label="JEFFEREY AI Home">
-        <span class="brand-dot" aria-hidden="true"></span>
-        <span class="brand-name">JEFFEREY AI™</span>
-      </a>
-
+    <div class="nav-inner">
+      <a class="brand" href="/"><span class="brand-dot" aria-hidden="true"></span>JEFFEREY&nbsp;AI™</a>
       <nav class="nav" aria-label="Primary navigation">
-        <a href="/personal-ai-shadow/" title="What is a Personal AI Shadow">What it is</a>
-        <a href="/self-cloud/" class="nav-cta active" aria-current="page" title="Self-Cloud private custody">Self-Cloud™</a>
-        <a href="/digital-conscience/" title="Digital Conscience values layer">Digital Conscience</a>
-        <a href="/whitepapers/" title="Whitepapers and architecture">Whitepapers</a>
-        <a href="/#early-access" class="nav-cta" title="Join early access waitlist">Early Access</a>
-        <a href="https://github.com/lczako-eng/Jeffrey-AI-Butler" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="/#human">The Human Side</a>
+        <a href="/#conscience">Conscience</a>
+        <a href="/#opportunity">Opportunity Engine</a>
+        <a href="/personal-ai-shadow/">The Shadow</a>
+        <a href="/self-cloud/" class="active">Self-Cloud™</a>
+        <a href="/whitepapers/">Whitepapers</a>
+        <a class="btn primary" href="/#coming-soon">Coming Soon</a>
       </nav>
     </div>
   </header>
-
   <main id="main">
-    <!-- HERO -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <p class="eyebrow">Owned Infrastructure • Your Network • Turn On / Turn Off</p>
+    <section class="page-hero">
+      <div class="container" style="position: relative;">
+        <div class="orb-mini" aria-hidden="true"></div>
+        <p class="kicker">Self-Cloud™</p>
+        <h1>Custody,<br /><span class="grad-text">not subscription.</span></h1>
+        <p class="lead">
+          Self-Cloud™ is owned infrastructure for your digital life: storage and compute that act as
+          the private custody layer for your Digital Conscience. Buy it once. Hold it in your hands.
+          It does not expire when an account closes or a company changes its terms.
+        </p>
+        <a class="btn primary" href="/#coming-soon">Where it fits in the plan</a>
+      </div>
+    </section>
 
-          <h1 id="hero-title">
-            <span class="gradient">Self-Cloud™</span><br />
-            Your own digital network — not a rented cloud
-          </h1>
+    <div class="statement reveal">
+      <div class="container">
+        <p>The strongest security posture is <span class="own">non-existence.</span></p>
+        <p class="sub">Self-Cloud™ is governed by physics, not policy. When it's powered down, it has no network presence at all. Existence is deliberate.</p>
+      </div>
+    </div>
 
-          <p class="hero-sub">
-            Self-Cloud™ is <strong>physically owned infrastructure</strong> that forms your personal digital network.
-            You can <strong>turn it on when needed</strong>, and <strong>turn it off to eliminate exposure</strong>.
-            <br /><br />
-            <strong>Digital Conscience™ is stored on Self-Cloud™</strong> — because continuity must live under custody,
-            not inside a vendor account.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#definition" class="btn primary">What it is</a>
-            <a href="#conscience" class="btn ghost">Digital Conscience storage</a>
-            <a href="#sovereignty" class="btn ghost">Sovereignty model</a>
-            <a href="/whitepapers/" class="btn ghost">Read the Whitepapers</a>
+    <section class="section" aria-labelledby="own-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker">Ownership model</p>
+          <h2 id="own-title">The cloud is someone else's computer.<br />Self-Cloud™ is yours.</h2>
+        </div>
+        <div class="grid cols-2">
+          <div class="card reveal" style="padding: 32px 30px;">
+            <h3 style="color: var(--dim);">Rented cloud</h3>
+            <p>A subscription forever. The vendor holds your data, can lock your account, scan your files,
+            change the terms, or shut down. When you die, your family negotiates with a corporation
+            for your memories. If you stop paying, they disappear.</p>
           </div>
-
-          <p class="tagline">Core idea: custody beats policy. Existence becomes deliberate.</p>
-
-          <div class="pill-row" aria-label="Key properties">
-            <span class="pill"><strong>Owned</strong> hardware</span>
-            <span class="pill"><strong>Custody</strong> memory</span>
-            <span class="pill"><strong>Off</strong> means no presence</span>
-            <span class="pill"><strong>Continuity</strong> across years</span>
+          <div class="card reveal" style="padding: 32px 30px; border-color: var(--line-bright);">
+            <h3><span class="grad-text">Self-Cloud™</span></h3>
+            <p>Hardware you own, encrypted with keys only you hold. No monthly fees, no vendor lock-in,
+            no account that can be terminated. Works offline. Your data is not analyzed. Not sold.
+            Not stored elsewhere. Not seen by anyone but you.</p>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="hero-visual" aria-label="Self-Cloud diagram">
-          <figure class="hero-figure">
-            <img
-              class="hero-image"
-              src="/assets/selfcloud.png"
-              alt="Self-Cloud™ diagram — your own digital network you can turn on and off; Digital Conscience™ is stored on Self-Cloud™"
-              loading="eager"
-              decoding="async"
-            />
-            <figcaption class="hero-caption">
-              Digital Conscience™ is stored on Self-Cloud™ — your own network, under your physical control.
-            </figcaption>
-          </figure>
+    <section class="section tight" aria-labelledby="cont-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker">Continuity</p>
+          <h2 id="cont-title">A digital life your family inherits — not a locked account.</h2>
+          <p class="lead">Because your memories and conscience reside in owned hardware, they can be
+          preserved and transferred according to your intent. A lifetime of memory, knowledge, and
+          context passed on — rather than erased when credentials expire.</p>
+        </div>
+        <div class="grid cols-3">
+          <div class="card reveal"><h3>Physical custody</h3><p>Possession is control. Your archive lives where you live — not in a jurisdiction you've never visited.</p></div>
+          <div class="card reveal"><h3>Deliberate existence</h3><p>Network presence is a switch you own. Offline is truly offline — not “disconnected until the next sync.”</p></div>
+          <div class="card reveal"><h3>Generational transfer</h3><p>Hand your family the device, and they inherit the memories — and the conscience that can still explain how you thought.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- DEFINITION -->
-    <section id="definition" class="section alt" aria-labelledby="def-title">
-      <div class="container two-column">
-        <div>
-          <p class="kicker">Definition</p>
-          <h2 id="def-title">Self-Cloud™ is your own digital network</h2>
-
-          <p class="muted">
-            “Cloud” usually means <em>rented infrastructure</em> owned by someone else.
-            Self-Cloud™ means the opposite: your storage, compute, and network presence are under
-            <strong>your physical control</strong>.
-          </p>
-
-          <div class="callout">
-            <p>
-              <strong>Plain English:</strong> it’s a personal digital network you can power on when needed, and power off
-              to eliminate exposure — because when it’s off, it can have <strong>no network presence</strong>.
-            </p>
-          </div>
-
-          <p class="muted">
-            This is why Self-Cloud™ is foundational to JEFFEREY AI™: continuity persists by possession — not by subscription.
-          </p>
+    <section class="section tight" aria-label="Position in the build">
+      <div class="container">
+        <div class="quote-card reveal">
+          <p>Self-Cloud™ is step 06 in the public build order — deliberately. Jeff launches first as an
+          agent connector riding the best AI engines, with a conscience store the user controls.
+          Once the demand is proven, the conscience comes home to hardware you physically own.</p>
+          <p class="attr">— From the “To Be Built” specification, built in the open on GitHub.</p>
         </div>
-
-        <aside class="card" aria-label="Self-Cloud summary">
-          <h3>What Self-Cloud™ enables</h3>
-          <ul class="list">
-            <li><strong>Custody storage</strong> for long-term memory and identity.</li>
-            <li><strong>Your own network</strong> for services you control.</li>
-            <li><strong>Off means off</strong>: no endpoint, no silent exposure.</li>
-            <li><strong>Continuity</strong> across years because you control the layer.</li>
-          </ul>
-        </aside>
-      </div>
-    </section>
-
-    <!-- DIGITAL CONSCIENCE STORAGE -->
-    <section id="conscience" class="section" aria-labelledby="conscience-title">
-      <div class="container two-column">
-        <div>
-          <p class="kicker">Digital Conscience™ storage</p>
-          <h2 id="conscience-title">Digital Conscience™ is stored on Self-Cloud™</h2>
-
-          <p class="muted">
-            Digital Conscience™ is a persistent priority layer — your rules, corrections, values, and identity constraints.
-            If that layer lives in a vendor account, it is ultimately governed by policy. If it lives on Self-Cloud™, it is
-            governed by <strong>custody</strong>.
-          </p>
-
-          <div class="callout">
-            <p><strong>What gets stored:</strong></p>
-            <ul class="list">
-              <li>Conscience Constitution (non-negotiable priorities)</li>
-              <li>Override rules that constrain base model behavior</li>
-              <li>Long-term memory vault (encrypted, owner-controlled)</li>
-              <li>Audit logs and continuity state across engines</li>
-            </ul>
-          </div>
-
-          <p class="muted">
-            This is the point: your identity layer remains yours even when reasoning engines change.
-          </p>
-        </div>
-
-        <div class="card" aria-label="Why custody matters">
-          <h3>Why “your own network” matters</h3>
-          <p class="muted">
-            A network is not a metaphor. Self-Cloud™ is the operational layer that can host your memory services, your local
-            databases, and your continuity logic — and it can disappear from the internet when you choose.
-          </p>
-          <p class="muted">
-            When disconnected, the strongest security posture isn’t “settings.” It’s <strong>non-existence</strong>.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROBLEM -->
-    <section class="section alt" aria-labelledby="problem-title">
-      <div class="container two-column">
-        <div>
-          <p class="kicker">Problem</p>
-          <h2 id="problem-title">Always-on cloud creates permanent exposure</h2>
-
-          <p class="muted">
-            Modern cloud services assume persistent accounts, persistent endpoints, and vendor custody.
-            Even with encryption, your data’s <em>existence</em> remains continuous — and therefore continuously exposed to
-            policy, jurisdiction, account pressure, and platform change.
-          </p>
-
-          <p class="muted">
-            You can sign out of an app. You can’t sign out of the cloud’s existence.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>Self-Cloud™ flips the model</h3>
-          <p class="muted">
-            Self-Cloud™ makes digital presence a choice. When disconnected, it isn’t “secured.”
-            It simply <strong>does not exist</strong> on the network.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOVEREIGNTY -->
-    <section id="sovereignty" class="section" aria-labelledby="sovereignty-title">
-      <div class="container two-column">
-        <div>
-          <p class="kicker">Sovereignty model</p>
-          <h2 id="sovereignty-title">Physical control is stronger than settings</h2>
-
-          <p class="muted">
-            Software toggles can be bypassed. Policies can be rewritten. Accounts can be pressured.
-            Self-Cloud™ is based on physical authority: power and connectivity are controlled at the owner level.
-          </p>
-
-          <div class="callout">
-            <p><strong>When Self-Cloud™ is disconnected:</strong></p>
-            <ul class="list">
-              <li>No network presence.</li>
-              <li>No listening services.</li>
-              <li>No passive endpoint.</li>
-              <li>No vendor dependency.</li>
-            </ul>
-          </div>
-
-          <p class="muted">
-            This is the core posture: <strong>the strongest defense is non-existence</strong>.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>Why this matters for private AI</h3>
-          <p class="muted">
-            Private AI requires a place for memory to live that isn’t controlled by someone else.
-            Self-Cloud™ is the custody layer that allows long-term continuity without surrendering authority.
-          </p>
-          <p class="muted">
-            It supports Digital Conscience™ as the persistent layer for priorities, rules, and long-term context.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ENGINE NETWORK -->
-    <section class="section alt" aria-labelledby="engine-title">
-      <div class="container two-column">
-        <div>
-          <p class="kicker">Architecture</p>
-          <h2 id="engine-title">A personal engine network when active</h2>
-
-          <p class="muted">
-            When powered on, Self-Cloud™ behaves like your own private cloud: it can host services, store encrypted memory,
-            and run the systems that support your Personal AI Shadow™.
-          </p>
-
-          <p class="muted">
-            When powered off, it’s gone — no background presence, no always-on endpoint.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>Use cases</h3>
-          <ul class="list">
-            <li>Owner-controlled AI memory vault</li>
-            <li>Secure personal document and identity store</li>
-            <li>Private compute + automation hub (when enabled)</li>
-            <li>Travel / border / legal-sensitive operating mode</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="section" aria-label="Call to action">
-      <div class="container two-column">
-        <div>
-          <p class="kicker">Next</p>
-          <h2>Read the technical documents</h2>
-          <p class="muted">
-            The whitepapers describe the custody architecture, the engine network model, and how Self-Cloud™ supports
-            long-lived continuity for JEFFEREY AI™ and Digital Conscience™.
-          </p>
-        </div>
-
-        <div class="card">
-          <a href="/whitepapers/" class="btn primary" style="width:100%;">Open Whitepapers</a>
-          <p class="muted" style="margin-top:12px;">
-            Next page in the stack: <a href="/digital-conscience/">Digital Conscience™</a>
-          </p>
+        <div style="text-align: center; margin-top: 24px;">
+          <a class="btn primary" href="/#coming-soon">Agent Connector — Coming Soon</a>
+          &nbsp;&nbsp;<a class="btn ghost" href="/digital-conscience/">The Digital Conscience</a>
         </div>
       </div>
     </section>
   </main>
-
   <footer class="footer" role="contentinfo">
-    <div class="container footer-inner"></div>
-      <p><strong>JEFFEREY AI™</strong> © 2026 — Self-Cloud™</p>
-      <p>Owned. Sovereign. Persistent.</p>
-      <p style="margin-top: 10px;">JEFFEREY AI™ · Self-Cloud™ · Digital Conscience™ are trademarks.</p>
-      <p>
+    <div class="container footer-inner">
+      <div>
+        <p><strong>JEFFEREY AI™</strong> © 2026 — Personal AI Shadow™ powered by Self-Cloud™</p>
+        <p>Owned. Sovereign. Persistent. Loyal to one person: you.</p>
+        <p style="margin-top: 10px;">JEFFEREY AI™ · Personal AI Shadow™ · Self-Cloud™ are trademarks.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/personal-ai-shadow/">Personal AI Shadow™</a>
+        <a href="/digital-conscience/">Digital Conscience</a>
+        <a href="/self-cloud/">Self-Cloud™</a>
+        <a href="/whitepapers/">Whitepapers</a>
+        <a href="/privacy/">Privacy</a>
         <a href="mailto:info@jeffereyai.com">info@jeffereyai.com</a>
-        &nbsp;·&nbsp;
         <a href="https://github.com/lczako-eng/Jeffrey-AI-Butler" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </p>
+      </div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      const els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+      }, { threshold: 0.12 });
+      els.forEach((e) => io.observe(e));
+    })();
+  </script>
 </body>
 </html>

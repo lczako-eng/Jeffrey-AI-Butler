@@ -1,794 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- =========================================================
-       CORE TECH SEO
-  ========================================================== -->
   <meta charset="UTF-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <link rel="canonical" href="https://jeffereyai.com/digital-conscience/" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-
-  <title>Digital Conscience™ — Sovereign Cognitive Continuity + Priority Override</title>
-  <meta
-    name="description"
-    content="Digital Conscience™ is a user-owned identity governance layer stored on Self-Cloud™ (your own drive/network) that enforces a non-bypassable priority override hierarchy over any AI engine, with auditable traces and model-agnostic continuity."
-  />
-
-  <meta name="theme-color" content="#050611" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <title>Digital Conscience — Priorities, Not Preferences | JEFFEREY AI™</title>
+  <meta name="description" content="The Digital Conscience is JEFFEREY's core: a persistent hierarchy of your priorities and decision rules — inspectable, correctable, portable between AI engines, and owned by you." />
+  <meta name="theme-color" content="#030409" />
   <link rel="icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-  <!-- OpenGraph -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="JEFFEREY AI™" />
-  <meta property="og:title" content="Digital Conscience™ — Sovereign Continuity + Priority Override" />
-  <meta property="og:description" content="A user-owned supervisory control plane stored on Self-Cloud™ that enforces priority override over base-model defaults, with an audit trail." />
+  <meta property="og:title" content="Digital Conscience — Priorities, Not Preferences | JEFFEREY AI™" />
+  <meta property="og:description" content="The Digital Conscience is JEFFEREY's core: a persistent hierarchy of your priorities and decision rules — inspectable, correctable, portable between AI engines, and owned by you." />
   <meta property="og:url" content="https://jeffereyai.com/digital-conscience/" />
   <meta property="og:image" content="https://jeffereyai.com/og.jpg" />
-  <meta property="og:image:alt" content="JEFFEREY AI™ — Digital Conscience™ and Self-Cloud™ architecture" />
-
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Digital Conscience™ — Priority Override Identity Layer" />
-  <meta name="twitter:description" content="Sovereign cognitive continuity stored on your Self-Cloud™. The engine proposes. The Conscience governs." />
-  <meta name="twitter:image" content="https://jeffereyai.com/og.jpg" />
-  <meta name="twitter:image:alt" content="JEFFEREY AI™ — Digital Conscience™ and Self-Cloud™" />
-
-  <!-- =========================================================
-       STRUCTURED DATA (JSON-LD)
-  ========================================================== -->
+  <meta name="twitter:title" content="Digital Conscience — Priorities, Not Preferences | JEFFEREY AI™" />
+  <meta name="twitter:description" content="The Digital Conscience is JEFFEREY's core: a persistent hierarchy of your priorities and decision rules — inspectable, correctable, portable between AI engines, and owned by you." />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": "https://jeffereyai.com/digital-conscience/#webpage",
-    "url": "https://jeffereyai.com/digital-conscience/",
-    "name": "Digital Conscience™ — Sovereign Cognitive Continuity + Priority Override",
-    "isPartOf": { "@id": "https://jeffereyai.com/#website" },
-    "inLanguage": "en",
-    "description": "Digital Conscience™ is a user-owned identity governance layer stored on Self-Cloud™ (your own drive/network) that enforces a non-bypassable priority override hierarchy over any AI engine, with auditable traces and model-agnostic continuity."
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jeffereyai.com/" },
-      { "@type": "ListItem", "position": 2, "name": "Digital Conscience™", "item": "https://jeffereyai.com/digital-conscience/" }
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://jeffereyai.com/digital-conscience/#webpage",
+        "url": "https://jeffereyai.com/digital-conscience/",
+        "name": "Digital Conscience — Priorities, Not Preferences | JEFFEREY AI™",
+        "inLanguage": "en",
+        "isPartOf": { "@id": "https://jeffereyai.com/#website" },
+        "description": "The Digital Conscience is JEFFEREY's core: a persistent hierarchy of your priorities and decision rules — inspectable, correctable, portable between AI engines, and owned by you."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jeffereyai.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Digital Conscience", "item": "https://jeffereyai.com/digital-conscience/" }
+        ]
+      }
     ]
   }
   </script>
-
   <style>
-    :root{
-      --bg:#050611;
-      --card:#111724;
-      --border:#20263a;
-      --text:#f5f5ff;
-      --muted:#a4a8c0;
-      --accent1:#9b7bff;
-      --accent2:#6fd1ff;
-      --accent3:#ff7b5c;
-      --radius:14px;
-      --shadow:0 22px 45px rgba(0,0,0,.55);
-      --container:1120px;
-      --t:220ms ease-out;
+    :root {
+      --bg: #030409; --bg2: #060a14;
+      --panel: rgba(14, 19, 34, 0.55); --panel-solid: #0c1120;
+      --line: rgba(140, 160, 255, 0.14); --line-bright: rgba(150, 170, 255, 0.32);
+      --text: #eef0ff; --muted: #9aa1c2; --dim: #6b7194;
+      --violet: #8b7bff; --teal: #4fd8e8; --gold: #f4c169; --ember: #ff6a4d;
+      --radius: 18px; --radius-sm: 12px; --container: 1180px;
+      --font-display: "Space Grotesk", system-ui, sans-serif;
+      --font-body: "Inter", system-ui, -apple-system, sans-serif;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
-    *,*::before,*::after{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
-      background:radial-gradient(circle at top, #302764 0, #141429 35%, #050611 70%);
-      color:var(--text);
-      text-rendering:optimizeLegibility;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: var(--font-body); font-size: 16px; line-height: 1.65;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
     }
-    a{color:inherit}
-    main{display:block}
-    .container{
-      width:100%;
-      max-width:var(--container);
-      margin:0 auto;
-      padding:0 24px;
-    }
-    .skip-link{
-      position:absolute;left:-999px;top:10px;
-      background:#fff;color:#000;padding:10px 12px;border-radius:10px;z-index:9999;
-    }
-    .skip-link:focus{left:12px}
-    .section{padding:72px 0}
-    .section.alt{
-      background:linear-gradient(to bottom, rgba(255,255,255,.02), rgba(111,209,255,.02), transparent);
-    }
-    .two-column{display:grid;gap:32px}
-    @media(min-width:860px){
-      .two-column{grid-template-columns:minmax(0,2fr) minmax(0,1.5fr)}
-    }
-
-    /* Header */
-    .site-header{
-      position:sticky;top:0;z-index:20;
-      backdrop-filter:blur(18px);
-      background:linear-gradient(to bottom, rgba(5,6,17,.96), rgba(5,6,17,.75), transparent);
-      border-bottom:1px solid rgba(255,255,255,.05);
-    }
-    .header-inner{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:14px 24px;gap:16px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:10px;min-width:180px;text-decoration:none;
-    }
-    .brand-dot{
-      width:18px;height:18px;border-radius:50%;
+    .ambient {
+      position: fixed; inset: 0; z-index: -2; pointer-events: none;
       background:
-        radial-gradient(circle at 30% 20%, #fff, #7ddcff 40%, #2b2666 80%),
-        radial-gradient(circle at 80% 80%, rgba(255,123,92,.9), transparent 60%);
-      box-shadow:0 6px 18px rgba(0,0,0,.7);
+        radial-gradient(ellipse 70% 45% at 50% -8%, rgba(97, 78, 210, 0.20), transparent 60%),
+        radial-gradient(ellipse 45% 35% at 88% 68%, rgba(38, 120, 150, 0.09), transparent 60%),
+        var(--bg);
     }
-    .brand-name{font-weight:650;letter-spacing:.16em;font-size:13px;white-space:nowrap}
-    .nav{
-      display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;
-      gap:14px;font-size:14px;
+    .grid-veil {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.5;
+      background-image:
+        linear-gradient(rgba(130, 150, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(130, 150, 255, 0.028) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, black 0%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, black 0%, transparent 75%);
     }
-    .nav a{
-      text-decoration:none;color:var(--muted);padding-bottom:2px;border-bottom:1px solid transparent;
-      transition:color var(--t), border-color var(--t), background var(--t);
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3);
+      background: rgba(4, 6, 14, 0.62); border-bottom: 1px solid var(--line);
     }
-    .nav a:hover,.nav a:focus-visible{
-      color:var(--text);border-color:rgba(255,255,255,.4);outline:none;
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 24px; max-width: var(--container); margin: 0 auto;
     }
-    .nav-cta{padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.22)}
-    .nav-active{color:var(--text)!important;border-color:rgba(255,255,255,.5)!important}
-
-    /* Hero */
-    .hero{padding:88px 0 56px}
-    .hero-inner{display:grid;gap:40px;align-items:center}
-    @media(min-width:900px){
-      .hero-inner{grid-template-columns:minmax(0,1.8fr) minmax(0,1.2fr)}
+    .brand {
+      font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;
+      letter-spacing: 0.14em; color: var(--text); display: flex; align-items: center; gap: 10px;
     }
-    .eyebrow{
-      text-transform:uppercase;letter-spacing:.22em;color:var(--muted);
-      font-size:11px;margin:0 0 10px;
+    .brand:hover { text-decoration: none; }
+    .brand-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #cdc4ff, var(--violet));
+      box-shadow: 0 0 12px 2px rgba(139, 123, 255, 0.65);
+      animation: dot-breathe 4s ease-in-out infinite;
     }
-    h1{
-      font-size:clamp(34px,4vw,48px);
-      line-height:1.08;margin:0 0 14px;
+    @keyframes dot-breathe {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 10px 2px rgba(139,123,255,0.5); }
+      50% { transform: scale(1.18); box-shadow: 0 0 18px 4px rgba(139,123,255,0.85); }
     }
-    .gradient{
-      background:linear-gradient(120deg, var(--accent1), var(--accent2), var(--accent3));
-      -webkit-background-clip:text;color:transparent;
+    .nav { display: flex; gap: 26px; align-items: center; }
+    .nav a { color: var(--muted); font-size: 0.86rem; font-weight: 500; }
+    .nav a:hover { color: var(--text); text-decoration: none; }
+    .nav a.active { color: var(--text); }
+    @media (max-width: 880px) { .nav a:not(.btn) { display: none; } }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 26px; border-radius: 999px; border: 1px solid transparent;
+      font-family: var(--font-display); font-weight: 600; font-size: 0.92rem;
+      letter-spacing: 0.03em; cursor: pointer; text-decoration: none;
+      transition: transform 240ms var(--ease), box-shadow 240ms var(--ease);
     }
-    .hero-sub{
-      max-width:70ch;color:var(--muted);margin:0 0 20px;
-      font-size:16px;line-height:1.65;
+    .btn:hover { text-decoration: none; transform: translateY(-2px); }
+    .btn.primary {
+      background: linear-gradient(94deg, #a795ff, #6fe3f2); color: #05060f;
+      box-shadow: 0 8px 28px -6px rgba(120, 140, 255, 0.45);
     }
-    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:10px}
-    .tagline{font-size:13px;color:var(--muted);margin:6px 0 0}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:10px 18px;border-radius:999px;border:1px solid transparent;
-      font-size:14px;text-decoration:none;cursor:pointer;
-      transition:background var(--t), border-color var(--t), transform var(--t), box-shadow var(--t), color var(--t);
-    }
-    .btn.primary{
-      background:linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent3));
-      color:#050611;box-shadow:var(--shadow);font-weight:650;
-    }
-    .btn.primary:hover{transform:translateY(-1px);box-shadow:0 18px 35px rgba(0,0,0,.7)}
-    .btn.ghost{
-      border-color:rgba(255,255,255,.32);color:var(--text);background:transparent;
-    }
-    .btn.ghost:hover{border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.04)}
-
-    h2{font-size:28px;margin:0 0 12px;line-height:1.15}
-    h3{font-size:18px;margin:0 0 8px;line-height:1.25}
-    p{font-size:15px;line-height:1.7;margin:0 0 12px;color:var(--text)}
-    .muted{color:var(--muted)}
-    .list{padding-left:18px;color:var(--muted);margin:0}
-    .list li{margin-bottom:8px}
-    .card{
-      background:var(--card);
-      border-radius:var(--radius);
-      padding:20px 20px 18px;
-      border:1px solid var(--border);
-      box-shadow:var(--shadow);
-    }
-    .callout{
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(5,6,17,.55);
-      border-radius:var(--radius);
-      padding:16px 16px 14px;
-    }
-    .kicker{
-      font-size:12px;letter-spacing:.18em;text-transform:uppercase;
-      color:var(--muted);margin-bottom:8px;
-    }
-    .codebox{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-      font-size:13px;line-height:1.6;color:#e9ebff;
-      background:rgba(0,0,0,.28);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:12px;padding:14px 14px 12px;
-      overflow:auto;white-space:pre;
-    }
-
-    /* =========================================================
-       DIGITAL CONSCIENCE ORB — CLEAN STAR CORE (no ring, no bubble)
-       - bright white nucleus
-       - rich blue aura
-       - crisp defined rays (no speckles / no dots)
-       - soft circular fade (not a shaded sphere)
-    ========================================================== */
-
-    .dc-orb-stage{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .dc-orb{
-  position:relative;
-  width:360px;
-  aspect-ratio:1/1;
-  background:transparent;
-
-  /* REMOVE these two lines (they create the cutoff) */
-  /* -webkit-mask-image: radial-gradient(...); */
-  /* mask-image: radial-gradient(...); */
-
-  overflow: visible; /* IMPORTANT: let glow exceed the box */
-  filter:
-    drop-shadow(0 0 30px rgba(140,220,255,.28))
-    drop-shadow(0 0 70px rgba(120,190,255,.18))
-    drop-shadow(0 0 120px rgba(160,90,255,.10));
-}
-.dc-orb-canvas{
-  position:absolute;
-  inset:-22%;          /* IMPORTANT: canvas bigger than the box */
-  width:144%;
-  height:144%;
-  display:block;
-  pointer-events:none;
-  mix-blend-mode:screen;
-}
-
-    .dc-orb-halo{
-      position:absolute; inset:-18%;
-      pointer-events:none;
+    .btn.ghost { color: var(--text); border-color: var(--line-bright); background: rgba(130, 150, 255, 0.05); }
+    .btn.ghost:hover { background: rgba(130, 150, 255, 0.12); }
+    .page-hero { padding: 84px 0 30px; position: relative; }
+    .page-hero .orb-mini {
+      position: absolute; right: 4%; top: 40px; width: 190px; height: 190px;
+      border-radius: 50%; pointer-events: none; opacity: 0.85;
       background:
-        radial-gradient(circle at 50% 56%,
-          rgba(255,255,255,.08) 0%,
-          rgba(170,235,255,.22) 14%,
-          rgba(110,200,255,.22) 26%,
-          rgba(90,150,255,.14) 40%,
-          rgba(140,90,255,.10) 52%,
-          rgba(0,0,0,0) 72%);
-      filter: blur(16px);
-      opacity:.95;
-      mix-blend-mode:screen;
-      animation: dc_halo_swell 4.6s ease-in-out infinite;
+        radial-gradient(circle at 38% 34%, rgba(205,190,255,0.55), transparent 40%),
+        radial-gradient(circle at 62% 66%, rgba(255,70,190,0.25), transparent 52%),
+        radial-gradient(circle, rgba(139,123,255,0.45), rgba(10,12,30,0) 70%);
+      filter: blur(2px);
+      animation: orb-mini-breathe 4.4s ease-in-out infinite;
     }
-    @keyframes dc_halo_swell{
-      0%,100%{ transform:scale(1.00); opacity:.86; }
-      50%    { transform:scale(1.03); opacity:.98; }
+    @keyframes orb-mini-breathe {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.07); opacity: 0.95; }
     }
-
-    .dc-orb-core{
-      position:absolute; inset:0;
-      pointer-events:none;
-      background:
-        radial-gradient(circle at 50% 56%,
-          rgba(255,255,255,1.0) 0%,
-          rgba(255,255,255,.78) 7%,
-          rgba(210,248,255,.34) 16%,
-          rgba(120,210,255,.22) 26%,
-          rgba(0,0,0,0) 48%);
-      filter: blur(6px);
-      mix-blend-mode:screen;
-      animation: dc_core_pulse 3.2s ease-in-out infinite;
+    @media (max-width: 880px) { .page-hero .orb-mini { display: none; } }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-display); font-size: 0.74rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal);
+      border: 1px solid rgba(79, 216, 232, 0.28); border-radius: 999px;
+      padding: 7px 16px; background: rgba(79, 216, 232, 0.06); margin: 0 0 22px;
     }
-    @keyframes dc_core_pulse{
-      0%,100%{ transform:scale(1.00); opacity:.90; }
-      50%    { transform:scale(1.04); opacity:1.00; }
+    .kicker::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+    h1 {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 4.8vw, 3.6rem);
+      line-height: 1.06; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 20px; max-width: 820px;
     }
-
-    @media (prefers-reduced-motion: reduce){
-      .dc-orb, .dc-orb-halo, .dc-orb-core{ animation:none; }
+    .grad-text {
+      background: linear-gradient(94deg, #f2f0ff 5%, #b3a4ff 48%, #5fd9ea 95%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
-
-    /* Footer */
-    .footer{
-      padding:60px 0 28px;
-      border-top:1px solid rgba(255,255,255,.08);
-      background:#050611;
+    .lead { color: var(--muted); font-size: 1.08rem; max-width: 44rem; margin: 0 0 26px; }
+    .section { padding: 72px 0; }
+    .section.tight { padding: 44px 0; }
+    .section-head { max-width: 720px; margin-bottom: 44px; }
+    h2 {
+      font-family: var(--font-display); font-weight: 700; letter-spacing: -0.015em;
+      font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.14; margin: 0 0 14px;
     }
-    .footer-inner{text-align:center;font-size:13px;color:var(--muted)}
-    .footer a{color:inherit;text-decoration:underline}
+    .grid { display: grid; gap: 18px; }
+    .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 980px) { .grid.cols-3, .grid.cols-4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: 1fr; } }
+    .card {
+      position: relative; border-radius: var(--radius); background: var(--panel);
+      border: 1px solid var(--line); padding: 28px 26px;
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      transition: transform 320ms var(--ease), border-color 320ms, box-shadow 320ms;
+    }
+    .card:hover { transform: translateY(-4px); border-color: var(--line-bright); box-shadow: 0 24px 50px -18px rgba(80, 90, 220, 0.28); }
+    .card h3 { font-family: var(--font-display); font-size: 1.06rem; font-weight: 600; margin: 0 0 10px; }
+    .card p { color: var(--muted); font-size: 0.92rem; margin: 0; }
+    .card .num {
+      font-family: var(--font-display); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; color: var(--teal); display: block; margin-bottom: 14px;
+    }
+    .statement {
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(96, 80, 210, 0.07), rgba(30, 120, 150, 0.05));
+      padding: 52px 0; text-align: center;
+    }
+    .statement p {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(1.25rem, 2.6vw, 1.8rem); line-height: 1.3;
+      max-width: 860px; margin: 0 auto;
+    }
+    .statement .own { background: linear-gradient(94deg, #b3a4ff, #5fd9ea); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .statement .sub { font-family: var(--font-body); font-weight: 400; font-size: 0.9rem; color: var(--dim); margin: 12px auto 0; }
+    .hier { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 10px; }
+    .hier-chip {
+      font-family: var(--font-display); font-weight: 600; font-size: 0.82rem;
+      letter-spacing: 0.05em; padding: 9px 18px; border-radius: 999px;
+      color: var(--text); border: 1px solid var(--line-bright);
+      background: linear-gradient(120deg, rgba(139,123,255,0.10), rgba(79,216,232,0.06));
+    }
+    .quote-card {
+      border-radius: var(--radius); border: 1px solid var(--line-bright);
+      background: var(--panel-solid); padding: 34px 32px; margin: 26px 0;
+    }
+    .quote-card p { font-family: var(--font-display); font-size: 1.12rem; color: var(--text); margin: 0; line-height: 1.55; }
+    .quote-card .attr { font-family: var(--font-body); font-size: 0.82rem; color: var(--dim); margin-top: 12px; }
+    .cta-panel {
+      border-radius: 26px; border: 1px solid var(--line-bright);
+      background: radial-gradient(ellipse 70% 90% at 50% -20%, rgba(139,123,255,0.16), transparent 60%), var(--panel-solid);
+      padding: 52px 34px; text-align: center;
+    }
+    .cta-panel .lead { margin: 0 auto 28px; }
+    .footer { border-top: 1px solid var(--line); padding: 48px 0 60px; margin-top: 40px; }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 26px; }
+    .footer p { margin: 0 0 6px; font-size: 0.82rem; color: var(--dim); }
+    .footer strong { color: var(--muted); font-family: var(--font-display); letter-spacing: 0.08em; }
+    .footer a { color: var(--muted); }
+    .footer-links { display: flex; flex-direction: column; gap: 6px; font-size: 0.82rem; }
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 700ms var(--ease), transform 700ms var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } * { animation-duration: 0.001s !important; } }
+    img.doc-img { max-width: 100%; border-radius: var(--radius); border: 1px solid var(--line); }
   </style>
 </head>
-
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="grid-veil" aria-hidden="true"></div>
   <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="https://jeffereyai.com/" aria-label="JEFFEREY AI Home">
-        <span class="brand-dot" aria-hidden="true"></span>
-        <span class="brand-name">JEFFEREY AI™</span>
-      </a>
-
+    <div class="nav-inner">
+      <a class="brand" href="/"><span class="brand-dot" aria-hidden="true"></span>JEFFEREY&nbsp;AI™</a>
       <nav class="nav" aria-label="Primary navigation">
-        <a href="/personal-ai-shadow/" title="What is a Personal AI Shadow">What it is</a>
-        <a href="/self-cloud/" title="Self-Cloud private custody">Self-Cloud™</a>
-        <a href="/digital-conscience/" class="nav-cta nav-active" title="Digital Conscience values + override layer">Digital Conscience</a>
-        <a href="/whitepapers/" title="Whitepapers and architecture">Whitepapers</a>
-        <a href="/#early-access" class="nav-cta" title="Join early access waitlist">Early Access</a>
-        <a href="https://github.com/lczako-eng/Jeffrey-AI-Butler" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="/#human">The Human Side</a>
+        <a href="/#conscience" class="active">Conscience</a>
+        <a href="/#opportunity">Opportunity Engine</a>
+        <a href="/personal-ai-shadow/">The Shadow</a>
+        <a href="/self-cloud/">Self-Cloud™</a>
+        <a href="/whitepapers/">Whitepapers</a>
+        <a class="btn primary" href="/#coming-soon">Coming Soon</a>
       </nav>
     </div>
   </header>
-
   <main id="main">
-    <!-- HERO -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <p class="eyebrow">Sovereign Storage • Priority Override • Replaceable Models</p>
-
-          <h1 id="hero-title">
-            <span class="gradient">Digital Conscience™</span><br />
-            Sovereign cognitive continuity + non-bypassable override
-          </h1>
-
-          <p class="hero-sub">
-            Digital Conscience™ is a <strong>user-owned identity governance layer</strong> stored on <strong>Self-Cloud™</strong>
-            (your own drive + your own network) that enforces a <strong>priority hierarchy</strong> you control.
-            Engines can change. Providers can change. The Conscience persists — because custody is physical.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#definition" class="btn primary">What it is</a>
-            <a href="#override" class="btn ghost">Override model</a>
-            <a href="#implementation" class="btn ghost">How it’s implemented</a>
-          </div>
-
-          <p class="tagline">The engine proposes. The Conscience governs.</p>
-        </div>
-
-        <!-- CLEAN STAR-CORE ORB (no image) -->
-        <div class="dc-orb-stage" aria-label="Digital Conscience visualization">
-          <div class="dc-orb" role="img" aria-label="Digital Conscience star-core">
-            <canvas class="dc-orb-canvas" aria-hidden="true"></canvas>
-            <div class="dc-orb-halo" aria-hidden="true"></div>
-            <div class="dc-orb-core" aria-hidden="true"></div>
-          </div>
-        </div>
-
+    <section class="page-hero">
+      <div class="container" style="position: relative;">
+        <div class="orb-mini" aria-hidden="true"></div>
+        <p class="kicker">Digital Conscience</p>
+        <h1>It doesn't learn what you like.<br /><span class="grad-text">It learns why you decide.</span></h1>
+        <p class="lead">
+          The Digital Conscience is JEFFEREY's core: a persistent hierarchy of your priorities and
+          decision rules — stored separately from temporary reasoning, inspectable, correctable,
+          and owned by you.
+        </p>
+        <a class="btn primary" href="/#conscience">See it in action</a>
       </div>
     </section>
 
-    <!-- DEFINITION -->
-    <section id="definition" class="section alt" aria-labelledby="def-title">
-      <div class="container two-column">
-        <div>
-          <p class="kicker">Definition</p>
-          <h2 id="def-title">Not memory as a feature — memory with authority</h2>
-
-          <p class="muted">
-            Most AI “memory” is rented storage inside a vendor account. Digital Conscience™ is different:
-            it is <strong>personal cognitive infrastructure</strong> — a structured identity archive plus an
-            enforceable hierarchy that governs how AI behaves on your behalf.
-          </p>
-
-          <div class="callout">
-            <p>
-              <strong>Plain English:</strong> Digital Conscience™ preserves your identity over years —
-              your rules, priorities, corrections, and decision logic — because it lives on infrastructure you physically control.
-            </p>
-          </div>
-
-          <p class="muted">
-            Self-Cloud™ is the custody layer. Digital Conscience™ is what lives on top of it: your
-            values, constraints, and ranked priorities — versioned and auditable.
-          </p>
-        </div>
-
-        <aside class="card" aria-label="Digital Conscience summary">
-          <h3>What Digital Conscience™ guarantees</h3>
-          <ul class="list">
-            <li><strong>Sovereign continuity</strong> across time, devices, and engines.</li>
-            <li><strong>Override authority</strong> over base-model defaults.</li>
-            <li><strong>Model-agnostic identity</strong> (the engine is replaceable).</li>
-            <li><strong>Auditable governance</strong> (logs prove what was enforced and why).</li>
-          </ul>
-        </aside>
+    <div class="statement reveal">
+      <div class="container">
+        <p>The intelligence is rented.<br /><span class="own">The conscience is owned.</span></p>
+        <p class="sub">Reasoning engines are disposable and swappable. Your values, memory, and history persist — because you hold them, not because you subscribe.</p>
       </div>
-    </section>
+    </div>
 
-    <!-- PROBLEM -->
-    <section class="section" aria-labelledby="problem-title">
-      <div class="container two-column">
-        <div>
-          <p class="kicker">Problem</p>
-          <h2 id="problem-title">AI resets identity — and cloud custody makes it permanent exposure</h2>
-          <p class="muted">
-            Stateless AI forces you to rebuild your identity every time. Cloud custody forces your identity to exist
-            under policies, accounts, and jurisdictions you don’t control.
-          </p>
-          <p class="muted">
-            Digital Conscience™ solves both: it persists on Self-Cloud™ (owned storage), and it governs the AI through
-            an explicit hierarchy that overrides default behavior.
-          </p>
+    <section class="section" aria-labelledby="prio-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker">Priorities, not preferences</p>
+          <h2 id="prio-title">Preferences are easy to copy.<br />Priorities explain you.</h2>
+          <p class="lead">Likes blue. Prefers steak. Uses Gmail — any system can learn those. What makes decisions is the ranking underneath:</p>
         </div>
-
-        <div class="card">
-          <h3>Custody beats policy</h3>
-          <p class="muted">
-            Policies can change. Accounts can be pressured. Models can be swapped.
-            Physical custody is stronger than settings — because the identity layer exists where you own the substrate.
-          </p>
+        <div class="hier reveal" aria-label="Examples of learned priority hierarchies">
+          <span class="hier-chip">Safety &gt; Cost</span>
+          <span class="hier-chip">Family &gt; Career</span>
+          <span class="hier-chip">Privacy &gt; Convenience</span>
+          <span class="hier-chip">Time &gt; Money</span>
+          <span class="hier-chip">Reliability &gt; Lowest price</span>
+        </div>
+        <div class="grid cols-3" style="margin-top: 30px;">
+          <div class="card reveal"><span class="num">CORRECTIONS</span><h3>The curriculum</h3><p>Every time you override Jeff, he learns which value you were protecting — not just what you chose, but why.</p></div>
+          <div class="card reveal"><span class="num">CONFIDENCE</span><h3>Transparent beliefs</h3><p>“I'm 60% confident you'd rather save money here. Should I update that?” Nothing about you is mysterious — every belief carries a score you can see.</p></div>
+          <div class="card reveal"><span class="num">CONTEXT</span><h3>Real hierarchies shift</h3><p>Business travel: Time &gt; Money. Family health: Safety &gt; Everything. The conscience models the real you, not one fixed ranking.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- ARCHITECTURE -->
-    <section id="architecture" class="section alt" aria-labelledby="arch-title">
-      <div class="container two-column">
-        <div>
-          <p class="kicker">Architecture</p>
-          <h2 id="arch-title">Four layers. One boundary: the Conscience is upstream of the engine.</h2>
-          <p class="muted">
-            Digital Conscience™ is built as a layered system where the Conscience Layer is superior to the reasoning engine.
-            The engine produces candidates. The Conscience enforces acceptance.
-          </p>
-
-          <div class="callout">
-            <p><strong>Layer map (clean boundary):</strong></p>
-            <ul class="list">
-              <li><strong>Layer 1 — Self-Cloud™ (Sovereign Storage):</strong> owned, local-first memory vault.</li>
-              <li><strong>Layer 2 — Identity Archive:</strong> facts, preferences, history, corrections, traces.</li>
-              <li><strong>Layer 3 — Conscience Layer:</strong> priority hierarchy + enforcement rules (override authority).</li>
-              <li><strong>Layer 4 — Reasoning Engine:</strong> replaceable model generating candidates under constraints.</li>
-            </ul>
-          </div>
-
-          <p class="muted">
-            This separation is architectural: the identity layer is not replaceable; the engine is.
-          </p>
+    <section class="section tight" aria-labelledby="sig-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker">The signature interaction</p>
+          <h2 id="sig-title">Every answer explains itself in your values.</h2>
         </div>
-
-        <aside class="card" aria-label="What this is not">
-          <h3>What this is not</h3>
-          <ul class="list">
-            <li>Not cloud “memory” rented from a vendor.</li>
-            <li>Not short-lived session context.</li>
-            <li>Not prompt conditioning or “tone prompts.”</li>
-            <li>Not a monolithic “prompt blob.”</li>
-          </ul>
-        </aside>
+        <div class="quote-card reveal">
+          <p>“I didn't recommend the cheapest plan because over the last year you've consistently
+          chosen reliability over saving $15/month — and you travel often, so I weighted roaming
+          heavily. If that's no longer your priority, tell me once and I'll update what I've learned.”</p>
+          <p class="attr">— JEFFEREY, explaining a recommendation. No hidden incentives. Ever.</p>
+        </div>
       </div>
     </section>
 
-    <!-- OVERRIDE -->
-    <section id="override" class="section" aria-labelledby="override-title">
-      <div class="container two-column">
-        <div>
-          <p class="kicker">Priority Override</p>
-          <h2 id="override-title">Override isn’t a suggestion. It’s enforcement.</h2>
-
-          <p class="muted">
-            Digital Conscience™ overrides base-model defaults in a measurable,
-            repeatable, <strong>non-bypassable</strong> way. That requires an enforcement loop —
-            not personalization settings.
-          </p>
-
-          <div class="callout">
-            <p><strong>Enforcement loop (control plane):</strong></p>
-            <ul class="list">
-              <li>Classify context (domain + stakes + intent).</li>
-              <li>Build constraints: <strong>Constitution Rules</strong> (hard) + <strong>Priority Hierarchy</strong> (weighted).</li>
-              <li>Generate multiple candidate outputs.</li>
-              <li>Score alignment + detect violations.</li>
-              <li><strong>Reject</strong> non-compliant candidates.</li>
-              <li>Mutate constraints and <strong>force re-generation</strong> until aligned.</li>
-              <li>Write an audit trace proving what was enforced and why.</li>
-            </ul>
-          </div>
-
-          <p class="muted">
-            The engine stays productive — but the Conscience determines the output.
-          </p>
+    <section class="section" aria-labelledby="cust-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker">Custody</p>
+          <h2 id="cust-title">Values kept separate from intelligence.</h2>
         </div>
-
-        <aside class="card" aria-label="Data structures">
-          <h3>Minimal enforceable structures</h3>
-          <ul class="list">
-            <li><strong>Constitution Rules (CR):</strong> non-negotiable constraints.</li>
-            <li><strong>Priority Graph (PG):</strong> ranked values by context + confidence.</li>
-            <li><strong>Override Log (OL):</strong> divergence + correction ledger.</li>
-            <li><strong>Decision Trace (DT):</strong> accept/reject + constraint deltas.</li>
-          </ul>
-          <p class="muted" style="margin-top:10px;">
-            Enforcement leaves evidence. That’s why it’s auditable.
-          </p>
-        </aside>
+        <div class="grid cols-3">
+          <div class="card reveal"><h3>Inspect, edit, delete</h3><p>Facts are stored separately from values. You can open the memory, read every line, correct it, or erase it — it's yours.</p></div>
+          <div class="card reveal"><h3>Moves between engines</h3><p>Correct Jeff in one AI engine on Monday; he remembers it in another on Tuesday. No platform can offer that — their memory is locked to themselves.</p></div>
+          <div class="card reveal"><h3>Built to outlive you</h3><p>A conscience under family custody can be passed on by your intent — so one day your grandchildren can still ask what you would have said.</p></div>
+        </div>
       </div>
     </section>
 
-    <!-- IMPLEMENTATION -->
-    <section id="implementation" class="section alt" aria-labelledby="impl-title">
-      <div class="container two-column">
-        <div>
-          <p class="kicker">Implementation</p>
-          <h2 id="impl-title">Stored on Self-Cloud™ as real files you own</h2>
-
-          <p class="muted">
-            Digital Conscience™ does not live “in the chat.” It lives on your Self-Cloud™ volume as inspectable,
-            enforceable infrastructure: constitution, identity, memory database, override ledger, and append-only logs.
-          </p>
-
-          <div class="callout">
-            <p><strong>Core principle:</strong> Ownership is physical and architectural — not philosophical.</p>
-          </div>
-
-          <p class="muted">
-            Self-Cloud™ is your hard drive and your network presence. Digital Conscience™ is the governing layer
-            that makes continuity and override real across engines.
-          </p>
-        </div>
-
-        <aside class="card" aria-label="Self-Cloud layout">
-          <h3>Self-Cloud™ layout (example)</h3>
-          <div class="codebox">/Volumes/SELF_CLOUD/JEFFEREY/
-  00_CONSTITUTION/ constitution.md
-  01_IDENTITY/     identity.json
-  02_MEMORY/       memory.sqlite
-                  facts.jsonl
-  03_LOGS/         events.jsonl
-                  errors.jsonl
-  04_OVERWRITE/    overrides.jsonl
-  05_BACKUP/
-  app/
-  secrets/         .env</div>
-          <p class="muted" style="margin-top:10px;">
-            Custody substrate + identity archive + audit trail in physical form.
-          </p>
-        </aside>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="section" aria-label="Call to action">
-      <div class="container two-column">
-        <div>
-          <p class="kicker">Next</p>
-          <h2>Read the enforcement documents</h2>
-          <p class="muted">
-            The whitepapers define the override control plane, data structures, and audit trace model.
-            Self-Cloud™ provides the owned substrate that makes it sovereign.
-          </p>
-        </div>
-
-        <div class="card">
-          <a href="/whitepapers/" class="btn primary" style="width:100%;">Open Whitepapers</a>
-          <p class="muted" style="margin-top:12px;">
-            Next page in the stack: <a href="/self-cloud/">Self-Cloud™</a>
-          </p>
+    <section class="section tight" aria-label="Next steps">
+      <div class="container">
+        <div class="cta-panel reveal">
+          <p class="kicker">Keep exploring</p>
+          <h2>The conscience needs a home you own.</h2>
+          <p class="lead">That home is Self-Cloud™ — custody, not subscription.</p>
+          <a class="btn primary" href="/self-cloud/">Explore Self-Cloud™</a>
+          &nbsp;&nbsp;<a class="btn ghost" href="/#coming-soon">Agent Connector — Coming Soon</a>
         </div>
       </div>
     </section>
   </main>
-
   <footer class="footer" role="contentinfo">
     <div class="container footer-inner">
-      <p><strong>JEFFEREY AI™</strong> © 2026 — Digital Conscience™</p>
-      <p>Owned. Sovereign. Enforceable.</p>
-      <p style="margin-top: 10px;">JEFFEREY AI™ · Digital Conscience™ · Self-Cloud™ are trademarks.</p>
-      <p>
+      <div>
+        <p><strong>JEFFEREY AI™</strong> © 2026 — Personal AI Shadow™ powered by Self-Cloud™</p>
+        <p>Owned. Sovereign. Persistent. Loyal to one person: you.</p>
+        <p style="margin-top: 10px;">JEFFEREY AI™ · Personal AI Shadow™ · Self-Cloud™ are trademarks.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/personal-ai-shadow/">Personal AI Shadow™</a>
+        <a href="/digital-conscience/">Digital Conscience</a>
+        <a href="/self-cloud/">Self-Cloud™</a>
+        <a href="/whitepapers/">Whitepapers</a>
+        <a href="/privacy/">Privacy</a>
         <a href="mailto:info@jeffereyai.com">info@jeffereyai.com</a>
-        &nbsp;·&nbsp;
         <a href="https://github.com/lczako-eng/Jeffrey-AI-Butler" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </p>
+      </div>
     </div>
   </footer>
 
   <script>
-    /* =========================================================
-       STAR-CORE RAYS (canvas) — crisp + defined, no speckles
-       ========================================================= */
-    (function(){
-      const orb = document.querySelector('.dc-orb');
-      const canvas = orb?.querySelector('canvas.dc-orb-canvas');
-      if (!orb || !canvas) return;
-
-      const ctx = canvas.getContext('2d', { alpha:true });
-      let w=0,h=0,dpr=1;
-
-      function resize(){
-        const r = canvas.getBoundingClientRect();
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-        w = Math.max(1, Math.floor(r.width * dpr));
-        h = Math.max(1, Math.floor(r.height * dpr));
-        canvas.width = w;
-        canvas.height = h;
-        ctx.setTransform(1,0,0,1,0,0);
-      }
-      resize();
-      window.addEventListener('resize', resize);
-
-      // Fewer rays + more definition (designed, not noisy)
-      const RAY_COUNT = 64;
-      const rays = Array.from({length:RAY_COUNT}, (_,i) => {
-        const base = (i / RAY_COUNT) * Math.PI * 2;
-        return {
-          a: base + (Math.random()-0.5)*0.03,
-          len: 0.78 + Math.random()*0.18,
-          lw: 0.9 + Math.random()*0.9,
-          phase: Math.random()*Math.PI*2,
-          speed: 0.55 + Math.random()*0.65
-        };
-      });
-// ---- Sparkles (controlled glints, not speckles) ----
-const sparkles = [];
-function spawnSparkle(){
-  if (sparkles.length > 10) return;
-  const ang = Math.random() * Math.PI * 2;
-  const ring = 0.22 + Math.random() * 0.38;
-  sparkles.push({
-    a: ang, r: ring, life: 0,
-    ttl: 0.9 + Math.random() * 0.9,
-    size: 5 + Math.random() * 10,
-    rot: Math.random() * Math.PI,
-    drift: (Math.random() - 0.5) * 0.18
-  });
-}
-function drawSparkle(cx, cy, R, s, time){
-  s.life += 1/60;
-  const t = Math.min(1, s.life / s.ttl);
-  const fade = Math.sin(t * Math.PI);
-
-  const rr = R * (s.r + 0.02*Math.sin(time*0.8 + s.a*3));
-  const x = cx + Math.cos(s.a + s.drift*time) * rr;
-  const y = cy + Math.sin(s.a + s.drift*time) * rr;
-
-  ctx.save();
-  ctx.translate(x, y);
-  ctx.rotate(s.rot + time*0.35);
-
-  ctx.globalAlpha = 0.55 * fade;
-  ctx.globalCompositeOperation = "screen";
-
-  ctx.beginPath();
-  ctx.moveTo(0, -s.size);
-  ctx.lineTo(s.size * 0.7, 0);
-  ctx.lineTo(0, s.size);
-  ctx.lineTo(-s.size * 0.7, 0);
-  ctx.closePath();
-
-  const g = ctx.createRadialGradient(0, 0, 0, 0, 0, s.size*1.6);
-  g.addColorStop(0.0, "rgba(255,255,255,0.95)");
-  g.addColorStop(0.3, "rgba(190,245,255,0.55)");
-  g.addColorStop(1.0, "rgba(0,0,0,0)");
-  ctx.fillStyle = g;
-  ctx.fill();
-
-  ctx.globalAlpha = 0.25 * fade;
-  ctx.lineWidth = 1.2 * dpr;
-  ctx.strokeStyle = "rgba(210,248,255,0.65)";
-  ctx.beginPath();
-  ctx.moveTo(-s.size*2.2, 0);
-  ctx.lineTo(s.size*2.2, 0);
-  ctx.stroke();
-
-  ctx.restore();
-}
-
-      function draw(t){
-        const time = t * 0.001;
-        ctx.clearRect(0,0,w,h);
-
-        const cx = w * 0.5;
-        const cy = h * 0.56;
-        const radius = Math.min(w,h) * 0.5;
-
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(w/2, h/2, radius*0.92, 0, Math.PI*2);
-        ctx.clip();
-
-        ctx.globalCompositeOperation = 'screen';
-
-        // soft bloom (blue biased)
-        const bloom = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius*0.92);
-        bloom.addColorStop(0.00, 'rgba(255,255,255,0.70)');
-        bloom.addColorStop(0.06, 'rgba(255,255,255,0.40)');
-        bloom.addColorStop(0.14, 'rgba(185,242,255,0.30)');
-        bloom.addColorStop(0.26, 'rgba(120,210,255,0.22)');
-        bloom.addColorStop(0.42, 'rgba(90,150,255,0.14)');
-        bloom.addColorStop(0.60, 'rgba(140,90,255,0.08)');
-        bloom.addColorStop(1.00, 'rgba(0,0,0,0)');
-        ctx.fillStyle = bloom;
-        ctx.beginPath();
-        ctx.arc(cx, cy, radius*0.92, 0, Math.PI*2);
-        ctx.fill();
-
-        for (const r of rays){
-          const flick = 0.88 + 0.12*Math.sin(time*r.speed + r.phase);
-          const L = radius * r.len * flick;
-
-          const a = r.a + 0.004*Math.sin(time*0.7 + r.phase);
-          const x2 = cx + Math.cos(a) * L;
-          const y2 = cy + Math.sin(a) * L;
-
-          // inner crisp line
-          const g1 = ctx.createLinearGradient(cx, cy, x2, y2);
-          g1.addColorStop(0.00, 'rgba(255,255,255,0.78)');
-          g1.addColorStop(0.10, 'rgba(220,250,255,0.36)');
-          g1.addColorStop(0.25, 'rgba(130,215,255,0.18)');
-          g1.addColorStop(1.00, 'rgba(0,0,0,0)');
-
-          ctx.strokeStyle = g1;
-          ctx.lineWidth = (r.lw * 0.9) * dpr;
-          ctx.lineCap = 'round';
-          ctx.shadowColor = 'rgba(150,225,255,0.25)';
-          ctx.shadowBlur = 8 * dpr;
-
-          ctx.beginPath();
-          ctx.moveTo(cx, cy);
-          ctx.lineTo(x2, y2);
-          ctx.stroke();
-
-          // outer glow pass
-          const g2 = ctx.createLinearGradient(cx, cy, x2, y2);
-          g2.addColorStop(0.00, 'rgba(170,235,255,0.22)');
-          g2.addColorStop(0.25, 'rgba(120,210,255,0.12)');
-          g2.addColorStop(1.00, 'rgba(0,0,0,0)');
-
-          ctx.strokeStyle = g2;
-          ctx.lineWidth = (r.lw * 1.9) * dpr;
-          ctx.shadowColor = 'rgba(120,200,255,0.20)';
-          ctx.shadowBlur = 18 * dpr;
-
-          ctx.beginPath();
-          ctx.moveTo(cx, cy);
-          ctx.lineTo(x2, y2);
-          ctx.stroke();
-        }
-
-        // white-hot core (defined)
-        const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius*0.18);
-        core.addColorStop(0.00, 'rgba(255,255,255,1.00)');
-        core.addColorStop(0.18, 'rgba(255,255,255,0.72)');
-        core.addColorStop(0.40, 'rgba(190,245,255,0.28)');
-        core.addColorStop(0.70, 'rgba(120,210,255,0.14)');
-        core.addColorStop(1.00, 'rgba(0,0,0,0)');
-
-        ctx.fillStyle = core;
-        ctx.shadowColor = 'rgba(255,255,255,0.30)';
-        ctx.shadowBlur = 22 * dpr;
-        ctx.beginPath();
-        ctx.arc(cx, cy, radius*0.18, 0, Math.PI*2);
-        ctx.fill();
-
-        ctx.restore();
-        requestAnimationFrame(draw);
-      }
-// ---- Sparkles (few + intentional) ----
-if (Math.random() < 0.18) spawnSparkle();
-for (let i=sparkles.length-1; i>=0; i--){
-  const s = sparkles[i];
-  drawSparkle(cx, cy, radius*1.15, s, time);
-  if (s.life >= s.ttl) sparkles.splice(i,1);
-}
-
-      requestAnimationFrame(draw);
+    (function () {
+      const els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+      }, { threshold: 0.12 });
+      els.forEach((e) => io.observe(e));
     })();
   </script>
 </body>
