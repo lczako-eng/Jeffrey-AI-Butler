@@ -307,6 +307,21 @@
       background: radial-gradient(circle, var(--orbGlow) 0%, transparent 62%);
       transition: background 900ms ease;
     }
+    .orb-frame::after {
+      content: ""; position: absolute; inset: 6%; border-radius: 50%; pointer-events: none;
+      background: var(--shimmer, conic-gradient(from 210deg,
+        rgba(255,255,255,0) 0deg, rgba(255,255,255,0.22) 25deg,
+        rgba(154,231,255,0.4) 60deg, rgba(128,90,255,0.45) 110deg,
+        rgba(18,235,210,0.35) 170deg, rgba(255,123,92,0.45) 220deg,
+        rgba(255,56,96,0.45) 250deg, rgba(154,231,255,0) 300deg));
+      mix-blend-mode: screen; opacity: 0.2; filter: blur(16px);
+      -webkit-mask-image: radial-gradient(circle, black 28%, rgba(0,0,0,0.55) 58%, transparent 72%);
+      mask-image: radial-gradient(circle, black 28%, rgba(0,0,0,0.55) 58%, transparent 72%);
+      animation: shimmer-spin 22s linear infinite;
+      transition: background 900ms ease;
+    }
+    @keyframes shimmer-spin { to { transform: rotate(360deg); } }
+
     .orb-frame.orb-fallback {
       border-radius: 50%;
       background:
@@ -1242,33 +1257,43 @@
     if (!gl) { frameEl.classList.add('orb-fallback'); return; }
 
     // ------------------------------------------------ moods
-    // Eight emotions. Palettes lifted from the ORIGINAL orb's colour
-    // schemes (calm/charged/rage/annoyed/sad/happy) plus curious+thinking —
-    // each mood is a true mixture of colours living in the body at once.
+    // Eight emotions. Palettes AND swirling shimmer bands lifted from the
+    // ORIGINAL orb's gradients — including the dark bases that made the
+    // colours pop (yellow against near-black for Happy, crimson against
+    // black-red for Rage). The conic shimmer rotates over the dust exactly
+    // like the old orb's swirl layer.
     const MOODS = {
       calm:       { c1: [72, 196, 255],  c2: [150, 235, 255], c3: [25, 90, 170],
-                    p: [[140, 225, 255], [72, 196, 255], [111, 150, 255], [30, 90, 190]],
+                    p: [[154, 231, 255], [72, 196, 255], [128, 90, 255], [18, 235, 210]],
+                    sh: "conic-gradient(from 210deg, rgba(255,255,255,0) 0deg, rgba(255,255,255,0.2) 40deg, rgba(154,231,255,0.4) 90deg, rgba(128,90,255,0.4) 150deg, rgba(18,235,210,0.35) 210deg, rgba(255,255,255,0) 360deg)",
                     fire: 0.35, spin: 0.4,  breathe: 1.7,  jitter: 0,    sag: 0,    morphA: 0.035, morphS: 0.35, label: 'Calm' },
       charged:    { c1: [124, 92, 255],  c2: [170, 140, 255], c3: [50, 120, 220],
-                    p: [[90, 200, 255], [124, 92, 255], [255, 56, 120], [255, 123, 92]],
+                    p: [[154, 231, 255], [128, 90, 255], [255, 56, 96], [18, 235, 210]],
+                    sh: "conic-gradient(from 210deg, rgba(255,255,255,0) 0deg, rgba(255,255,255,0.22) 25deg, rgba(154,231,255,0.4) 60deg, rgba(128,90,255,0.45) 110deg, rgba(18,235,210,0.35) 170deg, rgba(255,123,92,0.45) 220deg, rgba(255,56,96,0.45) 250deg, rgba(154,231,255,0) 300deg)",
                     fire: 1.0,  spin: 1.0,  breathe: 1.0,  jitter: 0,    sag: 0,    morphA: 0.055, morphS: 0.6,  label: 'Charged' },
-      happy:      { c1: [255, 200, 110], c2: [255, 225, 150], c3: [200, 110, 60],
-                    p: [[255, 215, 120], [255, 190, 135], [255, 150, 110], [230, 120, 80]],
+      happy:      { c1: [255, 205, 110], c2: [255, 235, 170], c3: [70, 50, 15],
+                    p: [[255, 245, 185], [255, 215, 120], [255, 190, 135], [70, 50, 15]],
+                    sh: "conic-gradient(from 210deg, rgba(255,255,255,0) 0deg, rgba(255,255,255,0.25) 40deg, rgba(255,255,210,0.4) 80deg, rgba(255,215,140,0.45) 140deg, rgba(255,255,255,0) 210deg, rgba(255,255,255,0.2) 260deg, rgba(255,255,255,0) 360deg)",
                     fire: 0.9,  spin: 1.2,  breathe: 0.9,  jitter: 0,    sag: 0,    morphA: 0.07,  morphS: 0.9,  label: 'Happy' },
-      curious:    { c1: [244, 193, 105], c2: [255, 200, 120], c3: [225, 105, 155],
-                    p: [[255, 205, 130], [244, 193, 105], [255, 110, 150], [190, 70, 45]],
+      curious:    { c1: [244, 193, 105], c2: [255, 210, 130], c3: [225, 105, 155],
+                    p: [[255, 240, 200], [244, 193, 105], [255, 110, 150], [120, 45, 30]],
+                    sh: "conic-gradient(from 210deg, rgba(255,255,255,0) 0deg, rgba(255,240,200,0.35) 50deg, rgba(244,193,105,0.45) 120deg, rgba(255,110,150,0.4) 200deg, rgba(255,255,255,0) 360deg)",
                     fire: 1.5,  spin: 1.6,  breathe: 0.85, jitter: 0.12, sag: 0,    morphA: 0.075, morphS: 1.05, label: 'Curious' },
-      annoyed:    { c1: [255, 150, 90],  c2: [255, 210, 120], c3: [110, 70, 200],
-                    p: [[255, 220, 120], [255, 137, 92], [128, 90, 255], [120, 60, 40]],
+      annoyed:    { c1: [255, 150, 90],  c2: [255, 215, 130], c3: [90, 55, 160],
+                    p: [[154, 231, 255], [255, 220, 120], [255, 137, 92], [128, 90, 255]],
+                    sh: "conic-gradient(from 210deg, rgba(255,255,255,0) 0deg, rgba(255,255,255,0.22) 30deg, rgba(154,231,255,0.4) 80deg, rgba(255,220,120,0.45) 140deg, rgba(255,137,92,0.45) 190deg, rgba(255,255,255,0) 360deg)",
                     fire: 1.3,  spin: 1.3,  breathe: 0.7,  jitter: 0.45, sag: 0,    morphA: 0.06,  morphS: 1.2,  label: 'Annoyed' },
-      protective: { c1: [255, 90, 70],   c2: [255, 160, 110], c3: [150, 10, 40],
-                    p: [[255, 150, 110], [255, 90, 70], [200, 0, 40], [90, 10, 25]],
+      protective: { c1: [255, 90, 70],   c2: [255, 170, 120], c3: [140, 0, 40],
+                    p: [[255, 230, 214], [255, 140, 100], [255, 56, 96], [140, 0, 40]],
+                    sh: "conic-gradient(from 210deg, rgba(255,255,255,0) 0deg, rgba(255,230,214,0.4) 30deg, rgba(255,140,100,0.5) 80deg, rgba(255,56,96,0.5) 140deg, rgba(140,0,40,0.5) 210deg, rgba(255,255,255,0) 320deg)",
                     fire: 2.6,  spin: 1.9,  breathe: 0.5,  jitter: 1.0,  sag: 0,    morphA: 0.09,  morphS: 1.7,  label: 'Protective' },
-      sad:        { c1: [90, 124, 220],  c2: [140, 170, 240], c3: [30, 50, 110],
-                    p: [[150, 180, 235], [80, 120, 200], [70, 100, 170], [25, 45, 95]],
+      sad:        { c1: [90, 124, 220],  c2: [150, 175, 240], c3: [20, 35, 85],
+                    p: [[180, 198, 235], [80, 120, 200], [70, 100, 170], [15, 25, 60]],
+                    sh: "conic-gradient(from 210deg, rgba(255,255,255,0) 0deg, rgba(180,200,255,0.28) 60deg, rgba(80,120,200,0.35) 150deg, rgba(70,100,170,0.3) 230deg, rgba(255,255,255,0) 360deg)",
                     fire: 0.15, spin: 0.25, breathe: 2.3,  jitter: 0,    sag: 0.26, morphA: 0.04,  morphS: 0.22, label: 'Sad' },
-      thinking:   { c1: [100, 160, 255], c2: [150, 220, 255], c3: [40, 70, 170],
-                    p: [[120, 230, 255], [90, 140, 255], [140, 110, 255], [30, 60, 150]],
+      thinking:   { c1: [100, 160, 255], c2: [150, 220, 255], c3: [35, 60, 160],
+                    p: [[120, 230, 255], [90, 140, 255], [140, 110, 255], [18, 235, 210]],
+                    sh: "conic-gradient(from 210deg, rgba(255,255,255,0) 0deg, rgba(120,230,255,0.4) 60deg, rgba(90,140,255,0.4) 140deg, rgba(140,110,255,0.4) 220deg, rgba(18,235,210,0.3) 300deg, rgba(255,255,255,0) 360deg)",
                     fire: 1.9,  spin: 0.7,  breathe: 0.8,  jitter: 0.05, sag: 0,    morphA: 0.05,  morphS: 0.8,  label: 'Thinking' }
     };
     let moodKey = 'charged';
@@ -1291,9 +1316,7 @@
       live.sag = lerp(live.sag, m.sag, k);
       live.morphA = lerp(live.morphA, m.morphA, k);
       live.morphS = lerp(live.morphS, m.morphS, k);
-      // css halo follows the mood
-      frameEl.style.setProperty('--orbGlow',
-        `rgba(${live.c1[0] | 0},${live.c1[1] | 0},${live.c1[2] | 0},0.16)`);
+      // css halo follows the mood; its alpha pulses with the heartbeat in frame()
     }
 
     // ------------------------------------------------ shaders
@@ -1353,7 +1376,7 @@
           // shearing the clouds into slow galaxy arms — plus height shear
           float rl = length(aPos);
           float a = uTime * orbit
-                  + uTime * 0.10 * (1.45 - rl)
+                  + uTime * 0.20 * (1.5 - rl)
                   + p.y * 0.30 * sin(uTime * 0.06);
           float ca = cos(a), sa = sin(a);
           p = vec3(p.x * ca + p.z * sa, p.y, -p.x * sa + p.z * ca);
@@ -1402,8 +1425,8 @@
         // ------- sadness: sag + deflate
         p.y -= uSag * 0.35 * (1.0 - p.y * p.y);
         p.xz *= (1.0 - uSag * 0.12);
-        // ------- organ breath
-        p *= (1.0 + uBreath * 0.045);
+        // ------- heartbeat: the whole body visibly beats — lub-dub
+        p *= (1.0 + uBreath * 0.085);
 
         // ------- rotate (attention-steered)
         float ry = uRot + uLook.x * 0.45;
@@ -1442,6 +1465,8 @@
           baseA = 0.030 + near * near * 0.12;
           col = mix(uC1, uP2, tone * 0.5);
         }
+        // saturation pop: keep the mixture vivid, never grey
+        col = mix(vec3(dot(col, vec3(0.299, 0.587, 0.114))), col, 1.3);
         lit = min(lit, 1.2);
         col = mix(col, uC2, min(1.0, lit * 0.6));
         vColor = col * (baseA + lit * 0.22);
@@ -1697,7 +1722,7 @@
       }
       const mo = 1 + live.morphA * Math.sin(y * 2.0 + lastT * live.morphS)
                   + live.morphA * 0.7 * Math.sin(x * 1.6 - lastT * live.morphS * 0.8 + 1.7);
-      const sc = (1 + lastBreath * 0.045) * mo;
+      const sc = (1 + lastBreath * 0.085) * mo;
       x *= sc; y *= sc; z *= sc;
       const ry = rotY + look.x * 0.45, rx = -0.26 + look.y * 0.32;
       const cy1 = Math.cos(ry), sy1 = Math.sin(ry);
@@ -2004,6 +2029,8 @@
       gl.drawArrays(gl.POINTS, 0, N);
 
       lastBreath = breath; lastT = tGlobal;
+      frameEl.style.setProperty('--orbGlow',
+        `rgba(${live.c1[0] | 0},${live.c1[1] | 0},${live.c1[2] | 0},${(0.10 + Math.max(0, breath) * 0.16).toFixed(3)})`);
       drawWires(dt);
 
       if (!reduceMotion) requestAnimationFrame(frame);
@@ -2028,10 +2055,12 @@
       moodKey = k;
       chips.forEach((c) => c.classList.toggle('active', c.dataset.mood === k));
       if (label) label.textContent = MOODS[k].label;
+      frameEl.style.setProperty('--shimmer', MOODS[k].sh);
       for (let i = 0; i < 8; i++) fireAxonFrom((Math.random() * CLUSTERS) | 0);
       for (let i = 0; i < 4; i++) burstCluster((Math.random() * CLUSTERS) | 0);
     }
     chips.forEach((chip) => chip.addEventListener('click', () => setMood(chip.dataset.mood)));
+    frameEl.style.setProperty('--shimmer', MOODS[moodKey].sh);
 
     // poke the orb → his mood changes, and he reacts
     canvas.style.cursor = 'pointer';
