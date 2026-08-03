@@ -568,6 +568,19 @@
     .form-status { width: 100%; font-size: 0.85rem; color: var(--teal); min-height: 1.2em; margin-top: 10px; }
     .form-note { font-size: 0.78rem; color: var(--dim); margin-top: 18px; }
 
+    .soon-mark {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: 0.3em;
+      margin: 26px 0 30px;
+      background: linear-gradient(94deg, #b3a4ff, #5fd9ea);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: soon-breathe 3.4s ease-in-out infinite;
+    }
+    @keyframes soon-breathe {
+      0%, 100% { opacity: 0.72; filter: drop-shadow(0 0 12px rgba(139,123,255,0.25)); }
+      50% { opacity: 1; filter: drop-shadow(0 0 28px rgba(139,123,255,0.55)); }
+    }
+
     /* Footer */
     .footer { border-top: 1px solid var(--line); padding: 48px 0 60px; }
     .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 26px; }
@@ -597,12 +610,13 @@
     <div class="nav-inner">
       <a class="brand" href="/"><span class="brand-dot" aria-hidden="true"></span>JEFFEREY&nbsp;AI™</a>
       <nav class="nav" aria-label="Primary navigation">
+        <a href="#human">The Human Side</a>
         <a href="#conscience">Conscience</a>
         <a href="#opportunity">Opportunity Engine</a>
         <a href="#layer">The Layer</a>
         <a href="/self-cloud/">Self-Cloud™</a>
         <a href="/whitepapers/">Whitepapers</a>
-        <a class="btn primary" href="#early-access">Join Waitlist</a>
+        <a class="btn primary" href="#coming-soon">Coming Soon</a>
       </nav>
     </div>
   </header>
@@ -624,7 +638,7 @@
           </p>
           <p class="hero-oath">The intelligence is rented. <em>The conscience is owned.</em></p>
           <div class="hero-ctas">
-            <a class="btn primary" href="#early-access">Join the Waitlist</a>
+            <a class="btn primary" href="#coming-soon">Agent Connector — Coming Soon</a>
             <a class="btn ghost" href="#conscience">See how it thinks</a>
           </div>
           <div class="hero-meta">
@@ -659,6 +673,44 @@
         <p>Most AI optimizes for <span class="rent">responding.</span><br />JEFFEREY optimizes for <span class="own">representing you.</span></p>
       </div>
     </div>
+
+    <!-- =========================================================
+         THE HUMAN SIDE
+    ========================================================== -->
+    <section id="human" class="section" aria-labelledby="human-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker">The Human Side</p>
+          <h2 id="human-title">The intelligence is engineering.<br /><span class="grad-text">The relationship is the point.</span></h2>
+          <p class="lead">
+            Apart from the AI, the human side is the single most important thing about JEFFEREY.
+            Jeff isn't built to be the smartest thing in the room — he's built to be the one that
+            never stops caring whose room it is.
+          </p>
+        </div>
+        <div class="grid cols-3">
+          <div class="card reveal">
+            <div class="card-icon" aria-hidden="true">♥</div>
+            <h3>A companion, not an app</h3>
+            <p>Jeff remembers what matters to you, notices the hard weeks, celebrates the wins, and shows up every day — especially for the elderly, the isolated, and everyone overwhelmed by modern systems.</p>
+          </div>
+          <div class="card reveal">
+            <div class="card-icon" aria-hidden="true">⛨</div>
+            <h3>A protector by instinct</h3>
+            <p>Scams, fraud, predatory billing, abusive fine print — Jeff watches for the things that prey on the people you love. The orb's protective state isn't a colour. It's a promise.</p>
+          </div>
+          <div class="card reveal">
+            <div class="card-icon" aria-hidden="true">∞</div>
+            <h3>A legacy that stays human</h3>
+            <p>A lifetime of memory, values, and reasoning — preserved under family custody, not a vendor's policy. One day your grandchildren can still ask what you would have said.</p>
+          </div>
+        </div>
+        <div class="card reveal" style="margin-top: 18px; padding: 32px 30px;">
+          <p style="font-family: var(--font-display); font-size: 1.15rem; color: var(--text); margin: 0 0 8px;">What a good friend does</p>
+          <p style="margin: 0;">Remembers what's important to you. Tells you uncomfortable truths, respectfully. Celebrates your successes. Quietly has your back. Jeff is designed to be exactly that — never to control you, never to replace the people you love — speaking your language, in your rhythm, at your pace.</p>
+        </div>
+      </div>
+    </section>
 
     <!-- =========================================================
          CONSCIENCE — PRIORITIES NOT PREFERENCES
@@ -947,6 +999,10 @@
             <div class="faq-body">A private, long-lived personal AI designed for one person. It preserves continuity over time and stays under your authority via owned infrastructure rather than vendor custody. One human, one shadow.</div>
           </details>
           <details>
+            <summary>Who is JEFFEREY for?</summary>
+            <div class="faq-body">One person at a time — and especially the people technology usually leaves behind: the elderly, the isolated, the overwhelmed. Jeff is companion-first and protector-first: emotionally present, watchful against scams and predatory billing, and loyal for life.</div>
+          </details>
+          <details>
             <summary>How is JEFFEREY different from Siri, Alexa, or ChatGPT?</summary>
             <div class="faq-body">Assistants answer questions. JEFFEREY represents you: he learns your priority hierarchy through your corrections, explains recommendations in terms of your own values, and proactively works toward goals you've approved — within permissions you control.</div>
           </details>
@@ -967,23 +1023,23 @@
     </section>
 
     <!-- =========================================================
-         EARLY ACCESS
+         COMING SOON — THE AGENT CONNECTOR
     ========================================================== -->
-    <section id="early-access" class="section" aria-labelledby="early-access-title">
+    <section id="coming-soon" class="section" aria-labelledby="coming-soon-title">
       <div class="container">
         <div class="cta-panel reveal">
-          <p class="kicker">Early access</p>
-          <h2 id="early-access-title">Own your Shadow™ from day one.</h2>
+          <p class="kicker">Coming soon</p>
+          <h2 id="coming-soon-title">JEFFEREY arrives as an <span class="grad-text">Agent Connector.</span></h2>
           <p class="lead">
-            JEFFEREY AI™ + Self-Cloud™ is in active development, built on a public specification.
-            Join the controlled waitlist for private builds, architecture updates, and invitation-only pilots.
+            No app. No account. No waitlist. Jeff launches as an agent connector that plugs into
+            Claude and GPT — carrying his conscience, his memory, and his orb into the AI you already
+            use. One conscience, many engines. Owned by you, for life.
           </p>
-          <form class="form" id="early-access-form" aria-label="Early access waitlist form">
-            <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required aria-label="Email address" />
-            <button type="submit" class="btn primary" id="early-access-submit">Join Waitlist</button>
-            <div class="form-status" id="early-access-status" aria-live="polite"></div>
-          </form>
-          <p class="form-note">A controlled waitlist — not a mailing list. No spam. No sharing. <a href="/privacy/">Privacy policy</a>.</p>
+          <p class="soon-mark" aria-hidden="true">COMING&nbsp;SOON</p>
+          <div class="hero-ctas" style="justify-content: center;">
+            <a class="btn ghost" href="https://github.com/lczako-eng/Jeffrey-AI-Butler" target="_blank" rel="noopener noreferrer">Built in the open — follow on GitHub</a>
+            <a class="btn ghost" href="mailto:info@jeffereyai.com">Partners &amp; press</a>
+          </div>
         </div>
       </div>
     </section>
@@ -1335,6 +1391,135 @@
     gl.blendFunc(gl.ONE, gl.ONE);          // additive — the light accumulates
     gl.clearColor(0, 0, 0, 0);
 
+    // ------------------------------------------------ living wire overlay
+    // The crisp nervous-system layer: dendrite webs, axon fibres and
+    // travelling firings drawn sharp over the volumetric plasma body.
+    const wire = document.createElement('canvas');
+    wire.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;';
+    frameEl.appendChild(wire);
+    const wctx = wire.getContext('2d');
+    const wNodes = [], wDendrites = [], wMembers = [], wCoreIdx = [];
+    for (let c = 0; c < CLUSTERS; c++) {
+      const core = cores[c];
+      const coreIdx = wNodes.length;
+      wCoreIdx.push(coreIdx);
+      wNodes.push({ p: core, cluster: c, core: true, charge: 0 });
+      const members = [];
+      const M = 6 + ((R2() * 4) | 0);
+      for (let m = 0; m < M; m++) {
+        let x = core[0] + gauss() * 0.10, y = core[1] + gauss() * 0.10, z = core[2] + gauss() * 0.10;
+        const l = Math.hypot(x, y, z) || 1;
+        const idx = wNodes.length;
+        members.push(idx);
+        wNodes.push({ p: [x / l, y / l, z / l], cluster: c, core: false, charge: 0 });
+        wDendrites.push([coreIdx, idx]);
+        if (m > 0 && R2() < 0.5) wDendrites.push([members[(R2() * m) | 0], idx]);
+      }
+      wMembers.push(members);
+    }
+    const wrgba = (c, a) => 'rgba(' + (c[0] | 0) + ',' + (c[1] | 0) + ',' + (c[2] | 0) + ',' + a + ')';
+    let lastBreath = 0;
+    function wproj(v) {
+      let x = v[0], y = v[1], z = v[2];
+      if (live.sag > 0.005) {
+        y -= live.sag * 0.35 * (1 - y * y);
+        x *= (1 - live.sag * 0.12); z *= (1 - live.sag * 0.12);
+      }
+      const sc = 1 + lastBreath * 0.045;
+      x *= sc; y *= sc; z *= sc;
+      const ry = rotY + look.x * 0.45, rx = -0.26 + look.y * 0.32;
+      const cy1 = Math.cos(ry), sy1 = Math.sin(ry);
+      const x1 = x * cy1 + z * sy1, z1 = -x * sy1 + z * cy1;
+      const cx1 = Math.cos(rx), sx1 = Math.sin(rx);
+      const y1 = y * cx1 - z1 * sx1, z2 = y * sx1 + z1 * cx1;
+      const f = 3.1 / (3.1 - z2);
+      const scalePx = Math.min(W, H) * 0.335;
+      return [W / 2 + x1 * scalePx * f, H / 2 + y1 * scalePx * f, z2];
+    }
+    function wbez(ax, t) {
+      const it = 1 - t;
+      return wproj([
+        it * it * ax.a[0] + 2 * it * t * ax.mid[0] + t * t * ax.b[0],
+        it * it * ax.a[1] + 2 * it * t * ax.mid[1] + t * t * ax.b[1],
+        it * it * ax.a[2] + 2 * it * t * ax.mid[2] + t * t * ax.b[2]
+      ]);
+    }
+    function drawWires(dt) {
+      wctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      wctx.clearRect(0, 0, W, H);
+      wctx.globalCompositeOperation = 'lighter';
+      const P = wNodes.map(n => wproj(n.p));
+      // dendrite webs — the junction wiring inside each cluster
+      wctx.lineWidth = 0.8;
+      for (let i = 0; i < wDendrites.length; i++) {
+        const a = wDendrites[i][0], b = wDendrites[i][1];
+        const near = ((P[a][2] + P[b][2]) / 2 + 1) / 2;
+        const glow = Math.max(wNodes[a].charge, wNodes[b].charge);
+        wctx.strokeStyle = wrgba(glow > 0.3 ? live.c2 : live.c1, 0.05 + near * near * 0.20 + glow * 0.5);
+        wctx.beginPath(); wctx.moveTo(P[a][0], P[a][1]); wctx.lineTo(P[b][0], P[b][1]); wctx.stroke();
+      }
+      // axon fibres — long arcs between junctions
+      wctx.lineWidth = 1.0;
+      for (let i = 0; i < axons.length; i++) {
+        const ax = axons[i];
+        const A = wproj(ax.a), Mm = wproj(ax.mid), B = wproj(ax.b);
+        const near = ((A[2] + B[2]) / 2 + 1) / 2;
+        wctx.strokeStyle = wrgba(live.c1, 0.045 + near * near * 0.20);
+        wctx.beginPath(); wctx.moveTo(A[0], A[1]); wctx.quadraticCurveTo(Mm[0], Mm[1], B[0], B[1]); wctx.stroke();
+      }
+      // travelling firings — bright heads with comet tails
+      for (let i = 0; i < pulses.length; i++) {
+        const pu = pulses[i];
+        const ax = axons[pu.axon];
+        const t = pu.dir === 1 ? pu.t : 1 - pu.t;
+        const head = wbez(ax, t);
+        const tail = wbez(ax, Math.max(0, Math.min(1, pu.dir === 1 ? t - 0.13 : t + 0.13)));
+        const near = (head[2] + 1) / 2;
+        wctx.strokeStyle = wrgba(live.c2, 0.15 + near * 0.45);
+        wctx.lineWidth = 1.8;
+        wctx.beginPath(); wctx.moveTo(tail[0], tail[1]); wctx.lineTo(head[0], head[1]); wctx.stroke();
+        wctx.lineWidth = 1.0;
+        const sz = 2.0 + near * 3.0;
+        const g = wctx.createRadialGradient(head[0], head[1], 0, head[0], head[1], sz * 5);
+        g.addColorStop(0, wrgba(live.c2, 0.9 * (0.35 + near * 0.65)));
+        g.addColorStop(1, 'rgba(0,0,0,0)');
+        wctx.fillStyle = g;
+        wctx.beginPath(); wctx.arc(head[0], head[1], sz * 5, 0, 6.283); wctx.fill();
+        wctx.fillStyle = 'rgba(255,255,255,' + (0.3 + near * 0.6) + ')';
+        wctx.beginPath(); wctx.arc(head[0], head[1], sz * 0.7, 0, 6.283); wctx.fill();
+      }
+      // cascade bursts light the cluster's members in sequence
+      for (let b = 0; b < bursts.length; b++) {
+        const bu = bursts[b];
+        wNodes[wCoreIdx[bu.cluster]].charge = Math.max(wNodes[wCoreIdx[bu.cluster]].charge, 1);
+        const members = wMembers[bu.cluster];
+        const lit = Math.min(members.length, Math.floor(bu.t * members.length * 1.5));
+        for (let m = 0; m < lit; m++) {
+          wNodes[members[m]].charge = Math.max(wNodes[members[m]].charge, 0.9);
+        }
+      }
+      // nodes — junction cores always visible, members flare when firing
+      for (let i = 0; i < wNodes.length; i++) {
+        const n = wNodes[i];
+        const near = (P[i][2] + 1) / 2;
+        if (n.core || n.charge > 0.04) {
+          const a = Math.min(1, (n.core ? 0.22 + near * near * 0.42 : 0.05) + n.charge * 0.9);
+          const size = (n.core ? 1.6 + near * 2.0 : 0.9 + near * 1.3) * (1 + n.charge * 1.8);
+          wctx.fillStyle = n.charge > 0.25 ? wrgba(live.c2, a) : wrgba(live.c1, a);
+          wctx.beginPath(); wctx.arc(P[i][0], P[i][1], size, 0, 6.283); wctx.fill();
+          if (n.charge > 0.5) {
+            const g = wctx.createRadialGradient(P[i][0], P[i][1], 0, P[i][0], P[i][1], size * 6);
+            g.addColorStop(0, wrgba(live.c2, 0.4 * n.charge));
+            g.addColorStop(1, 'rgba(0,0,0,0)');
+            wctx.fillStyle = g;
+            wctx.beginPath(); wctx.arc(P[i][0], P[i][1], size * 6, 0, 6.283); wctx.fill();
+          }
+        }
+        n.charge *= Math.pow(0.22, dt * 2.0);
+      }
+      wctx.globalCompositeOperation = 'source-over';
+    }
+
     // ------------------------------------------------ sizing
     let W = 0, H = 0, DPR = 1;
     function resize() {
@@ -1343,6 +1528,7 @@
       W = rect.width; H = rect.height;
       canvas.width = W * DPR; canvas.height = H * DPR;
       gl.viewport(0, 0, canvas.width, canvas.height);
+      if (wire) { wire.width = W * DPR; wire.height = H * DPR; }
     }
     resize();
     window.addEventListener('resize', resize);
@@ -1392,7 +1578,7 @@
 
       look.x += (look.tx - look.x) * 0.04;
       look.y += (look.ty - look.y) * 0.04;
-      rotY += dt * 0.2 * live.spin;
+      rotY += dt * 0.24 * live.spin;
 
       // advance pulses / bursts
       const pulseSpeed = 1.25 * (0.6 + live.fire * 0.55);
@@ -1403,7 +1589,7 @@
           const ax = axons[pu.axon];
           const toCluster = pu.dir === 1 ? ax.cb : ax.ca;
           burstCluster(toCluster);
-          if (Math.random() < 0.6) fireAxonFrom(toCluster);
+          if (Math.random() < 0.72) fireAxonFrom(toCluster);
           pulses.splice(p, 1);
         }
       }
@@ -1411,7 +1597,7 @@
         bursts[b].t += dt * 1.4;
         if (bursts[b].t > 1.4) bursts.splice(b, 1);
       }
-      fireAcc += dt * live.fire * 2.8;
+      fireAcc += dt * live.fire * 3.8;
       while (fireAcc > 1) { fireAcc -= 1; fireAxonFrom((Math.random() * CLUSTERS) | 0); }
 
       // flatten uniforms — pulse t mapped to travel direction
@@ -1450,11 +1636,14 @@
 
       gl.drawArrays(gl.POINTS, 0, N);
 
+      lastBreath = breath;
+      drawWires(dt);
+
       if (!reduceMotion) requestAnimationFrame(frame);
     }
 
     // warm start — alive on first paint
-    for (let i = 0; i < 14; i++) fireAxonFrom((Math.random() * CLUSTERS) | 0);
+    for (let i = 0; i < 18; i++) fireAxonFrom((Math.random() * CLUSTERS) | 0);
     for (let i = 0; i < 8; i++) burstCluster((Math.random() * CLUSTERS) | 0);
     stepLive(1);
     if (reduceMotion) {
@@ -1490,39 +1679,6 @@
     els.forEach((e) => io.observe(e));
   })();
 
-  // ===========================================================
-  //  Early access form (unchanged endpoint)
-  // ===========================================================
-  (function () {
-    const form = document.getElementById('early-access-form');
-    const status = document.getElementById('early-access-status');
-    const submitBtn = document.getElementById('early-access-submit');
-    if (!form) return;
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = form.email.value.trim();
-      if (!email) return;
-      submitBtn.disabled = true;
-      status.textContent = 'Joining…';
-      try {
-        const res = await fetch('/api/early-access', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email })
-        });
-        if (res.ok) {
-          status.textContent = 'You\'re on the list. Welcome to the Shadow.';
-          form.reset();
-        } else {
-          status.textContent = 'Something went wrong — please email info@jeffereyai.com';
-        }
-      } catch (err) {
-        status.textContent = 'Network error — please email info@jeffereyai.com';
-      } finally {
-        submitBtn.disabled = false;
-      }
-    });
-  })();
   </script>
 </body>
 </html>
