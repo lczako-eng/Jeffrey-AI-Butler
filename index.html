@@ -709,7 +709,7 @@
             <button class="mood-chip" data-mood="sad" style="--chip:#5078c8">Sad</button>
             <button class="mood-chip" data-mood="thinking" style="--chip:#64a0ff">Thinking</button>
           </div>
-          <p class="orb-caption">Live neural state · <strong id="moodLabel">Charged</strong> · When the cloud flashes from within, Jefferey is thinking<br />Poke the orb to change his mood · Scroll or pinch to zoom into the synapses</p>
+          <p class="orb-caption">Live neural state · <strong id="moodLabel">Charged</strong> · When the cloud flashes from within, Jefferey is thinking<br />Poke Jefferey — he giggles, jumps, snaps, or sulks. Sporadically. · Scroll or pinch to zoom in</p>
         </div>
       </div>
     </section>
@@ -1442,7 +1442,7 @@
           baseA = (0.022 + near * near * 0.09) * (0.5 + tw * 0.5);
           col = mix(uP1, uP2, tone * 0.85);
         } else {
-          baseA = 0.030 + near * near * 0.12;
+          baseA = 0.010 + near * near * 0.045;
           col = mix(uC1, uP2, tone * 0.5);
         }
         // saturation pop: keep the mixture vivid, never grey
@@ -1726,24 +1726,6 @@
       wctx.clearRect(0, 0, W, H);
       wctx.globalCompositeOperation = 'lighter';
       const P = wNodes.map(n => wproj(n.p));
-      // dendrite webs — the junction wiring inside each cluster
-      wctx.lineWidth = 0.8;
-      for (let i = 0; i < wDendrites.length; i++) {
-        const a = wDendrites[i][0], b = wDendrites[i][1];
-        const near = ((P[a][2] + P[b][2]) / 2 + 1) / 2;
-        const glow = Math.max(wNodes[a].charge, wNodes[b].charge);
-        wctx.strokeStyle = wrgba(glow > 0.3 ? live.c2 : live.c1, 0.03 + near * near * 0.12 + glow * 0.3);
-        wctx.beginPath(); wctx.moveTo(P[a][0], P[a][1]); wctx.lineTo(P[b][0], P[b][1]); wctx.stroke();
-      }
-      // axon fibres — long arcs between junctions
-      wctx.lineWidth = 1.0;
-      for (let i = 0; i < axons.length; i++) {
-        const ax = axons[i];
-        const A = wproj(ax.a), Mm = wproj(ax.mid), B = wproj(ax.b);
-        const near = ((A[2] + B[2]) / 2 + 1) / 2;
-        wctx.strokeStyle = wrgba(live.c1, 0.025 + near * near * 0.12);
-        wctx.beginPath(); wctx.moveTo(A[0], A[1]); wctx.quadraticCurveTo(Mm[0], Mm[1], B[0], B[1]); wctx.stroke();
-      }
       // rare visible strikes — tinted, thin, gone in a blink
       for (let b = bolts.length - 1; b >= 0; b--) {
         const bolt = bolts[b];
@@ -1891,7 +1873,7 @@
     const flashFlat = new Float32Array(40);
 
     let rotY = 0, last = performance.now(), tGlobal = 0, fireAcc = 0;
-    let zoom = 1, kick = 0, nextKick = 2.5;
+    let zoom = 1, kick = 0, nextKick = 2.5, reaction = null;
 
     function frame(now) {
       const dt = Math.min(0.05, (now - last) / 1000);
@@ -2013,6 +1995,35 @@
         `rgba(${live.c1[0] | 0},${live.c1[1] | 0},${live.c1[2] | 0},${(0.10 + Math.max(0, breath) * 0.16).toFixed(3)})`);
       drawWires(dt);
 
+      // living reactions: the whole orb body jiggles, bounces, shakes, sulks
+      if (reaction) {
+        reaction.t += dt;
+        const rt = reaction.t, rd = reaction.dur;
+        if (rt >= rd) {
+          reaction = null;
+          frameEl.style.transform = '';
+        } else {
+          const k = 1 - rt / rd, a = reaction.amp;
+          const arc = Math.sin(Math.PI * Math.min(1, rt / rd)); // rise & settle
+          let tx = 0, ty = 0, rot = 0, sc = 1;
+          switch (reaction.type) {
+            case 'giggle': rot = 5 * a * k * Math.sin(rt * 38); sc = 1 + 0.05 * a * k * Math.sin(rt * 52); break;
+            case 'bounce': ty = -16 * a * k * Math.abs(Math.sin(rt * 10)); sc = 1 + 0.04 * a * k * Math.sin(rt * 20); break;
+            case 'wiggle': tx = 7 * a * k * Math.sin(rt * 33); rot = 3 * a * k * Math.sin(rt * 27); break;
+            case 'shake': tx = 10 * a * k * Math.sin(rt * 72); rot = 1.6 * a * k * Math.sin(rt * 81); break;
+            case 'rage': tx = 8 * a * k * Math.sin(rt * 90); ty = 4 * a * k * Math.sin(rt * 77); sc = 1 + 0.06 * a * k; break;
+            case 'recoil': sc = 1 - 0.16 * a * Math.exp(-rt * 7) * Math.cos(rt * 16); break;
+            case 'droop': ty = 12 * a * arc; rot = -4 * a * arc; sc = 1 - 0.03 * a * arc; break;
+            case 'shiver': tx = 2.5 * a * k * Math.sin(rt * 90); ty = 2 * a * k * Math.cos(rt * 95); break;
+            case 'sway': rot = 6 * a * k * Math.sin(rt * 7); break;
+            case 'tilt': rot = 8 * a * arc; tx = 4 * a * k * Math.sin(rt * 13); break;
+            case 'jolt': ty = -10 * a * Math.exp(-rt * 9); sc = 1 + 0.08 * a * Math.exp(-rt * 8) * Math.cos(rt * 30); break;
+          }
+          frameEl.style.transform =
+            'translate(' + tx.toFixed(2) + 'px,' + ty.toFixed(2) + 'px) rotate(' + rot.toFixed(2) + 'deg) scale(' + sc.toFixed(4) + ')';
+        }
+      }
+
       if (!reduceMotion) requestAnimationFrame(frame);
     }
 
@@ -2042,18 +2053,45 @@
     chips.forEach((chip) => chip.addEventListener('click', () => setMood(chip.dataset.mood)));
     frameEl.style.setProperty('--shimmer', MOODS[moodKey].sh);
 
-    // poke the orb → his mood changes, and he reacts
+    // ------------------------------------------------ poking Jefferey: he LIVES
+    // A poke picks a sporadic mood (never the same one) and triggers a
+    // physical reaction — giggle, bounce, angry shake, sulk, shiver —
+    // with randomized intensity and duration, so no two pokes feel alike.
+    const REACTIONS = {
+      happy:      ['giggle', 'bounce', 'wiggle'],
+      curious:    ['wiggle', 'tilt', 'bounce'],
+      protective: ['rage', 'shake', 'recoil'],
+      annoyed:    ['shake', 'recoil', 'rage'],
+      sad:        ['droop', 'shiver'],
+      calm:       ['sway', 'shiver', 'tilt'],
+      charged:    ['jolt', 'giggle', 'shake'],
+      thinking:   ['tilt', 'sway', 'jolt']
+    };
+    function startReaction(mood) {
+      const types = REACTIONS[mood] || ['wiggle'];
+      reaction = {
+        type: types[(R2() * types.length) | 0],
+        t: 0,
+        dur: 0.7 + R2() * 0.9,
+        amp: 0.8 + R2() * 0.6
+      };
+    }
     canvas.style.cursor = 'pointer';
     canvas.setAttribute('title', 'Poke Jefferey');
     canvas.addEventListener('click', (e) => {
       const r = canvas.getBoundingClientRect();
       const dx = e.clientX - (r.left + r.width / 2);
       const dy = e.clientY - (r.top + r.height / 2);
-      const rad = Math.min(r.width, r.height) * 0.4 * zoom;
+      const rad = Math.min(r.width, r.height) * 0.42 * zoom;
       if (dx * dx + dy * dy < rad * rad) {
-        setMood(MOOD_ORDER[(MOOD_ORDER.indexOf(moodKey) + 1) % MOOD_ORDER.length]);
+        // sporadic: any mood but the current one
+        let next = moodKey;
+        while (next === moodKey) next = MOOD_ORDER[(R2() * MOOD_ORDER.length) | 0];
+        setMood(next);
+        startReaction(next);
         for (let i = 0; i < 5; i++) spawnFlash();
         if (Math.random() < 0.6) spawnBolt();
+        kick = 1;
       }
     });
 
