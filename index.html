@@ -301,7 +301,7 @@
 
     /* --- Orb stage --- */
     .orb-stage { position: relative; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-    .orb-frame { position: relative; width: min(480px, 92vw); aspect-ratio: 1; }
+    .orb-frame { position: relative; width: min(560px, 94vw); aspect-ratio: 1; }
     #orbCanvas { width: 100%; height: 100%; display: block; }
     .orb-caption {
       text-align: center; font-size: 0.78rem; color: var(--dim); letter-spacing: 0.14em;
@@ -1002,10 +1002,14 @@
 
   <script>
   // ===========================================================
-  //  THE NEURAL ORB — a living synaptic sphere
-  //  ~420 neurons on a fibonacci sphere · nearest-neighbour
-  //  synapses · travelling firing pulses · mood-driven colour,
-  //  tempo and posture · breathing · pointer attention
+  //  THE NEURAL ORB v2 — a breathing cosmic organ
+  //  · starfield space environment with parallax
+  //  · ~1500 nebula dust particles forming the organ's plasma body
+  //  · 64 neuron clusters: junction core + dendrite members
+  //  · long-range axons between clusters, travelling pulses,
+  //    cascade burst firing inside the receiving cluster
+  //  · organ breathing (double lub-dub pulse) + surface undulation
+  //  · mood-driven colour, tempo, tremor and posture
   // ===========================================================
   (function () {
     const canvas = document.getElementById('orbCanvas');
@@ -1013,57 +1017,25 @@
     const ctx = canvas.getContext('2d');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // ---------- geometry ----------
-    const N = 420;            // neurons
-    const LINK_DIST = 0.34;   // neighbour threshold on unit sphere
-    const nodes = [];
-    const links = [];
-
-    // fibonacci sphere distribution
-    const GA = Math.PI * (3 - Math.sqrt(5));
-    for (let i = 0; i < N; i++) {
-      const y = 1 - (i / (N - 1)) * 2;
-      const r = Math.sqrt(1 - y * y);
-      const th = GA * i;
-      nodes.push({
-        x: Math.cos(th) * r, y: y, z: Math.sin(th) * r,
-        // per-neuron character
-        phase: Math.random() * Math.PI * 2,
-        flicker: 0.5 + Math.random() * 0.5,
-        charge: 0
-      });
-    }
-    for (let i = 0; i < N; i++) {
-      for (let j = i + 1; j < N; j++) {
-        const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y, dz = nodes[i].z - nodes[j].z;
-        const d = Math.sqrt(dx * dx + dy * dy + dz * dz);
-        if (d < LINK_DIST) links.push({ a: i, b: j, d });
-      }
-    }
-    // adjacency for pulse propagation
-    const adj = Array.from({ length: N }, () => []);
-    links.forEach((l, idx) => { adj[l.a].push(idx); adj[l.b].push(idx); });
-
-    // ---------- moods ----------
-    // Each mood: core colours [r,g,b], secondary, tempo multipliers, posture
+    // ------------------------------------------------ moods
     const MOODS = {
-      calm:       { c1: [79, 216, 232],  c2: [120, 190, 255], fire: 0.35, spin: 0.45, breathe: 1.6, jitter: 0,    sag: 0,    label: 'Calm' },
-      charged:    { c1: [139, 123, 255], c2: [95, 217, 234],  fire: 1.0,  spin: 1.0,  breathe: 1.0, jitter: 0,    sag: 0,    label: 'Charged' },
-      curious:    { c1: [244, 193, 105], c2: [255, 226, 168], fire: 1.35, spin: 1.5,  breathe: 0.9, jitter: 0.15, sag: 0,    label: 'Curious' },
-      protective: { c1: [255, 106, 77],  c2: [255, 170, 90],  fire: 2.2,  spin: 1.9,  breathe: 0.55, jitter: 0.8, sag: 0,    label: 'Protective' },
-      sad:        { c1: [90, 124, 255],  c2: [70, 90, 180],   fire: 0.18, spin: 0.28, breathe: 2.2, jitter: 0,    sag: 0.22, label: 'Sad' }
+      calm:       { c1: [79, 216, 232],  c2: [150, 235, 255], c3: [40, 120, 190],  fire: 0.35, spin: 0.4,  breathe: 1.7,  jitter: 0,    sag: 0,    label: 'Calm' },
+      charged:    { c1: [139, 123, 255], c2: [190, 175, 255], c3: [70, 160, 220],  fire: 1.0,  spin: 1.0,  breathe: 1.0,  jitter: 0,    sag: 0,    label: 'Charged' },
+      curious:    { c1: [244, 193, 105], c2: [255, 230, 170], c3: [230, 120, 160], fire: 1.4,  spin: 1.55, breathe: 0.85, jitter: 0.12, sag: 0,    label: 'Curious' },
+      protective: { c1: [255, 106, 77],  c2: [255, 200, 120], c3: [200, 40, 90],   fire: 2.4,  spin: 1.9,  breathe: 0.5,  jitter: 0.9,  sag: 0,    label: 'Protective' },
+      sad:        { c1: [90, 124, 255],  c2: [140, 160, 255], c3: [40, 55, 140],   fire: 0.16, spin: 0.26, breathe: 2.3,  jitter: 0,    sag: 0.24, label: 'Sad' }
     };
     let moodKey = 'charged';
-    // live interpolated state
-    const live = { c1: [...MOODS.charged.c1], c2: [...MOODS.charged.c2], fire: 1, spin: 1, breathe: 1, jitter: 0, sag: 0 };
-
-    function lerp(a, b, t) { return a + (b - a) * t; }
+    const live = { c1: [...MOODS.charged.c1], c2: [...MOODS.charged.c2], c3: [...MOODS.charged.c3],
+                   fire: 1, spin: 1, breathe: 1, jitter: 0, sag: 0 };
+    const lerp = (a, b, t) => a + (b - a) * t;
     function stepLive(dt) {
       const m = MOODS[moodKey];
-      const k = Math.min(1, dt * 1.6); // ~600ms half-life colour glide
+      const k = Math.min(1, dt * 1.5);
       for (let i = 0; i < 3; i++) {
         live.c1[i] = lerp(live.c1[i], m.c1[i], k);
         live.c2[i] = lerp(live.c2[i], m.c2[i], k);
+        live.c3[i] = lerp(live.c3[i], m.c3[i], k);
       }
       live.fire = lerp(live.fire, m.fire, k);
       live.spin = lerp(live.spin, m.spin, k);
@@ -1071,32 +1043,136 @@
       live.jitter = lerp(live.jitter, m.jitter, k);
       live.sag = lerp(live.sag, m.sag, k);
     }
-    function rgba(c, a) { return `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`; }
+    const rgba = (c, a) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+    const mix = (a, b, t) => [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)];
 
-    // ---------- pulses (synapse firings) ----------
-    const pulses = []; // {link, t, dir, hops}
-    function firePulse(fromNode, hops) {
-      const options = adj[fromNode];
-      if (!options.length) return;
-      const li = options[(Math.random() * options.length) | 0];
-      const l = links[li];
-      pulses.push({ link: li, t: 0, dir: l.a === fromNode ? 1 : -1, hops: hops });
-      nodes[fromNode].charge = 1;
+    // ------------------------------------------------ anatomy
+    // Cluster cores on a fibonacci sphere; each core surrounded by
+    // dendrite members — "the neuron junction within the cluster".
+    const CLUSTERS = 64;
+    const nodes = [];        // {x,y,z, cluster, core, phase, flicker, charge}
+    const dendrites = [];    // short links inside a cluster {a,b}
+    const axons = [];        // long links between cluster cores {a,b}
+    const clusterCore = [];  // node index of each cluster core
+    const clusterMembers = []; // arrays of node indices per cluster
+
+    const GA = Math.PI * (3 - Math.sqrt(5));
+    function norm3(v) {
+      const l = Math.hypot(v[0], v[1], v[2]) || 1;
+      return [v[0] / l, v[1] / l, v[2] / l];
+    }
+    for (let c = 0; c < CLUSTERS; c++) {
+      const y = 1 - (c / (CLUSTERS - 1)) * 2;
+      const r = Math.sqrt(1 - y * y);
+      const th = GA * c;
+      const core = norm3([Math.cos(th) * r, y, Math.sin(th) * r]);
+      const coreIdx = nodes.length;
+      clusterCore.push(coreIdx);
+      nodes.push({ x: core[0], y: core[1], z: core[2], cluster: c, core: true,
+                   phase: Math.random() * 6.283, flicker: 0.4 + Math.random() * 0.5, charge: 0 });
+      const members = [];
+      const M = 7 + ((Math.random() * 4) | 0);
+      for (let m = 0; m < M; m++) {
+        const off = [ (Math.random() - 0.5), (Math.random() - 0.5), (Math.random() - 0.5) ];
+        const spread = 0.09 + Math.random() * 0.10;
+        const p = norm3([ core[0] + off[0] * spread * 2.2,
+                          core[1] + off[1] * spread * 2.2,
+                          core[2] + off[2] * spread * 2.2 ]);
+        const idx = nodes.length;
+        members.push(idx);
+        nodes.push({ x: p[0], y: p[1], z: p[2], cluster: c, core: false,
+                     phase: Math.random() * 6.283, flicker: 0.5 + Math.random() * 0.7, charge: 0 });
+        dendrites.push({ a: coreIdx, b: idx });
+        if (m > 0 && Math.random() < 0.55) {
+          dendrites.push({ a: members[(Math.random() * m) | 0], b: idx });
+        }
+      }
+      clusterMembers.push(members);
+    }
+    // axons: connect each core to its 3 nearest cores (dedup)
+    const axonKey = new Set();
+    for (let c = 0; c < CLUSTERS; c++) {
+      const ci = clusterCore[c], cn = nodes[ci];
+      const dists = [];
+      for (let o = 0; o < CLUSTERS; o++) {
+        if (o === c) continue;
+        const oi = clusterCore[o], on = nodes[oi];
+        dists.push([ (cn.x - on.x) ** 2 + (cn.y - on.y) ** 2 + (cn.z - on.z) ** 2, o ]);
+      }
+      dists.sort((p, q) => p[0] - q[0]);
+      for (let k = 0; k < 3; k++) {
+        const o = dists[k][1];
+        const key = c < o ? c + '-' + o : o + '-' + c;
+        if (!axonKey.has(key)) {
+          axonKey.add(key);
+          axons.push({ a: clusterCore[c], b: clusterCore[o], ca: c, cb: o });
+        }
+      }
+    }
+    const clusterAxons = Array.from({ length: CLUSTERS }, () => []);
+    axons.forEach((ax, i) => { clusterAxons[ax.ca].push(i); clusterAxons[ax.cb].push(i); });
+
+    // ------------------------------------------------ nebula dust
+    const DUST = 2300;
+    const dust = [];
+    for (let i = 0; i < DUST; i++) {
+      // biased to a thick living shell
+      const u = Math.random();
+      const rad = 0.42 + Math.pow(u, 0.6) * 0.62;   // 0.42 .. 1.04
+      let v = norm3([Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5]);
+      dust.push({
+        dx: v[0], dy: v[1], dz: v[2], rad,
+        size: 0.9 + Math.random() * 2.1,
+        tone: Math.random(),                 // 0 = c3 deep, 1 = c1 bright
+        phase: Math.random() * 6.283,
+        wob: 0.4 + Math.random() * 1.1,
+        orbit: (Math.random() - 0.5) * 0.14  // slow individual drift around axis
+      });
     }
 
-    // ---------- sizing ----------
+    // ------------------------------------------------ starfield
+    let starCanvas = null;
+    function buildStars(w, h, dpr) {
+      starCanvas = document.createElement('canvas');
+      starCanvas.width = w * dpr; starCanvas.height = h * dpr;
+      const sc = starCanvas.getContext('2d');
+      sc.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const COUNT = Math.floor((w * h) / 2600);
+      for (let i = 0; i < COUNT; i++) {
+        const x = Math.random() * w, y = Math.random() * h;
+        const s = Math.random();
+        const size = s < 0.85 ? 0.6 + s : 1.4 + Math.random() * 1.1;
+        const a = 0.12 + Math.random() * 0.55;
+        const tint = Math.random();
+        sc.fillStyle = tint < 0.75 ? `rgba(220,228,255,${a})`
+                     : tint < 0.9 ? `rgba(160,200,255,${a})`
+                     : `rgba(255,215,180,${a})`;
+        sc.beginPath(); sc.arc(x, y, size / 2, 0, 6.283); sc.fill();
+        if (s > 0.965) { // rare bright star with cross glint
+          sc.strokeStyle = `rgba(220,228,255,${a * 0.35})`;
+          sc.lineWidth = 0.6;
+          sc.beginPath();
+          sc.moveTo(x - size * 3, y); sc.lineTo(x + size * 3, y);
+          sc.moveTo(x, y - size * 3); sc.lineTo(x, y + size * 3);
+          sc.stroke();
+        }
+      }
+    }
+
+    // ------------------------------------------------ sizing
     let W = 0, H = 0, DPR = 1;
     function resize() {
-      DPR = Math.min(window.devicePixelRatio || 1, 2);
+      DPR = Math.min(window.devicePixelRatio || 1, 1.75);
       const rect = canvas.parentElement.getBoundingClientRect();
       W = rect.width; H = rect.height;
       canvas.width = W * DPR; canvas.height = H * DPR;
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      buildStars(W, H, DPR);
     }
     resize();
     window.addEventListener('resize', resize);
 
-    // ---------- pointer attention ----------
+    // ------------------------------------------------ pointer attention
     const look = { tx: 0, ty: 0, x: 0, y: 0 };
     window.addEventListener('mousemove', (e) => {
       const r = canvas.getBoundingClientRect();
@@ -1105,171 +1181,251 @@
       look.ty = Math.max(-1, Math.min(1, (e.clientY - cy) / (r.height * 0.9)));
     });
 
-    // ---------- render ----------
-    let rotY = 0, rotX = -0.28, last = performance.now(), tGlobal = 0;
-    let fireAcc = 0;
+    // ------------------------------------------------ firing system
+    const pulses = [];   // travelling along axons {axon, t, dir}
+    const bursts = [];   // cascade inside a cluster {cluster, t}
+    function fireAxonFrom(clusterIdx) {
+      const options = clusterAxons[clusterIdx];
+      if (!options.length) return;
+      const ai = options[(Math.random() * options.length) | 0];
+      const ax = axons[ai];
+      pulses.push({ axon: ai, t: 0, dir: ax.ca === clusterIdx ? 1 : -1 });
+      nodes[clusterCore[clusterIdx]].charge = 1;
+    }
+    function burstCluster(clusterIdx) {
+      bursts.push({ cluster: clusterIdx, t: 0 });
+      nodes[clusterCore[clusterIdx]].charge = 1;
+    }
+
+    // ------------------------------------------------ breathing (organ)
+    // lub-dub: two-beat organic pulse like a living organ
+    function organBreath(t) {
+      const T = 3.4 * live.breathe;             // full cycle seconds
+      const ph = (t % T) / T;                   // 0..1
+      const beat1 = Math.exp(-Math.pow((ph - 0.18) * 9, 2));
+      const beat2 = Math.exp(-Math.pow((ph - 0.42) * 11, 2)) * 0.55;
+      const slow = Math.sin(ph * 6.283) * 0.25;
+      return (beat1 + beat2) * 0.75 + slow * 0.4;
+    }
+
+    // ------------------------------------------------ render
+    let rotY = 0, last = performance.now(), tGlobal = 0, fireAcc = 0;
 
     function frame(now) {
       const dt = Math.min(0.05, (now - last) / 1000);
-      last = now;
-      tGlobal += dt;
+      last = now; tGlobal += dt;
       stepLive(dt);
 
-      // attention easing
       look.x += (look.tx - look.x) * 0.04;
       look.y += (look.ty - look.y) * 0.04;
 
-      rotY += dt * 0.22 * live.spin;
-      const targetRotX = -0.28 + look.y * 0.35;
+      rotY += dt * 0.2 * live.spin;
+      const rx = -0.26 + look.y * 0.32;
+      const cosY = Math.cos(rotY + look.x * 0.45), sinY = Math.sin(rotY + look.x * 0.45);
+      const cosX = Math.cos(rx), sinX = Math.sin(rx);
 
       const cx = W / 2, cy = H / 2;
-      const R = Math.min(W, H) * 0.335;
-      const breathe = 1 + Math.sin(tGlobal * (1.2 / live.breathe)) * 0.028 * live.breathe;
-      const scale = R * breathe;
-      const persp = 3.2;
+      const breath = organBreath(tGlobal);
+      const scale = Math.min(W, H) * 0.335 * (1 + breath * 0.045 * live.breathe);
+      const persp = 3.1;
 
       ctx.clearRect(0, 0, W, H);
 
-      // ---- halo ----
-      const halo = ctx.createRadialGradient(cx, cy, scale * 0.2, cx, cy, scale * 2.1);
-      halo.addColorStop(0, rgba(live.c1, 0.16));
-      halo.addColorStop(0.45, rgba(live.c1, 0.055));
+      // ---- space ----
+      if (starCanvas) {
+        ctx.save();
+        ctx.globalAlpha = 0.9;
+        ctx.drawImage(starCanvas, -look.x * 9, -look.y * 9, W, H);
+        ctx.restore();
+      }
+
+      // ---- deep halo (organ aura) ----
+      const halo = ctx.createRadialGradient(cx, cy, scale * 0.15, cx, cy, scale * 2.3);
+      halo.addColorStop(0, rgba(live.c1, 0.26 + breath * 0.07));
+      halo.addColorStop(0.4, rgba(live.c3, 0.07));
       halo.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = halo;
       ctx.fillRect(0, 0, W, H);
 
-      // ---- project ----
-      const cosY = Math.cos(rotY + look.x * 0.5), sinY = Math.sin(rotY + look.x * 0.5);
-      const rx = targetRotX;
-      const cosX = Math.cos(rx), sinX = Math.sin(rx);
-      const proj = new Array(N);
+      // additive from here — this is what gives the nebula its intensity
+      ctx.globalCompositeOperation = 'lighter';
 
-      for (let i = 0; i < N; i++) {
-        const n = nodes[i];
-        let x = n.x, y = n.y, z = n.z;
-        // sadness: sphere sags downward, slightly deflated
+      const projN = new Array(nodes.length);
+
+      function project(x, y, z) {
+        // posture: sadness sags & deflates
         if (live.sag > 0.005) {
           y = y - live.sag * 0.35 * (1 - y * y);
-          x *= (1 - live.sag * 0.12);
-          z *= (1 - live.sag * 0.12);
+          x *= (1 - live.sag * 0.12); z *= (1 - live.sag * 0.12);
         }
-        // protective: tremor
-        if (live.jitter > 0.01) {
-          x += (Math.random() - 0.5) * 0.012 * live.jitter;
-          y += (Math.random() - 0.5) * 0.012 * live.jitter;
-        }
-        // rotate Y then X
-        let x1 = x * cosY + z * sinY;
-        let z1 = -x * sinY + z * cosY;
-        let y1 = y * cosX - z1 * sinX;
-        let z2 = y * sinX + z1 * cosX;
+        const x1 = x * cosY + z * sinY;
+        const z1 = -x * sinY + z * cosY;
+        const y1 = y * cosX - z1 * sinX;
+        const z2 = y * sinX + z1 * cosX;
         const f = persp / (persp - z2);
-        proj[i] = { sx: cx + x1 * scale * f, sy: cy + y1 * scale * f, depth: z2, f };
-        // decay charge
-        n.charge *= Math.pow(0.25, dt * 2.2);
+        return [cx + x1 * scale * f, cy + y1 * scale * f, z2];
       }
 
-      // ---- links ----
-      ctx.lineWidth = 1;
-      for (let li = 0; li < links.length; li++) {
-        const l = links[li];
-        const A = proj[l.a], B = proj[l.b];
-        const depth = (A.depth + B.depth) / 2;             // -1 (back) .. 1 (front)
-        const near = (depth + 1) / 2;                      // 0..1
-        const alpha = 0.04 + near * near * 0.15;
-        ctx.strokeStyle = rgba(live.c1, alpha);
-        ctx.beginPath();
-        ctx.moveTo(A.sx, A.sy);
-        ctx.lineTo(B.sx, B.sy);
-        ctx.stroke();
+      // ---- nebula dust (the organ's plasma flesh) ----
+      const undA = 0.045 + breath * 0.02; // surface undulation amplitude
+      for (let i = 0; i < DUST; i++) {
+        const d = dust[i];
+        // slow personal orbit around Y axis + radial undulation = living tissue
+        const ang = tGlobal * d.orbit;
+        const ca = Math.cos(ang), sa = Math.sin(ang);
+        const px = d.dx * ca + d.dz * sa;
+        const pz = -d.dx * sa + d.dz * ca;
+        const und = 1 + Math.sin(tGlobal * d.wob + d.phase) * undA;
+        let r = d.rad * und;
+        const P = project(px * r, d.dy * r, pz * r);
+        const near = (P[2] + 1) / 2;
+        const tone = mix(live.c3, live.c1, d.tone * (0.35 + near * 0.65));
+        const tw = 0.5 + 0.5 * Math.sin(tGlobal * d.wob * 1.7 + d.phase);
+        const a = (0.10 + near * near * 0.42) * (0.5 + tw * 0.5);
+        const s = d.size * (0.6 + near * 1.05);
+        ctx.fillStyle = rgba(tone, a);
+        ctx.fillRect(P[0] - s / 2, P[1] - s / 2, s, s);
       }
 
-      // ---- pulses ----
-      const pulseSpeed = 1.6 * (0.6 + live.fire * 0.6);
+      // ---- dendrites (junction webs inside each cluster) ----
+      ctx.lineWidth = 0.8;
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+        let jx = 0, jy = 0;
+        if (live.jitter > 0.01) {
+          jx = (Math.random() - 0.5) * 0.011 * live.jitter;
+          jy = (Math.random() - 0.5) * 0.011 * live.jitter;
+        }
+        projN[i] = project(n.x + jx, n.y + jy, n.z);
+        n.charge *= Math.pow(0.22, dt * 2.0);
+      }
+      for (let i = 0; i < dendrites.length; i++) {
+        const l = dendrites[i];
+        const A = projN[l.a], B = projN[l.b];
+        const near = ((A[2] + B[2]) / 2 + 1) / 2;
+        const glow = Math.max(nodes[l.a].charge, nodes[l.b].charge);
+        const alpha = 0.05 + near * near * 0.22 + glow * 0.40;
+        ctx.strokeStyle = rgba(glow > 0.3 ? live.c2 : live.c1, alpha);
+        ctx.beginPath(); ctx.moveTo(A[0], A[1]); ctx.lineTo(B[0], B[1]); ctx.stroke();
+      }
+
+      // ---- axons (long-range fibres between junctions) ----
+      ctx.lineWidth = 1.1;
+      for (let i = 0; i < axons.length; i++) {
+        const l = axons[i];
+        const A = projN[l.a], B = projN[l.b];
+        const near = ((A[2] + B[2]) / 2 + 1) / 2;
+        ctx.strokeStyle = rgba(live.c1, 0.07 + near * near * 0.28);
+        ctx.beginPath(); ctx.moveTo(A[0], A[1]); ctx.lineTo(B[0], B[1]); ctx.stroke();
+      }
+
+      // ---- travelling pulses along axons ----
+      const pulseSpeed = 1.35 * (0.6 + live.fire * 0.55);
       for (let p = pulses.length - 1; p >= 0; p--) {
         const pu = pulses[p];
         pu.t += dt * pulseSpeed;
-        const l = links[pu.link];
-        const from = pu.dir === 1 ? l.a : l.b;
-        const to = pu.dir === 1 ? l.b : l.a;
+        const ax = axons[pu.axon];
+        const fromI = pu.dir === 1 ? ax.a : ax.b;
+        const toI = pu.dir === 1 ? ax.b : ax.a;
+        const toCluster = pu.dir === 1 ? ax.cb : ax.ca;
         if (pu.t >= 1) {
-          nodes[to].charge = 1;
-          if (pu.hops > 0 && Math.random() < 0.82) firePulse(to, pu.hops - 1);
+          burstCluster(toCluster);
+          if (Math.random() < 0.6) fireAxonFrom(toCluster);
           pulses.splice(p, 1);
           continue;
         }
-        const A = proj[from], B = proj[to];
-        const px = A.sx + (B.sx - A.sx) * pu.t;
-        const py = A.sy + (B.sy - A.sy) * pu.t;
-        const depth = (A.depth + B.depth) / 2;
-        const near = (depth + 1) / 2;
-        const sizeP = 1.4 + near * 2.4;
-        const g = ctx.createRadialGradient(px, py, 0, px, py, sizeP * 4);
-        g.addColorStop(0, rgba(live.c2, 0.85 * (0.35 + near * 0.65)));
+        const A = projN[fromI], B = projN[toI];
+        const px = A[0] + (B[0] - A[0]) * pu.t;
+        const py = A[1] + (B[1] - A[1]) * pu.t;
+        const near = ((A[2] + B[2]) / 2 + 1) / 2;
+        const sz = 1.6 + near * 2.6;
+        const g = ctx.createRadialGradient(px, py, 0, px, py, sz * 5);
+        g.addColorStop(0, rgba(live.c2, 0.9 * (0.3 + near * 0.7)));
         g.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.fillStyle = g;
-        ctx.beginPath();
-        ctx.arc(px, py, sizeP * 4, 0, Math.PI * 2);
-        ctx.fill();
-        // bright core of the pulse
-        ctx.fillStyle = rgba([255, 255, 255], 0.7 * near + 0.15);
-        ctx.beginPath();
-        ctx.arc(px, py, sizeP * 0.8, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.beginPath(); ctx.arc(px, py, sz * 5, 0, 6.283); ctx.fill();
+        ctx.fillStyle = 'rgba(255,255,255,' + (0.25 + near * 0.6) + ')';
+        ctx.beginPath(); ctx.arc(px, py, sz * 0.7, 0, 6.283); ctx.fill();
+        // comet tail
+        const tx = A[0] + (B[0] - A[0]) * Math.max(0, pu.t - 0.09);
+        const ty = A[1] + (B[1] - A[1]) * Math.max(0, pu.t - 0.09);
+        ctx.strokeStyle = rgba(live.c2, 0.35 * near + 0.08);
+        ctx.lineWidth = 1.6;
+        ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(px, py); ctx.stroke();
+        ctx.lineWidth = 1.1;
+      }
+
+      // ---- cluster bursts (cascade inside the junction) ----
+      for (let b = bursts.length - 1; b >= 0; b--) {
+        const bu = bursts[b];
+        bu.t += dt * 1.5;
+        const members = clusterMembers[bu.cluster];
+        const litCount = Math.min(members.length, Math.floor(bu.t * members.length * 1.4));
+        for (let m = 0; m < litCount; m++) nodes[members[m]].charge = Math.max(nodes[members[m]].charge, 0.85);
+        if (bu.t > 1) bursts.splice(b, 1);
       }
 
       // ---- neurons ----
-      for (let i = 0; i < N; i++) {
-        const P = proj[i];
+      for (let i = 0; i < nodes.length; i++) {
+        const P = projN[i];
         const n = nodes[i];
-        const near = (P.depth + 1) / 2;
+        const near = (P[2] + 1) / 2;
         const twinkle = 0.55 + 0.45 * Math.sin(tGlobal * n.flicker * 2 + n.phase);
-        const base = 0.14 + near * near * 0.5;
-        const a = Math.min(1, base * twinkle + n.charge * 0.9);
-        const size = (0.7 + near * 1.5) * (1 + n.charge * 1.6);
+        const base = n.core ? 0.30 + near * near * 0.60 : 0.14 + near * near * 0.50;
+        const a = Math.min(1, base * twinkle + n.charge);
+        const size = (n.core ? 1.5 + near * 2.1 : 0.6 + near * 1.2) * (1 + n.charge * 1.7);
         ctx.fillStyle = n.charge > 0.25 ? rgba(live.c2, a) : rgba(live.c1, a);
-        ctx.beginPath();
-        ctx.arc(P.sx, P.sy, size, 0, Math.PI * 2);
-        ctx.fill();
-        if (n.charge > 0.5) { // firing glow
-          const g = ctx.createRadialGradient(P.sx, P.sy, 0, P.sx, P.sy, size * 6);
-          g.addColorStop(0, rgba(live.c2, 0.35 * n.charge));
+        ctx.beginPath(); ctx.arc(P[0], P[1], size, 0, 6.283); ctx.fill();
+        if (n.core || n.charge > 0.5) {
+          const gs = size * (n.core ? 5 : 6);
+          const g = ctx.createRadialGradient(P[0], P[1], 0, P[0], P[1], gs);
+          g.addColorStop(0, rgba(live.c2, (n.core ? 0.10 : 0) + 0.38 * n.charge + (n.core ? 0.05 : 0)));
           g.addColorStop(1, 'rgba(0,0,0,0)');
           ctx.fillStyle = g;
-          ctx.beginPath();
-          ctx.arc(P.sx, P.sy, size * 6, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.beginPath(); ctx.arc(P[0], P[1], gs, 0, 6.283); ctx.fill();
         }
       }
 
-      // ---- inner core glow ----
-      const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, scale * 0.85);
-      core.addColorStop(0, rgba(live.c1, 0.12 + Math.sin(tGlobal * 1.4) * 0.02));
-      core.addColorStop(0.6, rgba(live.c1, 0.04));
-      core.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = core;
-      ctx.beginPath();
-      ctx.arc(cx, cy, scale * 0.85, 0, Math.PI * 2);
-      ctx.fill();
+      // ---- limb glow: the organ's silhouette against space ----
+      const limb = ctx.createRadialGradient(cx, cy, scale * 0.82, cx, cy, scale * 1.16);
+      limb.addColorStop(0, 'rgba(0,0,0,0)');
+      limb.addColorStop(0.55, rgba(live.c1, 0.10 + breath * 0.04));
+      limb.addColorStop(0.72, rgba(live.c2, 0.05));
+      limb.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = limb;
+      ctx.beginPath(); ctx.arc(cx, cy, scale * 1.16, 0, 6.283); ctx.fill();
+
+      // ---- inner heart glow, beats with the breath ----
+      const heart = ctx.createRadialGradient(cx, cy, 0, cx, cy, scale * 0.9);
+      heart.addColorStop(0, rgba(live.c1, 0.15 + breath * 0.09));
+      heart.addColorStop(0.55, rgba(live.c3, 0.05));
+      heart.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = heart;
+      ctx.beginPath(); ctx.arc(cx, cy, scale * 0.9, 0, 6.283); ctx.fill();
+
+      ctx.globalCompositeOperation = 'source-over';
 
       // ---- spawn firings ----
-      fireAcc += dt * live.fire * 3.2;
+      fireAcc += dt * live.fire * 2.6;
       while (fireAcc > 1) {
         fireAcc -= 1;
-        firePulse((Math.random() * N) | 0, 2 + ((Math.random() * 3) | 0));
+        fireAxonFrom((Math.random() * CLUSTERS) | 0);
       }
 
       if (!reduceMotion) requestAnimationFrame(frame);
     }
 
+    // warm start — the organ is already alive when you arrive
+    for (let i = 0; i < 12; i++) fireAxonFrom((Math.random() * CLUSTERS) | 0);
+    for (let i = 0; i < 7; i++) burstCluster((Math.random() * CLUSTERS) | 0);
     if (reduceMotion) {
-      // render a single elegant static frame
-      stepLive(1); frame(performance.now());
+      stepLive(1);
+      frame(performance.now());
     } else {
       requestAnimationFrame(frame);
     }
 
-    // ---------- mood chips ----------
+    // ------------------------------------------------ mood chips
     const chips = document.querySelectorAll('.mood-chip');
     const label = document.getElementById('moodLabel');
     chips.forEach((chip) => {
@@ -1278,8 +1434,8 @@
         chip.classList.add('active');
         moodKey = chip.dataset.mood;
         if (label) label.textContent = MOODS[moodKey].label;
-        // burst of activity on mood change
-        for (let i = 0; i < 8; i++) firePulse((Math.random() * N) | 0, 3);
+        for (let i = 0; i < 6; i++) fireAxonFrom((Math.random() * CLUSTERS) | 0);
+        for (let i = 0; i < 3; i++) burstCluster((Math.random() * CLUSTERS) | 0);
       });
     });
   })();
