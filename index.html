@@ -403,6 +403,16 @@
       font-size: 1.1rem;
     }
 
+    /* Priority hierarchy strip */
+    .hier { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 34px; }
+    .hier-chip {
+      font-family: var(--font-display); font-weight: 600; font-size: 0.82rem;
+      letter-spacing: 0.05em; padding: 9px 18px; border-radius: 999px;
+      color: var(--text); border: 1px solid var(--line-bright);
+      background: linear-gradient(120deg, rgba(139,123,255,0.10), rgba(79,216,232,0.06));
+    }
+    .hier-note { font-size: 0.8rem; color: var(--dim); }
+
     /* Chat comparison */
     .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
     @media (max-width: 880px) { .compare { grid-template-columns: 1fr; } }
@@ -461,6 +471,20 @@
     .opp-info span { font-size: 0.78rem; color: var(--dim); }
     .opp-val { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--teal); white-space: nowrap; }
     .opp-val.risk { color: var(--ember); }
+
+    /* Opportunity loop list */
+    .loop-list {
+      margin: 0; padding: 0 0 0 2px; list-style: none; counter-reset: loop;
+    }
+    .loop-list li {
+      counter-increment: loop; position: relative; padding: 7px 0 7px 40px;
+      color: var(--muted); font-size: 0.88rem;
+    }
+    .loop-list li::before {
+      content: "0" counter(loop); position: absolute; left: 0; top: 7px;
+      font-family: var(--font-display); font-weight: 700; font-size: 0.78rem;
+      color: var(--teal); letter-spacing: 0.08em;
+    }
 
     /* Layer diagram */
     .layer-diagram {
@@ -636,11 +660,12 @@
       <div class="container hero-grid">
         <div>
           <p class="kicker">Personal AI Shadow™ · Digital Conscience</p>
-          <h1 id="hero-title">Your Shadow.<br />Your Butler.<br /><span class="grad-text">Your Soul.</span></h1>
+          <h1 id="hero-title">The AI that doesn't answer you.<br /><span class="grad-text">It represents you.</span></h1>
           <p class="hero-sub">
-            JEFFEREY™ is the world's first Personal AI Shadow™ — a private, lifelong digital twin that
-            learns <em>why</em> you make decisions and quietly runs your world. Not a chatbot. Not an app.
-            Not “an assistant.”
+            JEFFEREY™ is your lifelong AI representative — the world's first Personal AI Shadow™.
+            It learns <em>why</em> you make decisions — your priorities, not just your preferences —
+            and quietly works to improve your life every day, within permissions you control.
+            Not a chatbot. Not an app. Not “an assistant.”
           </p>
           <p class="hero-oath">Jeff ALWAYS puts your best interest first.<br /><em>The intelligence is rented — the conscience is owned.</em></p>
           <div class="hero-ctas">
@@ -677,7 +702,7 @@
     <div class="statement reveal">
       <div class="container">
         <p><span class="own">JEFFEREY IS EVERYWHERE.</span></p>
-        <p class="roles">Shadow&nbsp;·&nbsp;Butler&nbsp;·&nbsp;Operator&nbsp;·&nbsp;Companion&nbsp;·&nbsp;Protector</p>
+        <p class="roles">Shadow&nbsp;·&nbsp;Operator&nbsp;·&nbsp;Companion&nbsp;·&nbsp;Protector&nbsp;·&nbsp;Representative</p>
         <p class="roles-sub">Where the orb appears, Jeff is there. One human. One shadow.</p>
       </div>
     </div>
@@ -730,19 +755,20 @@
     </section>
 
     <!-- =========================================================
-         BUTLER LAYER + PRIVACY SKELETON — THE ORIGINAL MESSAGE
+         MISSION + PRIVACY SKELETON
     ========================================================== -->
-    <section class="section tight" aria-label="The Butler layer and privacy">
+    <section class="section tight" aria-label="Mission and privacy">
       <div class="container">
         <div class="grid cols-2">
           <div class="card reveal" style="padding: 34px 30px;">
-            <p class="kicker" style="margin-bottom: 16px;">The Butler execution layer</p>
-            <h3 style="font-size: 1.4rem;">Calm. Articulate. Composed.<br />Loyal. Analytical. Subtly witty.</h3>
+            <p class="kicker" style="margin-bottom: 16px;">The mission</p>
+            <h3 style="font-size: 1.4rem;">Earn trust. Represent one person.<br />For life.</h3>
             <p style="margin-top: 10px;">
-              Jeff behaves with the precision, tone, and loyalty of a British-style personal butler.
-              This is not a gimmick — it is an operational interface philosophy.
-              <strong style="color: var(--text); display: block; margin-top: 12px;">A Shadow with the manners of a Butler is trustworthy.
-              A Butler with the intelligence of a Shadow is powerful.</strong>
+              JEFFEREY exists to earn your trust by continuously working in your best interests,
+              according to your values, while always leaving you in control.
+              <strong style="color: var(--text); display: block; margin-top: 12px;">Every feature must answer one question:
+              does this make Jeff a more trustworthy representative of the user? If yes, it belongs.
+              If no — however impressive — it doesn't.</strong>
             </p>
           </div>
           <div class="card reveal" style="padding: 34px 30px;">
@@ -772,6 +798,15 @@
             Every time you correct Jeff, he learns the value you were protecting — and stores it, with a confidence
             score you can see, in a conscience only you own.
           </p>
+        </div>
+
+        <div class="hier reveal" aria-label="Examples of learned priority hierarchies">
+          <span class="hier-chip">Safety &gt; Cost</span>
+          <span class="hier-chip">Family &gt; Career</span>
+          <span class="hier-chip">Privacy &gt; Convenience</span>
+          <span class="hier-chip">Time &gt; Money</span>
+          <span class="hier-chip">Reliability &gt; Lowest price</span>
+          <span class="hier-note">— the hierarchy is yours, learned from your corrections, ranked per context, with a confidence score on every belief</span>
         </div>
 
         <div class="compare reveal">
@@ -829,9 +864,16 @@
               better?"</em> He watches renewals, prices, deadlines, and risks — scores every opportunity against
               <strong>your</strong> priorities — and only interrupts when it's genuinely worth it.
             </p>
-            <p class="lead" style="font-size: 0.95rem;">
+            <p class="lead" style="font-size: 0.95rem; margin-bottom: 18px;">
               <strong style="color: var(--text);">Jeff doesn't interrupt. He earns the right to interrupt.</strong>
             </p>
+            <ol class="loop-list" aria-label="The Opportunity Engine's internal loop">
+              <li>What are this person's long-term goals?</li>
+              <li>Has anything changed in the world?</li>
+              <li>Does that change create an opportunity — or reduce a risk?</li>
+              <li>Can I act within the permissions I've been given?</li>
+              <li>If not — what's the best recommendation to present?</li>
+            </ol>
           </div>
           <div class="opp-feed reveal" aria-label="Example of Jeff's daily opportunity feed">
             <div class="opp-head">Today's Opportunities<span class="live">Watching</span></div>
@@ -927,6 +969,28 @@
     </section>
 
     <!-- =========================================================
+         PLATFORM AI vs JEFFEREY
+    ========================================================== -->
+    <section class="section tight" aria-labelledby="vs-title">
+      <div class="container">
+        <div class="section-head center reveal">
+          <p class="kicker">Two different species</p>
+          <h2 id="vs-title">Platform AI serves millions.<br /><span class="grad-text">JEFFEREY serves one.</span></h2>
+        </div>
+        <div class="grid cols-2 reveal">
+          <div class="card" style="padding: 32px 30px;">
+            <h3 style="color: var(--dim);">Platform AI</h3>
+            <p>Optimizes for the platform's objectives. May prioritize engagement, subscriptions, ecosystem growth. Serves millions of users with one general policy. Its memory belongs to the platform — and stays there.</p>
+          </div>
+          <div class="card" style="padding: 32px 30px; border-color: var(--line-bright);">
+            <h3><span class="grad-text">JEFFEREY</span></h3>
+            <p>Optimizes for one person. Learns that person's priorities. Explains its reasoning. Acts only within permissions. Seeks long-term trust over short-term engagement. Its conscience belongs to you — and moves with you.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
          SIX BUILDING BLOCKS
     ========================================================== -->
     <section class="section tight" aria-labelledby="blocks-title">
@@ -999,6 +1063,14 @@
             <span class="t-val">"I optimize for your interests — not an advertiser's, an affiliate commission, or another company's objectives." Jeff works for exactly one party: you.</span>
           </div>
         </div>
+        <div class="card reveal" style="margin-top: 34px; padding: 32px 30px; text-align: center;">
+          <p class="kicker" style="margin-bottom: 14px;">The product test</p>
+          <p style="font-family: var(--font-display); font-size: 1.15rem; color: var(--text); margin: 0;">
+            If JEFFEREY disappeared tomorrow, would you feel like you'd lost someone
+            who was quietly looking out for you?
+          </p>
+          <p style="margin: 10px 0 0; font-size: 0.85rem; color: var(--dim);">That's a much higher bar than "would you miss a chatbot" — and it's the bar. The category isn't personal AI. It's a digital companion that develops its own understanding of you over years.</p>
+        </div>
       </div>
     </section>
 
@@ -1026,6 +1098,29 @@
               <a href="/digital-conscience/" style="display: inline-block; margin-top: 12px;">Explore Digital Conscience →</a>
             </p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         THE BUILD ORDER — FROM THE PUBLIC SPEC
+    ========================================================== -->
+    <section class="section" aria-labelledby="build-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker">Built in the open</p>
+          <h2 id="build-title">The build order.<br /><span class="grad-text">Straight from the spec.</span></h2>
+          <p class="lead">JEFFEREY is being built against a public specification — in priority order, one proof at a time.</p>
+        </div>
+        <div class="grid cols-4 reveal">
+          <div class="card"><span class="num">01</span><h3>Digital Conscience</h3><p>The core differentiator: it learns who you are, not just what you ask.</p></div>
+          <div class="card"><span class="num">02</span><h3>Priority-Based Learning</h3><p>What matters most — with confidence scores and per-context ranking.</p></div>
+          <div class="card"><span class="num">03</span><h3>Plug-In Agent Layer</h3><p>Jeff rides Claude and GPT as an agent connector. The delivery vehicle for 01–02.</p></div>
+          <div class="card"><span class="num">04</span><h3>Operational AI</h3><p>Jeff accomplishes real tasks on your behalf, inside your permissions.</p></div>
+          <div class="card"><span class="num">05</span><h3>Emotional Orb</h3><p>The identity people remember — the state you can read without words.</p></div>
+          <div class="card"><span class="num">06</span><h3>Self-Cloud™</h3><p>The conscience comes home to hardware you physically own.</p></div>
+          <div class="card"><span class="num">07</span><h3>Digital Inheritance</h3><p>A conscience your family can keep — custody by intent, not vendor policy.</p></div>
+          <div class="card" style="border-color: var(--line-bright);"><span class="num">KPI</span><h3>One measure for v1</h3><p>Does Jeff know you better after 30 days than any other AI you've ever used?</p></div>
         </div>
       </div>
     </section>
