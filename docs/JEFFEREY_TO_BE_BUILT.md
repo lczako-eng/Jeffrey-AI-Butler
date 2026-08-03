@@ -1,6 +1,6 @@
 # JEFFEREY AI — "To Be Built" Specification
 
-**Document:** Build Specification v1.0 (Draft — Founder's Addendum pending)
+**Document:** Build Specification v1.1 (adds Founder's Addendum: the Plug-In Agent Strategy)
 **Project:** JEFFEREY — The Personal Shadow AI (Project JBX)
 **Author:** Laszlo Czako
 **Date:** August 2026
@@ -227,10 +227,11 @@ Do **not** build all patent claims at once. The MVP proves the one thing that ma
 |---|---|---|
 | 1 | **Digital Conscience** | The core differentiator. It learns *who the user is*, not just what they ask. |
 | 2 | **Priority-Based Learning** | What makes the conscience useful — it learns what matters *most*, with confidence and context. |
-| 3 | **Operational AI** | Jeff actually accomplishes tasks on the user's behalf. |
-| 4 | **Emotional Orb** | The visual identity people will remember. |
-| 5 | **Physical Sovereignty / Self-Cloud** | Extremely important — introduced after demand is proven. |
-| 6 | **Digital Inheritance** | Compelling long-term feature, not the first thing users need to experience. |
+| 3 | **Plug-In Agent Layer (Claude / GPT)** | The delivery vehicle for priorities 1–2: Jeffrey rides the biggest models as a plug-in agent, giving them his directives. Fastest route to a working Jeffrey — no model to build, host, or train. *(Added in v1.1 — see §9.)* |
+| 4 | **Operational AI** | Jeff actually accomplishes tasks on the user's behalf — through the host platform's tool/action framework at first. |
+| 5 | **Emotional Orb** | The visual identity people will remember. |
+| 6 | **Physical Sovereignty / Self-Cloud** | Extremely important — introduced after demand is proven. The plug-in phase funds and proves it; the conscience store later moves home to owned hardware. |
+| 7 | **Digital Inheritance** | Compelling long-term feature, not the first thing users need to experience. |
 
 ---
 
@@ -291,9 +292,36 @@ A note on the "friend" framing: a good friend doesn't try to control you or repl
 
 ---
 
-## 9. Founder's Addendum (Reserved)
+## 9. Founder's Addendum (v1.1) — The Plug-In Agent Strategy
 
-*This section is reserved for the founder's forthcoming twist on the concepts above. It will be incorporated as v1.1 of this specification before implementation begins.*
+**Founder's directive:** Jeffrey should launch as an AI agent that plugs into the biggest models — Claude and GPT — rather than as a standalone model. We might as well go with a big one, and give it Jeffrey's directives: the host model *becomes* Jeffrey.
+
+### Why this is the right first move
+
+1. **It makes Section 2 real.** "The permanent personal layer above whichever model is best" was positioning; the plug-in agent is the mechanism. Jeffrey stops being a claim and becomes something a user can add to the AI they already pay for.
+2. **It implements the core patent claim directly.** Claim 1 separates the *temporary reasoning engine* from the *persistent conscience store*. In the plug-in architecture, Claude/GPT are the temporary reasoning engine — rented, disposable, swappable — while Jeffrey's conscience, memory, and priorities live in a store the user owns. The architecture of the filing and the architecture of the product become the same drawing.
+3. **It collapses cost and time.** No model to train or host, no inference bill at scale, no GPU capex. The demo in Section 7 becomes buildable in weeks on top of frontier-model intelligence.
+4. **Distribution.** The users are already inside Claude and ChatGPT. Jeffrey meets them there instead of asking them to switch.
+
+### The technical shape
+
+- **The Jeffrey Conscience Server.** The conscience, memory, priority hierarchy, and opportunity queue are implemented as a service the user controls (locally runnable), exposed to host models through their agent-integration standards — MCP (Model Context Protocol) for Claude, custom GPT / Actions for OpenAI. The host model connects to Jeffrey; Jeffrey's data never becomes the platform's.
+- **The Jeffrey Directive Pack.** A versioned set of directives (persona, butler tone, the fiduciary design rules of §1, the interrupt rule, permission levels) injected as the agent's instructions on every host. This is what makes Claude or GPT *be* Jeffrey rather than merely *use* Jeffrey.
+- **One conscience, many engines.** The same conscience store serves both hosts. A user can correct Jeffrey inside Claude on Monday and Jeffrey remembers it inside GPT on Tuesday. This cross-model persistence is the single most demonstrable proof of the "permanent personal layer" claim — no platform can copy it, because each platform's memory is locked to itself.
+
+### The rule that keeps the twist safe
+
+> **The intelligence is rented. The conscience is owned.**
+
+Jeffrey's moat is not the model — both platforms will always have better raw models than any startup. The moat is the portable conscience: it must live in a store the user controls, exportable at will, movable between hosts, and — in the Self-Cloud phase — physically held in the user's hands. Nothing about the plug-in phase may leak the conscience into platform-owned memory, or the sovereignty story (and the patent position) is compromised.
+
+### Known risks, accepted knowingly
+
+- **Platform dependency:** hosts control pricing, policies, and APIs, and both already ship native memory features. Mitigation: portability *is* the differentiator; never depend on a single host; keep the conscience store host-agnostic from day one.
+- **Persona limits:** host platforms constrain how fully a third-party agent can restyle them; Jeffrey's identity must survive on directives + conscience data, not on model-level control.
+- **Migration path:** the plug-in phase is Phase 1 economics, not the end state. Self-Cloud (priority 6) remains the destination where the conscience comes home to owned hardware.
+
+*Further founder additions will be incorporated as v1.2+.*
 
 ---
 
