@@ -314,7 +314,7 @@
         rgba(154,231,255,0.4) 60deg, rgba(128,90,255,0.45) 110deg,
         rgba(18,235,210,0.35) 170deg, rgba(255,123,92,0.45) 220deg,
         rgba(255,56,96,0.45) 250deg, rgba(154,231,255,0) 300deg));
-      mix-blend-mode: screen; opacity: 0.2; filter: blur(16px);
+      mix-blend-mode: screen; opacity: 0.27; filter: blur(15px);
       -webkit-mask-image: radial-gradient(circle, black 28%, rgba(0,0,0,0.55) 58%, transparent 72%);
       mask-image: radial-gradient(circle, black 28%, rgba(0,0,0,0.55) 58%, transparent 72%);
       animation: shimmer-spin 22s linear infinite;
@@ -1351,6 +1351,11 @@
                   + p.y * 0.30 * sin(uTime * 0.06);
           float ca = cos(a), sa = sin(a);
           p = vec3(p.x * ca + p.z * sa, p.y, -p.x * sa + p.z * ca);
+          // in-plane vortex: visible swirl on screen, inner dust turning
+          // faster than outer — unmistakable spiral motion
+          float az = uTime * 0.085 * (1.35 - rl) + uKick * 0.12;
+          float caz = cos(az), saz = sin(az);
+          p = vec3(p.x * caz - p.y * saz, p.x * saz + p.y * caz, p.z);
         }
 
         // ------- morphogenic shape language: the whole body changes form
@@ -1421,9 +1426,13 @@
         if (kind < 0.5) {
           // ------- cloud colouring: 4-colour palette field + white-hot cores
           // tone = smooth region noise (colour patches), tA = density heat
-          float t2 = id;                       // coherent colour-region noise
-          vec3 colA = mix(uP0, uP1, tone);
-          vec3 colB = mix(uP2, uP3, tone);
+          // colour ZONES: the field polarizes to the four palette tones so
+          // every mood shows at least three dominant colours at once —
+          // large coherent patches, blending only at their borders.
+          float tz = smoothstep(0.30, 0.70, tone);
+          float t2 = smoothstep(0.34, 0.66, id);
+          vec3 colA = mix(uP0, uP1, tz);
+          vec3 colB = mix(uP2, uP3, tz);
           col = mix(colA, colB, t2);
           float heat = tA;
           col = mix(col, uP1 * 1.05, heat * heat * 0.35);
