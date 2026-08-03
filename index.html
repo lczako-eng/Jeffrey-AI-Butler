@@ -685,13 +685,16 @@
             <canvas id="orbCanvas" role="img" aria-label="The JEFFEREY orb — a breathing organism of a million particles: neuron clusters fire, pulses travel between junctions, and its colour shifts with emotional state"></canvas>
           </div>
           <div class="mood-row" role="group" aria-label="Orb emotional states">
-            <button class="mood-chip" data-mood="calm" style="--chip:#4fd8e8">Calm</button>
-            <button class="mood-chip active" data-mood="charged" style="--chip:#8b7bff">Charged</button>
+            <button class="mood-chip" data-mood="calm" style="--chip:#48c4ff">Calm</button>
+            <button class="mood-chip active" data-mood="charged" style="--chip:#7c5cff">Charged</button>
+            <button class="mood-chip" data-mood="happy" style="--chip:#ffd778">Happy</button>
             <button class="mood-chip" data-mood="curious" style="--chip:#f4c169">Curious</button>
-            <button class="mood-chip" data-mood="protective" style="--chip:#ff6a4d">Protective</button>
-            <button class="mood-chip" data-mood="sad" style="--chip:#5a7cff">Sad</button>
+            <button class="mood-chip" data-mood="annoyed" style="--chip:#ff895c">Annoyed</button>
+            <button class="mood-chip" data-mood="protective" style="--chip:#ff5a46">Protective</button>
+            <button class="mood-chip" data-mood="sad" style="--chip:#5078c8">Sad</button>
+            <button class="mood-chip" data-mood="thinking" style="--chip:#64a0ff">Thinking</button>
           </div>
-          <p class="orb-caption">Live neural state · <strong id="moodLabel">Charged</strong> · When the lightning storms, Jefferey is thinking<br />Poke the orb to change his mood · Scroll or pinch to zoom into the synapses</p>
+          <p class="orb-caption">Live neural state · <strong id="moodLabel">Charged</strong> · When the cloud flashes from within, Jefferey is thinking<br />Poke the orb to change his mood · Scroll or pinch to zoom into the synapses</p>
         </div>
       </div>
     </section>
@@ -1239,25 +1242,34 @@
     if (!gl) { frameEl.classList.add('orb-fallback'); return; }
 
     // ------------------------------------------------ moods
-    // each mood is a 4-colour palette blended across the cloud by noise
-    // regions — many colours live in the body at once, the mood just
-    // re-tunes the whole field.
+    // Eight emotions. Palettes lifted from the ORIGINAL orb's colour
+    // schemes (calm/charged/rage/annoyed/sad/happy) plus curious+thinking —
+    // each mood is a true mixture of colours living in the body at once.
     const MOODS = {
-      calm:       { c1: [79, 216, 232],  c2: [120, 235, 255], c3: [30, 110, 185],
-                    p: [[135, 232, 248], [79, 216, 232], [90, 140, 255], [25, 70, 160]],
+      calm:       { c1: [72, 196, 255],  c2: [150, 235, 255], c3: [25, 90, 170],
+                    p: [[140, 225, 255], [72, 196, 255], [111, 150, 255], [30, 90, 190]],
                     fire: 0.35, spin: 0.4,  breathe: 1.7,  jitter: 0,    sag: 0,    morphA: 0.035, morphS: 0.35, label: 'Calm' },
-      charged:    { c1: [139, 123, 255], c2: [175, 155, 255], c3: [55, 140, 235],
-                    p: [[145, 185, 255], [139, 123, 255], [255, 70, 190], [45, 60, 185]],
+      charged:    { c1: [124, 92, 255],  c2: [170, 140, 255], c3: [50, 120, 220],
+                    p: [[90, 200, 255], [124, 92, 255], [255, 56, 120], [255, 123, 92]],
                     fire: 1.0,  spin: 1.0,  breathe: 1.0,  jitter: 0,    sag: 0,    morphA: 0.055, morphS: 0.6,  label: 'Charged' },
+      happy:      { c1: [255, 200, 110], c2: [255, 225, 150], c3: [200, 110, 60],
+                    p: [[255, 215, 120], [255, 190, 135], [255, 150, 110], [230, 120, 80]],
+                    fire: 0.9,  spin: 1.2,  breathe: 0.9,  jitter: 0,    sag: 0,    morphA: 0.07,  morphS: 0.9,  label: 'Happy' },
       curious:    { c1: [244, 193, 105], c2: [255, 200, 120], c3: [225, 105, 155],
                     p: [[255, 205, 130], [244, 193, 105], [255, 110, 150], [190, 70, 45]],
                     fire: 1.5,  spin: 1.6,  breathe: 0.85, jitter: 0.12, sag: 0,    morphA: 0.075, morphS: 1.05, label: 'Curious' },
-      protective: { c1: [255, 106, 77],  c2: [255, 165, 105], c3: [190, 30, 85],
-                    p: [[255, 175, 115], [255, 106, 77], [225, 25, 95], [115, 10, 55]],
+      annoyed:    { c1: [255, 150, 90],  c2: [255, 210, 120], c3: [110, 70, 200],
+                    p: [[255, 220, 120], [255, 137, 92], [128, 90, 255], [120, 60, 40]],
+                    fire: 1.3,  spin: 1.3,  breathe: 0.7,  jitter: 0.45, sag: 0,    morphA: 0.06,  morphS: 1.2,  label: 'Annoyed' },
+      protective: { c1: [255, 90, 70],   c2: [255, 160, 110], c3: [150, 10, 40],
+                    p: [[255, 150, 110], [255, 90, 70], [200, 0, 40], [90, 10, 25]],
                     fire: 2.6,  spin: 1.9,  breathe: 0.5,  jitter: 1.0,  sag: 0,    morphA: 0.09,  morphS: 1.7,  label: 'Protective' },
-      sad:        { c1: [90, 124, 255],  c2: [135, 155, 255], c3: [35, 50, 135],
-                    p: [[150, 168, 255], [120, 140, 255], [75, 80, 205], [22, 32, 110]],
-                    fire: 0.15, spin: 0.25, breathe: 2.3,  jitter: 0,    sag: 0.26, morphA: 0.04,  morphS: 0.22, label: 'Sad' }
+      sad:        { c1: [90, 124, 220],  c2: [140, 170, 240], c3: [30, 50, 110],
+                    p: [[150, 180, 235], [80, 120, 200], [70, 100, 170], [25, 45, 95]],
+                    fire: 0.15, spin: 0.25, breathe: 2.3,  jitter: 0,    sag: 0.26, morphA: 0.04,  morphS: 0.22, label: 'Sad' },
+      thinking:   { c1: [100, 160, 255], c2: [150, 220, 255], c3: [40, 70, 170],
+                    p: [[120, 230, 255], [90, 140, 255], [140, 110, 255], [30, 60, 150]],
+                    fire: 1.9,  spin: 0.7,  breathe: 0.8,  jitter: 0.05, sag: 0,    morphA: 0.05,  morphS: 0.8,  label: 'Thinking' }
     };
     let moodKey = 'charged';
     const live = { c1: [...MOODS.charged.c1], c2: [...MOODS.charged.c2], c3: [...MOODS.charged.c3],
@@ -1290,7 +1302,8 @@
       attribute vec3 aPos;
       attribute vec4 aA;   // phase, orbit, tone, size
       attribute vec3 aB;   // kind (0 nebula, 1 neural, 2 axon, 3 star), id, tAlong
-      uniform float uTime, uRot, uBreath, uScale, uSag, uJitter, uDPR, uPulseCount, uBurstCount, uMorphA, uMorphS, uKick;
+      uniform float uTime, uRot, uBreath, uScale, uSag, uJitter, uDPR, uPulseCount, uBurstCount, uMorphA, uMorphS, uKick, uFlashCount;
+      uniform vec4 uFlash[10];
       uniform vec2 uViewport, uLook;
       uniform vec2 uPulses[24];
       uniform vec2 uBursts[16];
@@ -1336,8 +1349,12 @@
             sin(p.y * 6.3 + tK * 0.7 + phase * 2.1),
             sin(p.z * 5.7 + tK * 0.6 + phase * 1.3),
             sin(p.x * 6.1 + tK * 0.65 + phase * 0.8));
-          // shearing swirl: rotation speed varies with height, like smoke
-          float a = uTime * orbit + p.y * 0.30 * sin(uTime * 0.06);
+          // spiralling: differential rotation — inner dust orbits faster,
+          // shearing the clouds into slow galaxy arms — plus height shear
+          float rl = length(aPos);
+          float a = uTime * orbit
+                  + uTime * 0.10 * (1.45 - rl)
+                  + p.y * 0.30 * sin(uTime * 0.06);
           float ca = cos(a), sa = sin(a);
           p = vec3(p.x * ca + p.z * sa, p.y, -p.x * sa + p.z * ca);
         }
@@ -1358,7 +1375,17 @@
               if (dp < 0.0 && dp > -0.30) lit += exp(dp * 11.0) * 0.30; // comet tail
             }
           }
-        } else if (kind > 0.5) {
+        }
+        // ------- thundercloud lightning: the cloud lights from WITHIN.
+        // No bolt is drawn — nearby dust brightens, flickers, and dies down.
+        if (kind < 1.5) {
+          for (int i = 0; i < 10; i++) {
+            if (float(i) >= uFlashCount) break;
+            float fd = distance(aPos, uFlash[i].xyz);
+            lit += uFlash[i].w * exp(-fd * fd * 14.0);
+          }
+        }
+        if (kind > 0.5 && kind < 1.5) {
           // ------- neural particle: cascade burst inside its cluster
           for (int i = 0; i < 16; i++) {
             if (float(i) >= uBurstCount) break;
@@ -1407,7 +1434,7 @@
           float heat = tA;
           col = mix(col, uP1 * 1.05, heat * heat * 0.35);
           baseA = (0.055 + heat * 0.17 + near * near * 0.13) * (0.55 + tw * 0.45);
-          col *= (0.78 + near * 0.45);
+          col *= (0.88 + near * 0.5);
         } else if (kind < 1.5) {
           baseA = (0.022 + near * near * 0.09) * (0.5 + tw * 0.5);
           col = mix(uP1, uP2, tone * 0.85);
@@ -1565,7 +1592,7 @@
       tone = tone * tone * (3 - 2 * tone);
       let tone2 = Math.min(1, Math.max(0, vnoise(x * 0.8 + 91.2, y * 0.8 + 47.5, z * 0.8 + 17.9) * 1.6 - 0.3));
       tone2 = tone2 * tone2 * (3 - 2 * tone2);
-      put(x, y, z, R2() * TAU, (R2() - 0.5) * 0.30, tone, 0.7 + d * 1.1, 0, tone2, heat);
+      put(x, y, z, R2() * TAU, (R2() - 0.5) * 0.30, tone, 0.8 + d * 1.2, 0, tone2, heat);
       made++;
     }
     // fallback fill if rejection ran dry (keeps buffer counts exact)
@@ -1628,7 +1655,7 @@
     const U = {};
     ['uTime', 'uRot', 'uBreath', 'uScale', 'uSag', 'uJitter', 'uDPR', 'uPulseCount', 'uBurstCount',
      'uViewport', 'uLook', 'uPulses', 'uBursts', 'uC1', 'uC2', 'uC3',
-     'uP0', 'uP1', 'uP2', 'uP3', 'uMorphA', 'uMorphS', 'uKick'].forEach(n => U[n] = gl.getUniformLocation(prog, n));
+     'uP0', 'uP1', 'uP2', 'uP3', 'uMorphA', 'uMorphS', 'uKick', 'uFlash', 'uFlashCount'].forEach(n => U[n] = gl.getUniformLocation(prog, n));
 
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE);          // additive — the light accumulates
@@ -1712,44 +1739,6 @@
         wctx.strokeStyle = wrgba(live.c1, 0.025 + near * near * 0.12);
         wctx.beginPath(); wctx.moveTo(A[0], A[1]); wctx.quadraticCurveTo(Mm[0], Mm[1], B[0], B[1]); wctx.stroke();
       }
-      // synaptic lightning — jagged branching bolts, flickering hard
-      for (let b = bolts.length - 1; b >= 0; b--) {
-        const bolt = bolts[b];
-        bolt.life += dt;
-        if (bolt.life > bolt.max) { bolts.splice(b, 1); continue; }
-        const k = 1 - bolt.life / bolt.max;
-        const flick = 0.65 + 0.35 * Math.sin(bolt.life * 110 + b * 7);
-        const inten = k * flick;
-        const drawPath = (pts, scale) => {
-          wctx.beginPath();
-          for (let i = 0; i < pts.length; i++) {
-            const P2 = wproj(pts[i]);
-            if (i === 0) wctx.moveTo(P2[0], P2[1]); else wctx.lineTo(P2[0], P2[1]);
-          }
-          wctx.strokeStyle = wrgba(live.c2, 0.08 * inten * scale);
-          wctx.lineWidth = 4.2 * scale;
-          wctx.stroke();
-          wctx.strokeStyle = wrgba(live.c2, 0.34 * inten * scale);
-          wctx.lineWidth = 1.9 * scale;
-          wctx.stroke();
-          wctx.strokeStyle = wrgba(live.c2, 0.9 * inten * scale);
-          wctx.lineWidth = 0.9 * scale;
-          wctx.stroke();
-        };
-        drawPath(bolt.pts, 1);
-        for (let br = 0; br < bolt.branches.length; br++) drawPath(bolt.branches[br], 0.55);
-        // flash at both ends
-        const ends = [bolt.pts[0], bolt.pts[bolt.pts.length - 1]];
-        for (let e = 0; e < 2; e++) {
-          const E = wproj(ends[e]);
-          const g2 = wctx.createRadialGradient(E[0], E[1], 0, E[0], E[1], 17);
-          g2.addColorStop(0, wrgba(live.c2, 0.18 * inten));
-          g2.addColorStop(1, 'rgba(0,0,0,0)');
-          wctx.fillStyle = g2;
-          wctx.beginPath(); wctx.arc(E[0], E[1], 17, 0, 6.283); wctx.fill();
-        }
-      }
-
       // cascade bursts light the cluster's members in sequence
       for (let b = 0; b < bursts.length; b++) {
         const bu = bursts[b];
@@ -1804,58 +1793,25 @@
       bursts.push({ cluster: c, t: 0 });
     }
 
-    // ------------------------------------------------ synaptic lightning storm
-    // Sporadic storms of jagged, branching bolts arcing between junctions.
-    // When the storm rolls, Jefferey is thinking.
-    const bolts = [];   // {pts, branches, life, max}
+    // ------------------------------------------------ thundercloud lightning
+    // No bolts. Regions of the cloud light up from WITHIN — flickering
+    // interior flashes, like thunder seen inside a storm cloud.
+    // When the cloud flashes, Jefferey is thinking.
+    const flashes = [];   // {pos, t, dur, seed, cluster}
     let stormUntil = 0, nextStorm = 1.4, boltAcc = 0;
-    function jaggedPath(a, b, bow, roughness) {
-      const mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2, (a[2] + b[2]) / 2];
-      const ml = Math.hypot(mid[0], mid[1], mid[2]) || 1;
-      const push = bow / ml;
-      let pts = [a, [mid[0] * push, mid[1] * push, mid[2] * push], b];
-      for (let iter = 0; iter < 3; iter++) {
-        const out = [pts[0]];
-        const amp = roughness / (iter + 1.6);
-        for (let i = 1; i < pts.length; i++) {
-          const p = pts[i - 1], q = pts[i];
-          out.push([
-            (p[0] + q[0]) / 2 + (R2() - 0.5) * amp,
-            (p[1] + q[1]) / 2 + (R2() - 0.5) * amp,
-            (p[2] + q[2]) / 2 + (R2() - 0.5) * amp
-          ], q);
-        }
-        pts = out;
-      }
-      return pts;
-    }
-    function spawnBolt() {
-      if (bolts.length >= 5) return;
-      const c1i = (R2() * CLUSTERS) | 0;
-      let c2i = -1;
-      for (let tries = 0; tries < 8; tries++) {
-        const cand = (R2() * CLUSTERS) | 0;
-        if (cand === c1i) continue;
-        const dx = cores[c1i][0] - cores[cand][0], dy = cores[c1i][1] - cores[cand][1], dz = cores[c1i][2] - cores[cand][2];
-        if (dx * dx + dy * dy + dz * dz < 1.25) { c2i = cand; break; }
-      }
-      if (c2i < 0) c2i = (c1i + 3) % CLUSTERS;
-      const pts = jaggedPath(cores[c1i], cores[c2i], 1.10, 0.22);
-      const branches = [];
-      const nb = 2 + ((R2() * 2) | 0);
-      for (let b = 0; b < nb; b++) {
-        const idx = 3 + ((R2() * (pts.length - 6)) | 0);
-        const start = pts[idx];
-        let end = [start[0] + (R2() - 0.5) * 0.55, start[1] + (R2() - 0.5) * 0.55, start[2] + (R2() - 0.5) * 0.55];
-        const el = Math.hypot(end[0], end[1], end[2]) || 1;
-        end = [end[0] / el * 1.05, end[1] / el * 1.05, end[2] / el * 1.05];
-        branches.push(jaggedPath(start, end, 1.06, 0.10));
-      }
-      bolts.push({ pts, branches, life: 0, max: 0.10 + R2() * 0.12 });
-      kick = Math.min(1, kick + 0.3);
-      burstCluster(c1i); burstCluster(c2i);
-      if (R2() < 0.5) fireAxonFrom(c1i);
-      if (R2() < 0.5) fireAxonFrom(c2i);
+    function spawnFlash() {
+      if (flashes.length >= 10) return;
+      const c = (R2() * CLUSTERS) | 0;
+      const core = cores[c];
+      // flash centre floats somewhere inside the cloud near that junction
+      const depth = 0.55 + R2() * 0.45;
+      flashes.push({
+        pos: [core[0] * depth, core[1] * depth, core[2] * depth],
+        t: 0, dur: 0.22 + R2() * 0.35, seed: R2() * 6.283, cluster: c,
+      });
+      burstCluster(c);
+      if (R2() < 0.5) fireAxonFrom(c);
+      kick = Math.min(1, kick + 0.25);
     }
 
     function organBreath(t) {
@@ -1869,6 +1825,7 @@
 
     const pulseFlat = new Float32Array(48);
     const burstFlat = new Float32Array(32);
+    const flashFlat = new Float32Array(40);
 
     let rotY = 0, last = performance.now(), tGlobal = 0, fireAcc = 0;
     let zoom = 1, kick = 0, nextKick = 2.5;
@@ -1892,7 +1849,7 @@
           const toCluster = pu.dir === 1 ? ax.cb : ax.ca;
           burstCluster(toCluster);
           if (Math.random() < 0.72) fireAxonFrom(toCluster);
-          if (Math.random() < 0.3) spawnBolt();
+          if (Math.random() < 0.3) spawnFlash();
           pulses.splice(p, 1);
         }
       }
@@ -1916,10 +1873,29 @@
         nextStorm = stormUntil + 1.4 + R2() * 5.0 / Math.max(0.35, live.fire);
       }
       if (tGlobal < stormUntil) {
-        boltAcc += dt * (2.6 + live.fire * 4.2);
-        while (boltAcc > 1) { boltAcc -= 1; spawnBolt(); }
-      } else if (R2() < dt * 0.55) {
-        spawnBolt();   // stray snap — spontaneous firing, any time
+        boltAcc += dt * (2.2 + live.fire * 3.6);
+        while (boltAcc > 1) { boltAcc -= 1; spawnFlash(); }
+      } else if (R2() < dt * 0.5) {
+        spawnFlash();   // stray flash — spontaneous, any time
+      }
+
+      // advance interior flashes and hand them to the GPU
+      for (let f = flashes.length - 1; f >= 0; f--) {
+        flashes[f].t += dt;
+        if (flashes[f].t > flashes[f].dur) flashes.splice(f, 1);
+      }
+      for (let i = 0; i < 10; i++) {
+        if (i < flashes.length) {
+          const fl = flashes[i];
+          const k = 1 - fl.t / fl.dur;
+          const flicker = 0.55 + 0.45 * Math.sin(fl.t * 65 + fl.seed);
+          flashFlat[i * 4] = fl.pos[0]; flashFlat[i * 4 + 1] = fl.pos[1];
+          flashFlat[i * 4 + 2] = fl.pos[2];
+          flashFlat[i * 4 + 3] = 1.5 * k * flicker;
+        } else {
+          flashFlat[i * 4] = 99; flashFlat[i * 4 + 1] = 99;
+          flashFlat[i * 4 + 2] = 99; flashFlat[i * 4 + 3] = 0;
+        }
       }
 
       // flatten uniforms — pulse t mapped to travel direction
@@ -1946,6 +1922,8 @@
       gl.uniform1f(U.uMorphA, live.morphA);
       gl.uniform1f(U.uMorphS, live.morphS);
       gl.uniform1f(U.uKick, kick);
+      gl.uniform4fv(U.uFlash, flashFlat);
+      gl.uniform1f(U.uFlashCount, Math.min(10, flashes.length));
       gl.uniform1f(U.uSag, live.sag);
       gl.uniform1f(U.uJitter, live.jitter);
       gl.uniform1f(U.uDPR, DPR);
@@ -1974,6 +1952,7 @@
     // warm start — alive on first paint
     for (let i = 0; i < 18; i++) fireAxonFrom((Math.random() * CLUSTERS) | 0);
     for (let i = 0; i < 8; i++) burstCluster((Math.random() * CLUSTERS) | 0);
+    for (let i = 0; i < 4; i++) spawnFlash();
     stepLive(1);
     if (reduceMotion) {
       frame(performance.now());
@@ -1984,7 +1963,7 @@
     // ------------------------------------------------ moods: chips + poking Jefferey
     const chips = document.querySelectorAll('.mood-chip');
     const label = document.getElementById('moodLabel');
-    const MOOD_ORDER = ['calm', 'charged', 'curious', 'protective', 'sad'];
+    const MOOD_ORDER = ['calm', 'charged', 'happy', 'curious', 'annoyed', 'protective', 'sad', 'thinking'];
     function setMood(k) {
       moodKey = k;
       chips.forEach((c) => c.classList.toggle('active', c.dataset.mood === k));
@@ -2004,7 +1983,7 @@
       const rad = Math.min(r.width, r.height) * 0.4 * zoom;
       if (dx * dx + dy * dy < rad * rad) {
         setMood(MOOD_ORDER[(MOOD_ORDER.indexOf(moodKey) + 1) % MOOD_ORDER.length]);
-        for (let i = 0; i < 4; i++) spawnBolt();
+        for (let i = 0; i < 5; i++) spawnFlash();
       }
     });
 
