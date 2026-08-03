@@ -1309,7 +1309,7 @@
           gl_Position = vec4(sp, 0.999, 1.0);
           float tw = 0.55 + 0.45 * sin(uTime * orbit + phase);
           gl_PointSize = max(1.0, size * uDPR * tw);
-          vColor = mix(vec3(0.86, 0.89, 1.0), vec3(1.0, 0.86, 0.72), step(5.8, phase)) * (0.35 + tw * 0.45) * tone;
+          vColor = mix(vec3(0.55, 0.60, 0.95), vec3(0.75, 0.55, 0.90), step(5.8, phase)) * (0.16 + tw * 0.22) * tone;
           vAlpha = 1.0;
           return;
         }
@@ -1402,8 +1402,8 @@
           vec3 colB = mix(uP2, uP3, tone);
           col = mix(colA, colB, t2);
           float heat = tA;
-          col = mix(col, uP0, heat * heat * 0.42);
-          baseA = (0.024 + heat * 0.17 + near * near * 0.075) * (0.55 + tw * 0.45);
+          col = mix(col, uP1 * 1.05, heat * heat * 0.35);
+          baseA = (0.017 + heat * 0.075 + near * near * 0.055) * (0.55 + tw * 0.45);
           col *= (0.78 + near * 0.45);
         } else if (kind < 1.5) {
           baseA = (0.011 + near * near * 0.055) * (0.5 + tw * 0.5);
@@ -1412,11 +1412,11 @@
           baseA = 0.024 + near * near * 0.11;
           col = mix(uC1, uP2, tone * 0.5);
         }
-        lit = min(lit, 2.0);
-        col = mix(col, uC2, min(1.0, lit * 0.75));
-        vColor = col * (baseA + lit * 0.5);
+        lit = min(lit, 1.2);
+        col = mix(col, uC2, min(1.0, lit * 0.6));
+        vColor = col * (baseA + lit * 0.22);
         vAlpha = 1.0;
-        gl_PointSize = clamp((size * (0.55 + near * 1.05)) * uDPR * (1.0 + lit * (kind > 1.5 ? 0.45 : 1.1)), 1.0, 9.0 * uDPR);
+        gl_PointSize = clamp((size * (0.55 + near * 1.05)) * uDPR * (1.0 + lit * (kind > 1.5 ? 0.35 : 0.6)), 1.0, 9.0 * uDPR);
       }
     `;
     const FSRC = `
@@ -1723,11 +1723,11 @@
         wctx.lineWidth = 1.0;
         const sz = 1.6 + near * 2.2;
         const g = wctx.createRadialGradient(head[0], head[1], 0, head[0], head[1], sz * 3.5);
-        g.addColorStop(0, wrgba(live.c2, 0.45 * (0.35 + near * 0.65)));
+        g.addColorStop(0, wrgba(live.c2, 0.28 * (0.35 + near * 0.65)));
         g.addColorStop(1, 'rgba(0,0,0,0)');
         wctx.fillStyle = g;
         wctx.beginPath(); wctx.arc(head[0], head[1], sz * 3.5, 0, 6.283); wctx.fill();
-        wctx.fillStyle = wrgba(live.c2, 0.22 + near * 0.30);
+        wctx.fillStyle = wrgba(live.c2, 0.14 + near * 0.20);
         wctx.beginPath(); wctx.arc(head[0], head[1], sz * 0.55, 0, 6.283); wctx.fill();
       }
       // synaptic lightning — jagged branching bolts, flickering hard
@@ -1761,7 +1761,7 @@
         for (let e = 0; e < 2; e++) {
           const E = wproj(ends[e]);
           const g2 = wctx.createRadialGradient(E[0], E[1], 0, E[0], E[1], 17);
-          g2.addColorStop(0, wrgba(live.c2, 0.32 * inten));
+          g2.addColorStop(0, wrgba(live.c2, 0.18 * inten));
           g2.addColorStop(1, 'rgba(0,0,0,0)');
           wctx.fillStyle = g2;
           wctx.beginPath(); wctx.arc(E[0], E[1], 17, 0, 6.283); wctx.fill();
@@ -1771,11 +1771,11 @@
       // cascade bursts light the cluster's members in sequence
       for (let b = 0; b < bursts.length; b++) {
         const bu = bursts[b];
-        wNodes[wCoreIdx[bu.cluster]].charge = Math.max(wNodes[wCoreIdx[bu.cluster]].charge, 1);
+        wNodes[wCoreIdx[bu.cluster]].charge = Math.max(wNodes[wCoreIdx[bu.cluster]].charge, 0.7);
         const members = wMembers[bu.cluster];
         const lit = Math.min(members.length, Math.floor(bu.t * members.length * 1.5));
         for (let m = 0; m < lit; m++) {
-          wNodes[members[m]].charge = Math.max(wNodes[members[m]].charge, 0.9);
+          wNodes[members[m]].charge = Math.max(wNodes[members[m]].charge, 0.55);
         }
       }
       // nodes — junction cores always visible, members flare when firing
@@ -1783,13 +1783,13 @@
         const n = wNodes[i];
         const near = (P[i][2] + 1) / 2;
         if (n.core || n.charge > 0.04) {
-          const a = Math.min(0.75, (n.core ? 0.10 + near * near * 0.20 : 0.035) + n.charge * 0.34);
-          const size = (n.core ? 1.1 + near * 1.4 : 0.7 + near * 1.0) * (1 + n.charge * 1.1);
+          const a = Math.min(0.5, (n.core ? 0.08 + near * near * 0.16 : 0.03) + n.charge * 0.2);
+          const size = (n.core ? 1.0 + near * 1.2 : 0.6 + near * 0.9) * (1 + n.charge * 0.7);
           wctx.fillStyle = n.charge > 0.25 ? wrgba(live.c2, a) : wrgba(live.c1, a);
           wctx.beginPath(); wctx.arc(P[i][0], P[i][1], size, 0, 6.283); wctx.fill();
           if (n.charge > 0.5) {
             const g = wctx.createRadialGradient(P[i][0], P[i][1], 0, P[i][0], P[i][1], size * 4.2);
-            g.addColorStop(0, wrgba(live.c2, 0.22 * n.charge));
+            g.addColorStop(0, wrgba(live.c2, 0.12 * n.charge));
             g.addColorStop(1, 'rgba(0,0,0,0)');
             wctx.fillStyle = g;
             wctx.beginPath(); wctx.arc(P[i][0], P[i][1], size * 4.2, 0, 6.283); wctx.fill();
