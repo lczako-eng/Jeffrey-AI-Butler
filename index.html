@@ -1228,14 +1228,14 @@
 
         if (kind < 0.5) {
           // ------- nebula: two octaves of roiling turbulence — ink in water
-          p += 0.085 * vec3(
-            sin(p.y * 2.6 + uTime * 0.30 + phase),
-            sin(p.z * 2.9 + uTime * 0.24 + phase * 1.7),
-            sin(p.x * 2.3 + uTime * 0.34 + phase * 0.6));
-          p += 0.038 * vec3(
-            sin(p.y * 6.3 + uTime * 0.58 + phase * 2.1),
-            sin(p.z * 5.7 + uTime * 0.49 + phase * 1.3),
-            sin(p.x * 6.1 + uTime * 0.54 + phase * 0.8));
+          p += 0.105 * vec3(
+            sin(p.y * 2.6 + uTime * 0.36 + phase),
+            sin(p.z * 2.9 + uTime * 0.29 + phase * 1.7),
+            sin(p.x * 2.3 + uTime * 0.40 + phase * 0.6));
+          p += 0.046 * vec3(
+            sin(p.y * 6.3 + uTime * 0.66 + phase * 2.1),
+            sin(p.z * 5.7 + uTime * 0.56 + phase * 1.3),
+            sin(p.x * 6.1 + uTime * 0.61 + phase * 0.8));
           // shearing swirl: rotation speed varies with height, like smoke
           float a = uTime * orbit + p.y * 0.30 * sin(uTime * 0.06);
           float ca = cos(a), sa = sin(a);
@@ -1299,22 +1299,22 @@
           vec3 colB = mix(uP2, uP3, tone);
           col = mix(colA, colB, t2);
           float heat = tA;
-          col = mix(col, vec3(1.03, 1.0, 0.97), heat * heat * 0.6);
+          col = mix(col, vec3(1.02, 1.0, 0.98), heat * heat * 0.36);
           baseA = (0.024 + heat * 0.17 + near * near * 0.075) * (0.55 + tw * 0.45);
           col *= (0.78 + near * 0.45);
         } else if (kind < 1.5) {
-          baseA = (0.016 + near * near * 0.075) * (0.5 + tw * 0.5);
-          col = mix(uC1, uC2, tone * 0.45);
+          baseA = (0.011 + near * near * 0.055) * (0.5 + tw * 0.5);
+          col = mix(uP1, uP2, tone * 0.85);
         } else {
-          baseA = 0.030 + near * near * 0.14;
-          col = uC1;
+          baseA = 0.024 + near * near * 0.11;
+          col = mix(uC1, uP2, tone * 0.5);
         }
-        lit = min(lit, 2.2);
-        col = mix(col, uC2, min(1.0, lit));
-        col += vec3(0.9) * max(0.0, lit - 1.0) * 0.35;            // white-hot centres
+        lit = min(lit, 2.0);
+        col = mix(col, uC2, min(1.0, lit * 0.75));
+        col += vec3(0.8, 0.85, 1.0) * max(0.0, lit - 1.4) * 0.2;  // restrained hot centres
         vColor = col * (baseA + lit * 0.5);
         vAlpha = 1.0;
-        gl_PointSize = clamp((size * (0.55 + near * 1.05)) * uDPR * (1.0 + lit * 1.4), 1.0, 10.0 * uDPR);
+        gl_PointSize = clamp((size * (0.55 + near * 1.05)) * uDPR * (1.0 + lit * (kind > 1.5 ? 0.45 : 1.1)), 1.0, 9.0 * uDPR);
       }
     `;
     const FSRC = `
@@ -1475,14 +1475,16 @@
     const perCluster = (NEURAL / CLUSTERS) | 0;
     for (let c = 0; c < CLUSTERS; c++) {
       const core = cores[c];
+      // each junction is one compact blob at its own depth inside the body
+      const clusRad = 0.60 + R2() * 0.30;
       for (let m = 0; m < perCluster; m++) {
         const tight = R2() < 0.35;
-        const s = tight ? 0.03 : 0.085;
+        const s = tight ? 0.05 : 0.115;
         let x = core[0] + gauss() * s, y = core[1] + gauss() * s, z = core[2] + gauss() * s;
         const l = Math.hypot(x, y, z) || 1;
-        const rad = 1.0 + gauss() * 0.015;
+        const rad = clusRad + gauss() * 0.035;
         x = x / l * rad; y = y / l * rad; z = z / l * rad;
-        put(x, y, z, R2() * TAU, (R2() - 0.5) * 0.05, R2(), tight ? 1.1 + R2() * 1.6 : 0.7 + R2() * 1.1, 1, c, 0);
+        put(x, y, z, R2() * TAU, (R2() - 0.5) * 0.07, R2(), tight ? 0.9 + R2() * 1.2 : 0.6 + R2() * 1.0, 1, c, 0);
       }
     }
     // axon fibres: particles along bowed bezier arcs
@@ -1621,8 +1623,8 @@
         g.addColorStop(1, 'rgba(0,0,0,0)');
         wctx.fillStyle = g;
         wctx.beginPath(); wctx.arc(head[0], head[1], sz * 5, 0, 6.283); wctx.fill();
-        wctx.fillStyle = 'rgba(255,255,255,' + (0.3 + near * 0.6) + ')';
-        wctx.beginPath(); wctx.arc(head[0], head[1], sz * 0.7, 0, 6.283); wctx.fill();
+        wctx.fillStyle = wrgba(live.c2, 0.30 + near * 0.45);
+        wctx.beginPath(); wctx.arc(head[0], head[1], sz * 0.55, 0, 6.283); wctx.fill();
       }
       // synaptic lightning — jagged branching bolts, flickering hard
       for (let b = bolts.length - 1; b >= 0; b--) {
@@ -1638,14 +1640,14 @@
             const P2 = wproj(pts[i]);
             if (i === 0) wctx.moveTo(P2[0], P2[1]); else wctx.lineTo(P2[0], P2[1]);
           }
-          wctx.strokeStyle = wrgba(live.c2, 0.10 * inten * scale);
-          wctx.lineWidth = 6.5 * scale;
+          wctx.strokeStyle = wrgba(live.c2, 0.08 * inten * scale);
+          wctx.lineWidth = 4.2 * scale;
           wctx.stroke();
-          wctx.strokeStyle = wrgba(live.c2, 0.40 * inten * scale);
-          wctx.lineWidth = 2.6 * scale;
+          wctx.strokeStyle = wrgba(live.c2, 0.34 * inten * scale);
+          wctx.lineWidth = 1.9 * scale;
           wctx.stroke();
-          wctx.strokeStyle = 'rgba(255,255,255,' + (0.85 * inten * scale) + ')';
-          wctx.lineWidth = 1.1 * scale;
+          wctx.strokeStyle = 'rgba(255,255,255,' + (0.8 * inten * scale) + ')';
+          wctx.lineWidth = 0.9 * scale;
           wctx.stroke();
         };
         drawPath(bolt.pts, 1);
@@ -1654,11 +1656,11 @@
         const ends = [bolt.pts[0], bolt.pts[bolt.pts.length - 1]];
         for (let e = 0; e < 2; e++) {
           const E = wproj(ends[e]);
-          const g2 = wctx.createRadialGradient(E[0], E[1], 0, E[0], E[1], 26);
-          g2.addColorStop(0, wrgba(live.c2, 0.5 * inten));
+          const g2 = wctx.createRadialGradient(E[0], E[1], 0, E[0], E[1], 17);
+          g2.addColorStop(0, wrgba(live.c2, 0.32 * inten));
           g2.addColorStop(1, 'rgba(0,0,0,0)');
           wctx.fillStyle = g2;
-          wctx.beginPath(); wctx.arc(E[0], E[1], 26, 0, 6.283); wctx.fill();
+          wctx.beginPath(); wctx.arc(E[0], E[1], 17, 0, 6.283); wctx.fill();
         }
       }
 
@@ -1677,16 +1679,16 @@
         const n = wNodes[i];
         const near = (P[i][2] + 1) / 2;
         if (n.core || n.charge > 0.04) {
-          const a = Math.min(1, (n.core ? 0.22 + near * near * 0.42 : 0.05) + n.charge * 0.9);
-          const size = (n.core ? 1.6 + near * 2.0 : 0.9 + near * 1.3) * (1 + n.charge * 1.8);
+          const a = Math.min(1, (n.core ? 0.12 + near * near * 0.24 : 0.04) + n.charge * 0.55);
+          const size = (n.core ? 1.1 + near * 1.4 : 0.7 + near * 1.0) * (1 + n.charge * 1.1);
           wctx.fillStyle = n.charge > 0.25 ? wrgba(live.c2, a) : wrgba(live.c1, a);
           wctx.beginPath(); wctx.arc(P[i][0], P[i][1], size, 0, 6.283); wctx.fill();
           if (n.charge > 0.5) {
-            const g = wctx.createRadialGradient(P[i][0], P[i][1], 0, P[i][0], P[i][1], size * 6);
-            g.addColorStop(0, wrgba(live.c2, 0.4 * n.charge));
+            const g = wctx.createRadialGradient(P[i][0], P[i][1], 0, P[i][0], P[i][1], size * 4.2);
+            g.addColorStop(0, wrgba(live.c2, 0.22 * n.charge));
             g.addColorStop(1, 'rgba(0,0,0,0)');
             wctx.fillStyle = g;
-            wctx.beginPath(); wctx.arc(P[i][0], P[i][1], size * 6, 0, 6.283); wctx.fill();
+            wctx.beginPath(); wctx.arc(P[i][0], P[i][1], size * 4.2, 0, 6.283); wctx.fill();
           }
         }
         n.charge *= Math.pow(0.22, dt * 2.0);
@@ -1757,11 +1759,17 @@
       return pts;
     }
     function spawnBolt() {
-      if (bolts.length >= 7) return;
+      if (bolts.length >= 5) return;
       const c1i = (R2() * CLUSTERS) | 0;
-      let c2i = (R2() * CLUSTERS) | 0;
-      if (c2i === c1i) c2i = (c1i + 11) % CLUSTERS;
-      const pts = jaggedPath(cores[c1i], cores[c2i], 1.12, 0.14);
+      let c2i = -1;
+      for (let tries = 0; tries < 8; tries++) {
+        const cand = (R2() * CLUSTERS) | 0;
+        if (cand === c1i) continue;
+        const dx = cores[c1i][0] - cores[cand][0], dy = cores[c1i][1] - cores[cand][1], dz = cores[c1i][2] - cores[cand][2];
+        if (dx * dx + dy * dy + dz * dz < 1.25) { c2i = cand; break; }
+      }
+      if (c2i < 0) c2i = (c1i + 3) % CLUSTERS;
+      const pts = jaggedPath(cores[c1i], cores[c2i], 1.10, 0.22);
       const branches = [];
       const nb = 1 + ((R2() * 2) | 0);
       for (let b = 0; b < nb; b++) {
